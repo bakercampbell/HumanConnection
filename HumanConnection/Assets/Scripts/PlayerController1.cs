@@ -32,8 +32,9 @@ public class PlayerController1 : MonoBehaviour
         shootAction = playerInput.actions["Shoot"];
     }
 
-    void Update()
+    private void FixedUpdate()
     {
+        
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
