@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: a8b6725acd656114395b74e8ec378f37, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -463,6 +463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -473,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.000015258789
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -534,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalScale.x
-      value: 25
+      value: 19.67
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.x
@@ -542,11 +546,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6481714
+      value: 0.6482
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -32.823982
+      value: -35.4888
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalRotation.w
@@ -608,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.x
@@ -682,11 +686,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalScale.x
-      value: 31
+      value: 23.637499
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.663109
+      value: 24.5
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -770,6 +774,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -780,7 +788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -855,6 +863,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -865,7 +877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -926,11 +938,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalScale.x
-      value: 14
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -48.83689
+      value: -44.34
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -938,7 +950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.72398186
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1260,6 +1272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1270,7 +1286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000015258789
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1599,6 +1615,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1609,7 +1629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1713,6 +1733,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1723,7 +1747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1822,6 +1846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -1832,7 +1860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2001,6 +2029,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -2011,7 +2043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2072,19 +2104,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.836891
+      value: -25.81
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6481714
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.276018
+      value: 8.77
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2156,33 +2188,13 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
-    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
-      propertyPath: lightPoles.Array.data[6]
-      value: 
-      objectReference: {fileID: 2114469202}
-    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
-      propertyPath: lightPoles.Array.data[7]
-      value: 
-      objectReference: {fileID: 446311433}
-    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
-      propertyPath: lightPoles.Array.data[8]
-      value: 
-      objectReference: {fileID: 27521197}
-    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
-      propertyPath: lightPoles.Array.data[9]
-      value: 
-      objectReference: {fileID: 1155635930}
-    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
-      propertyPath: lightPoles.Array.data[10]
-      value: 
-      objectReference: {fileID: 1758561516}
-    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
-      propertyPath: lightPoles.Array.data[11]
-      value: 
-      objectReference: {fileID: 1210056459}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
@@ -2194,7 +2206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2330,6 +2342,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -2340,7 +2356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2559,6 +2575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2569,7 +2589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2742,6 +2762,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -2752,7 +2776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2827,6 +2851,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2837,7 +2865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3037,6 +3065,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4775231121729346061, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
   m_PrefabInstance: {fileID: 1081303936}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1150429778
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1328842111}
+    m_Modifications:
+    - target: {fileID: 7354499270393089714, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_Name
+      value: Wall_Maze (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354499270393089714, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354499270393089714, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_RootOrder
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.4093
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.0047
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6481714
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
 --- !u!1001 &1151219031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3100,6 +3197,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -3110,7 +3211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3343,6 +3444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -3353,7 +3458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3463,6 +3568,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
   m_PrefabInstance: {fileID: 1281882155}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1291558679 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
+  m_PrefabInstance: {fileID: 1150429778}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1328842110
 GameObject:
   m_ObjectHideFlags: 0
@@ -3525,6 +3635,7 @@ Transform:
   - {fileID: 1621863354}
   - {fileID: 2081783515}
   - {fileID: 150509007}
+  - {fileID: 1291558679}
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3591,6 +3702,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -3601,7 +3716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3914,6 +4029,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -3924,7 +4043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4137,11 +4256,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalScale.x
-      value: 35
+      value: 17.285217
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.336891
+      value: -28.1657
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4149,7 +4268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.723982
+      value: -21.15
       objectReference: {fileID: 0}
     - target: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4230,6 +4349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -4240,7 +4363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4483,9 +4606,17 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
@@ -4497,7 +4628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4647,9 +4778,12 @@ GameObject:
   - component: {fileID: 1931202225}
   - component: {fileID: 1931202224}
   - component: {fileID: 1931202223}
-  m_Layer: 0
+  - component: {fileID: 1931202226}
+  - component: {fileID: 1931202227}
+  - component: {fileID: 1931202228}
+  m_Layer: 7
   m_Name: Player_Maze
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4726,7 +4860,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931202218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 45}
+  m_LocalPosition: {x: 0, y: 1, z: 45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4745,7 +4879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107378c5dabad144eaa68a919a312f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 6
 --- !u!114 &1931202224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4826,6 +4960,51 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &1931202226
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931202218}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!65 &1931202227
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931202218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 0.3, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1931202228
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931202218}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1951465444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5317,6 +5496,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager_Maze (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -5327,7 +5510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5450,6 +5633,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: detectionRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: lightDetectionRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: playerDetectionRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407760, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: lightPoles.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -5477,9 +5672,17 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze
+      objectReference: {fileID: 0}
+    - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_RootOrder
@@ -5678,14 +5881,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 674223949}
     m_Modifications:
-    - target: {fileID: 458068438172209879, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1989234254436223816, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4775231121729346061, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5730,21 +5925,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4847715116432733979, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761182835013634618, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6370231928920708354, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
       propertyPath: m_Name
       value: LightPole
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370231928920708354, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}

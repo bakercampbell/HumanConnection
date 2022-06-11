@@ -7,14 +7,22 @@ public class VillagerBehaviour_Maze : MonoBehaviour
 {
     NavMeshAgent nav;
 
-    enum VillagerState {Idle, Moving, Hiding};
+    enum VillagerState {Idle, Moving, Running, Hiding};
     VillagerState currentState;
     [SerializeField]
     GameObject[] lightPoles;
+    GameObject closestLight;
+    GameObject furthestLight;
     [SerializeField, Range(0, 100)]
     float moveTimer, moveTimerReset;
+    [SerializeField, Range(0, 100)]
+    float lightDetectionRange, playerDetectionRange;
+    int lightLayer;
+    int playerLayer;
     
-    Vector3 moveTarget;
+    Transform moveTarget;
+    Transform runAwayTarget;
+
 
     [SerializeField]
     bool hasRandomStartTime = true;
@@ -28,9 +36,10 @@ public class VillagerBehaviour_Maze : MonoBehaviour
         {
             moveTimer = Random.Range(2, 7);
         }
+        lightLayer = LayerMask.NameToLayer("Light");
+        playerLayer = LayerMask.NameToLayer("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
         moveTimer -= Time.deltaTime;
@@ -39,25 +48,142 @@ public class VillagerBehaviour_Maze : MonoBehaviour
         {
             currentState = VillagerState.Moving;
             moveTarget = NextMoveTarget();
-            moveTimer = moveTimerReset;
+            moveTimer = Random.Range(moveTimerReset/2, moveTimerReset);
 
         }
 
+        else if (nav.remainingDistance < 5 && nav.velocity == Vector3.zero)
+            currentState = VillagerState.Idle;
+
+        /*if (DetectPlayer())
+        {
+            currentState = VillagerState.Running;
+        }
+        else
+            currentState = VillagerState.Moving;
+        */
         switch (currentState)
         {
+            case VillagerState.Idle:
+                Idle();
+                break;
             case VillagerState.Moving:
                 Move();
                 break;
+            case VillagerState.Hiding:
+                Hide();
+                break;
+            case VillagerState.Running:
+                RunAway();
+                break;
+
         }
     }
 
-    Vector3 NextMoveTarget()
+    Transform NextMoveTarget()
     {
-        return lightPoles[Random.Range(0, lightPoles.Length)].transform.position;
+        return lightPoles[Random.Range(0, lightPoles.Length)].transform;
+    }
+
+    void FindClosestLight()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightDetectionRange, 1 << lightLayer);
+        float minimumDistance = Mathf.Infinity;
+        foreach (Collider collider in hitColliders)
+        {
+            float distance = Vector3.Distance(transform.position, collider.transform.position);
+            if (distance < minimumDistance)
+            {
+                minimumDistance = distance;
+                closestLight = collider.gameObject;
+            }
+        }
+        if (closestLight != null)
+        {
+            Debug.Log("Nearest Light: " + closestLight.transform.parent.name + "; Distance: " + minimumDistance);
+        }
+        else
+        {
+            Debug.Log("There is no light in the given radius");
+        }
+    }
+
+    GameObject FindFurthestLight()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightDetectionRange, 1 << lightLayer);
+        float maximumDistance = 0;
+        foreach (Collider collider in hitColliders)
+        {
+            float distance = Vector3.Distance(transform.position, collider.transform.position);
+            if (distance > maximumDistance)
+            {
+                maximumDistance = distance;
+                furthestLight = collider.gameObject;
+            }
+        }
+        if (furthestLight != null)
+        {
+            return furthestLight;
+            Debug.Log("Furthest Light: " + closestLight.transform.parent.name + "; Distance: " + maximumDistance);
+        }
+        else
+        {
+            Debug.Log("There is no light in the given radius");
+        }
+        return null;
+    }
+
+    bool DetectPlayer()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, playerDetectionRange, 1 << playerLayer);
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider != null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void Move()
     {
-        nav.SetDestination(moveTarget);
+        //if (runAwayTarget != null)
+            //runAwayTarget = null;
+        nav.SetDestination(moveTarget.position);
+    }
+
+    void Idle()
+    {
+        //Do Stuff. Maybe just an animation?
+    }
+
+    void Hide()
+    {
+        
+    }
+
+    void RunAway()
+    {
+        Debug.Log("Player detected by" + gameObject.name);
+        /*    runAwayTarget = NextMoveTarget();
+
+        if (runAwayTarget.position != moveTarget.position)
+        {
+            nav.SetDestination(runAwayTarget.position);
+        }
+        else
+            RunAway();
+        */
+        nav.SetDestination(FindFurthestLight().transform.position);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            RunAway();
+            Debug.Log("Trigger");
+        }
     }
 }
