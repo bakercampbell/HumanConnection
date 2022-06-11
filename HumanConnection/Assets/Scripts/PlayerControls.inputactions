@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "7055b0f5-e4ae-4744-8095-71f68b5efbf6",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -46,7 +46,7 @@
                 {
                     "name": "KeyboardLR",
                     "id": "ba177425-0473-4121-b77f-c014fc5622f9",
-                    "path": "1DAxis",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -55,8 +55,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "a2f63867-4532-4f3b-9046-8ce7ac2d9c37",
+                    "name": "Left",
+                    "id": "f8c4832e-e560-490a-92ca-fc4949200edb",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -66,8 +66,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "da706b39-47c7-4393-b38f-db3f3ecdef1e",
+                    "name": "Right",
+                    "id": "160ba349-405c-432d-9a47-7b69612bd56d",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -79,7 +79,7 @@
                 {
                     "name": "JoystickLR",
                     "id": "ff5a339f-0a6e-4809-a810-5a46f8da3a54",
-                    "path": "1DAxis",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -88,8 +88,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "208ad07b-a24a-4622-9c4b-ee4a1902b754",
+                    "name": "Left",
+                    "id": "df1c8612-ca47-4c66-bcdc-011bb3f955c2",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
@@ -99,8 +99,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "03682a75-ae1d-45c8-9258-82d7fc6cbe95",
+                    "name": "Right",
+                    "id": "61f572d8-846a-4ad0-98f8-f5251d6b3b1f",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
@@ -144,8 +144,30 @@
                 },
                 {
                     "name": "",
+                    "id": "6880b4a4-cf38-44df-9105-afbf025c1300",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "387a00f0-4554-4181-a79f-d8637e900919",
                     "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be279ba4-57af-4918-8167-01e1697ebdcb",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
