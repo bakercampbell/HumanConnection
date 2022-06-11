@@ -16,8 +16,8 @@ GameObject:
   m_Name: Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7267074278405087890
 Transform:
@@ -114,8 +114,8 @@ GameObject:
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8705013089181321008
 Transform:
@@ -213,8 +213,8 @@ GameObject:
   m_Name: Globe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5009302959820137743
 Transform:
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 4775231121729346061}
   m_Layer: 0
   m_Name: LightPole
-  m_TagString: Untagged
+  m_TagString: LightPole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
