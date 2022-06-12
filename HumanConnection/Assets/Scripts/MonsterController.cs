@@ -1,61 +1,106 @@
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
-    namespace baker { 
-    public class MonsterController : MonoBehaviour
-    {
-        [SerializeField] private GameObject target;
-        [SerializeField] private MonsterScriptableObject monsterScriptableObject;
-        [SerializeField] private WaitForSeconds waitForSeconds = new WaitForSeconds(5);
-        //[SerializeField] private float inRange = 30f;
-        //[SerializeField] private float inSight;
+namespace baker { 
+public class MonsterController : MonoBehaviour
+{
+    [SerializeField] private GameObject target;
+    [SerializeField] private MonsterScriptableObject monsterScriptableObject;
+    [SerializeField] private WaitForSeconds waitForSeconds = new(5);
     
-        private Animator animator;
-        private int monsterSprint, monsterAttack, monsterReturn;
+    
+    //[SerializeField] private float inRange = 30f;
+    //[SerializeField] private float inSight;
+    
+    private Animator animator;
+    private int monsterSprint, monsterAttack, monsterReturn;
+    private Vector3 resetPos;
+    
+    private void Start()
+    {
+        StartCoroutine(MonsterMoveToward());
 
-        private void Awake()
-        {
-            animator = GetComponent<Animator>();
+    }
+    
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        monsterAttack = Animator.StringToHash("wham");
+        monsterSprint = Animator.StringToHash("Walk");
+        monsterReturn = Animator.StringToHash("Reset");
         
-            monsterAttack = Animator.StringToHash("wham");
-            monsterSprint = Animator.StringToHash("Walk");
-            monsterReturn = Animator.StringToHash("Reset");
-        }
+        resetPos = new Vector3(42, 0, 0);
+        
+    }
 
-        private void Start()
+   
+
+    private void Update()
+    {
+
+      
+    }
+
+    IEnumerator MonsterMoveToward()
+    {
+        animator.Play(monsterSprint);
+        while (Vector3.Distance(transform.position, target.transform.position) > monsterScriptableObject.monsterAttackType.attackRange) 
         {
-            StartCoroutine(MonsterMoveToward());
-           
+            Vector3 destination = Vector3.MoveTowards(transform.position, target.transform.position, monsterScriptableObject.speed * Time.deltaTime);
+            destination.y = transform.position.y;
+            transform.position = destination;
+            transform.LookAt(target.transform);
+            yield return null;
         }
+        StartCoroutine(MonsterAttack());
+    }
 
+    IEnumerator MonsterAttack()
+    {
+        animator.Play(monsterAttack);
+        yield return waitForSeconds;
+        StartCoroutine(MonsterMoveToward());
+    }
 
-
-        IEnumerator MonsterMoveToward()
-        {
-            animator.Play(monsterSprint);
-            while (Vector3.Distance(transform.position, target.transform.position) > monsterScriptableObject.monsterAttackType.attackRange) 
-            {
-                Vector3 destination = Vector3.MoveTowards(transform.position, target.transform.position, monsterScriptableObject.speed * Time.deltaTime);
-                destination.y = transform.position.y;
-                transform.position = destination;
-                transform.LookAt(target.transform);
-                yield return null;
-            }
-            StartCoroutine(MonsterAttack());
-        }
-
-        IEnumerator MonsterAttack()
-        {
-            animator.Play(monsterAttack);
-            yield return waitForSeconds;
-            StartCoroutine(MonsterMoveToward());
-        }
+    private void OnTriggerEnter(Collider other)
+    {
+        BackToStart();
+    }
 
         private void BackToStart()
-            {
+    {
             animator.Play(monsterReturn);
-
+            
+           
+            {
+                transform.DOMoveZ(0, 1f).OnComplete(() =>
+              {
+                  transform.DOMoveZ(8, .5f).OnComplete(() =>
+                  {
+                      transform.DOMoveY(-4, .5f).OnComplete(() =>
+                      {
+                          transform.DOMoveX(46, 3).OnComplete(() =>
+                          {
+                              transform.DOMoveY(0, .5f).OnComplete(() =>
+                              {
+                                  transform.DOMove(resetPos, 1).OnComplete(() =>
+                                  {
+                                      transform.DOMove(resetPos, 1).OnComplete(() =>
+                                      {
+                                          Debug.Log("start move");
+                                          StartCoroutine(MonsterMoveToward());
+                                          
+                                      });
+                                  });
+                              });
+                          });
+                      });
+                  });
+              });
             }
+            
     }
+}
 
     }

@@ -18,7 +18,7 @@ public class SegmentController : MonoBehaviour
 
     private void Update()
     {
-
+        
     }
 
     IEnumerator DelayFlail()
