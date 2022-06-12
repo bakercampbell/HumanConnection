@@ -7,18 +7,20 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 {
     NavMeshAgent nav;
 
-    enum VillagerState {Idle, Moving, Running, Hiding, Captured};
+    enum VillagerState {Idle, Moving, Running, Hiding, Hidden, Captured};
     VillagerState currentState;
     [SerializeField]
     GameObject[] lightPoles;
     GameObject closestLight;
     GameObject furthestLight;
+    GameObject closestHidingSpot;
     [SerializeField, Range(0, 100)]
     float moveTimer, moveTimerReset;
     [SerializeField, Range(0, 100)]
     float lightDetectionRange, playerDetectionRange;
     int lightLayer;
     int playerLayer;
+    int hidingLayer;
     
     Transform moveTarget;
     Transform runAwayTarget;
@@ -39,6 +41,8 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         }
         lightLayer = LayerMask.NameToLayer("Light");
         playerLayer = LayerMask.NameToLayer("Player");
+        hidingLayer = LayerMask.NameToLayer("HidingSpot");
+
     }
 
     void Update()
@@ -48,6 +52,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (moveTimer < 0)
         {
             currentState = VillagerState.Moving;
+            nav.stoppingDistance = 8;
             moveTarget = NextMoveTarget();
             moveTimer = Random.Range(moveTimerReset/2, moveTimerReset);
 
@@ -72,7 +77,10 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
                 Move();
                 break;
             case VillagerState.Hiding:
-                Hide();
+                Hiding();
+                break;
+            case VillagerState.Hidden:
+                Hidden();
                 break;
             case VillagerState.Running:
                 RunAway();
@@ -94,7 +102,34 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     }
     Transform NextMoveTarget()
     {
-        return lightPoles[Random.Range(0, lightPoles.Length)].transform;
+        if (CheckAllLights())
+        {
+            var potentialLight = lightPoles[Random.Range(0, lightPoles.Length)];
+            if (!CheckIfLightIsOn(potentialLight))
+            {
+                potentialLight = NextMoveTarget().gameObject;
+            }
+            return potentialLight.transform;
+        }
+        currentState = VillagerState.Hiding;
+        return null;
+    }
+
+    bool CheckIfLightIsOn(GameObject light)
+    {
+        if (light.GetComponentInChildren<Light>().enabled)
+            return true;
+
+        return false;
+    }
+    bool CheckAllLights()
+    {
+        for(int i = 0; i < lightPoles.Length - 1; i++)
+        {
+            if (lightPoles[i].GetComponentInChildren<Light>().enabled)
+                return true;
+        }
+        return false;
     }
 
     void FindClosestLight()
@@ -136,13 +171,39 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (furthestLight != null)
         {
             return furthestLight;
-            Debug.Log("Furthest Light: " + closestLight.transform.parent.name + "; Distance: " + maximumDistance);
         }
         else
         {
             Debug.Log("There is no light in the given radius");
         }
         return null;
+    }
+    void FindClosestHidingSpot()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightDetectionRange, 1 << hidingLayer);
+        float minimumDistance = Mathf.Infinity;
+        foreach (Collider collider in hitColliders)
+        {
+            Debug.Log("Checking " + collider.gameObject.name);
+            bool isSpotOccupied = collider.gameObject.GetComponent<HidingSpotBehaviour>().isOccupied;
+            if (!isSpotOccupied)
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                if (distance < minimumDistance)
+                {
+                    minimumDistance = distance;
+                    closestHidingSpot = collider.gameObject;
+                }
+            }
+        }
+        if (closestHidingSpot != null)
+        {
+            
+        }
+        else
+        {
+            
+        }
     }
 
     bool DetectPlayer()
@@ -173,7 +234,20 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     void Hide()
     {
-        
+        currentState = VillagerState.Hiding;
+        nav.stoppingDistance = 0;
+    }
+
+    void Hiding()
+    {
+        FindClosestHidingSpot();
+        nav.SetDestination(closestHidingSpot.transform.position);
+        Debug.Log(gameObject.name + " is going to hide at " + closestHidingSpot.name);
+    }
+
+    void Hidden()
+    {
+        Debug.Log(gameObject.name + " is hiding at " + closestHidingSpot.gameObject.name);
     }
 
     void RunAway()
@@ -188,7 +262,10 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         else
             RunAway();
         */
-        nav.SetDestination(FindFurthestLight().transform.position);
+        if (CheckAllLights())
+            nav.SetDestination(FindFurthestLight().transform.position);
+        else
+            currentState = VillagerState.Hiding;
     }
 
     void Captured()
@@ -201,6 +278,27 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         {
             RunAway();
             Debug.Log("Trigger");
+        }
+        if (other.gameObject.GetComponent<LightPoleBehaviour>())
+        {
+            Debug.Log("Subscribing to " + other.gameObject.name);
+            other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent += Hide;
+        }
+        if (other.gameObject.tag == "HidingSpot")
+        {
+            if (currentState == VillagerState.Hiding)
+            {
+                currentState = VillagerState.Hidden;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "LightPole")
+        {
+            Debug.Log("UnSubscribing to " + other.gameObject.name);
+            other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent -= Hide;
         }
     }
 }
