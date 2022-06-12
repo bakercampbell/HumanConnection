@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "eacfb2f5-ce39-4fc3-9cba-ac8c2a43e014",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -82,12 +91,23 @@
                 },
                 {
                     "name": "",
-                    "id": "bdf9563f-d996-4e87-96bb-7c9a1d7fdd6b",
-                    "path": "<Keyboard>/space",
+                    "id": "51005a05-ae1f-47a1-bb42-f3ed8619d460",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c4e945ab-45d8-4dcc-ade2-9af31c4a7c78",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
