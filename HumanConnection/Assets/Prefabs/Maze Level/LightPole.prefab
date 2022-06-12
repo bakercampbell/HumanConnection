@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 6047921145908946563}
   - component: {fileID: 2334655226276180340}
   - component: {fileID: 3223380307693668773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.84967804, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 10
   m_Range: 30
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -345,7 +345,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -365,7 +365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4775231121729346061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightPole
   m_TagString: LightPole
   m_Icon: {fileID: 0}
