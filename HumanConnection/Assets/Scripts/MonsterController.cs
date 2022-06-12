@@ -6,7 +6,7 @@ public class MonsterController : MonoBehaviour
 {
     [SerializeField] private GameObject target;
     [SerializeField] private MonsterScriptableObject monsterScriptableObject;
-    [SerializeField] private WaitForSeconds waitForSeconds = new WaitForSeconds(3);
+    [SerializeField] private WaitForSeconds waitForSeconds = new WaitForSeconds(5);
     //[SerializeField] private float inRange = 30f;
     //[SerializeField] private float inSight;
     
