@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class VillagerBehaviour_Maze : MonoBehaviour
+public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 {
     NavMeshAgent nav;
 
-    enum VillagerState {Idle, Moving, Running, Hiding};
+    enum VillagerState {Idle, Moving, Running, Hiding, Captured};
     VillagerState currentState;
     [SerializeField]
     GameObject[] lightPoles;
@@ -26,6 +26,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour
 
     [SerializeField]
     bool hasRandomStartTime = true;
+    public bool isCaptured;
 
 
     void Start()
@@ -52,7 +53,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour
 
         }
 
-        else if (nav.remainingDistance < 5 && nav.velocity == Vector3.zero)
+        else if (nav.enabled && nav.remainingDistance < 5 && nav.velocity == Vector3.zero)
             currentState = VillagerState.Idle;
 
         /*if (DetectPlayer())
@@ -76,10 +77,21 @@ public class VillagerBehaviour_Maze : MonoBehaviour
             case VillagerState.Running:
                 RunAway();
                 break;
-
+            case VillagerState.Captured:
+                Captured();
+                break;
         }
     }
 
+    public void Interact()
+    {
+        Debug.Log("Captured");
+        nav.enabled = false;
+        var capturedParent = FindObjectOfType<TopDownMovement>().dragPoint.transform;
+        transform.Translate(capturedParent.localPosition);
+        transform.parent = capturedParent;
+        currentState = VillagerState.Captured;
+    }
     Transform NextMoveTarget()
     {
         return lightPoles[Random.Range(0, lightPoles.Length)].transform;
@@ -150,7 +162,8 @@ public class VillagerBehaviour_Maze : MonoBehaviour
     {
         //if (runAwayTarget != null)
             //runAwayTarget = null;
-        nav.SetDestination(moveTarget.position);
+        if (nav.enabled)
+            nav.SetDestination(moveTarget.position);
     }
 
     void Idle()
@@ -178,6 +191,10 @@ public class VillagerBehaviour_Maze : MonoBehaviour
         nav.SetDestination(FindFurthestLight().transform.position);
     }
 
+    void Captured()
+    {
+        //Do something
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")

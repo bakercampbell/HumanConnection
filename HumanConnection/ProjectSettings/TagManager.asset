@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - LightPole
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Light
   - Player
-  - 
+  - Interactable
   - 
   - 
   - 

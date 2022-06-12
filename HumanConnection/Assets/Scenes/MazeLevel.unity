@@ -276,6 +276,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8591697119212310075, guid: bfe75cdd0fe9bb74d8584beedcf34a46, type: 3}
   m_PrefabInstance: {fileID: 42449522}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &45239177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+  m_PrefabInstance: {fileID: 1667300204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &51295644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -459,6 +464,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (17)
@@ -770,6 +779,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (15)
@@ -859,6 +872,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (20)
@@ -1268,6 +1285,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (9)
@@ -1500,7 +1521,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &360096142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360096143}
+  m_Layer: 0
+  m_Name: firePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &360096143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360096142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1931202222}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &390760190
 PrefabInstance:
@@ -1611,6 +1663,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (19)
@@ -1729,6 +1785,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (10)
@@ -1842,6 +1902,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (6)
@@ -1896,100 +1960,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
---- !u!1 &568461461
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 568461463}
-  - component: {fileID: 568461462}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &568461462
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568461461}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 0.6509434, g: 0.37269703, b: 0, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 1
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &568461463
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568461461}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &581717070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2025,6 +1995,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (12)
@@ -2188,6 +2162,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (8)
@@ -2242,6 +2220,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+--- !u!1 &639642417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639642418}
+  m_Layer: 0
+  m_Name: dragPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &639642418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639642417}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1931202222}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &674223948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,7 +2286,7 @@ Transform:
   - {fileID: 1979302418}
   - {fileID: 1607360459}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &723114749
 PrefabInstance:
@@ -2338,6 +2347,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (2)
@@ -2571,6 +2584,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (14)
@@ -2758,6 +2775,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (4)
@@ -2847,6 +2868,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (18)
@@ -3065,6 +3090,131 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4775231121729346061, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
   m_PrefabInstance: {fileID: 1081303936}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1118741536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1118741541}
+  - component: {fileID: 1118741540}
+  - component: {fileID: 1118741539}
+  - component: {fileID: 1118741538}
+  - component: {fileID: 1118741537}
+  - component: {fileID: 1118741542}
+  m_Layer: 0
+  m_Name: LabZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!65 &1118741537
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118741536}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 2, z: 10}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!64 &1118741538
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118741536}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1118741539
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118741536}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: ae6f92a16bda89640a7a0ce2335987d4, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1118741540
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118741536}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1118741541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118741536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1118741542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118741536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583b49ca2addf5949bb8cf75215f52fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1150429778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3193,6 +3343,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (5)
@@ -3440,6 +3594,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (16)
@@ -3637,7 +3795,7 @@ Transform:
   - {fileID: 150509007}
   - {fileID: 1291558679}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1345691388
 PrefabInstance:
@@ -3698,6 +3856,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (3)
@@ -3822,6 +3984,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7597386742454544914, guid: aaa1a9b91285db74698bda6c21434327, type: 3}
   m_PrefabInstance: {fileID: 1384447098}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1389306241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1389306242}
+  m_Layer: 0
+  m_Name: CrossHair
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1389306242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389306241}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.86, z: 34.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1417684154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4025,6 +4218,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[11]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (7)
@@ -4231,6 +4428,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7597386742454544914, guid: aaa1a9b91285db74698bda6c21434327, type: 3}
   m_PrefabInstance: {fileID: 1621863353}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1667300204
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1931202222}
+    m_Modifications:
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_Name
+      value: MadScientist
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
 --- !u!1001 &1753232273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4345,6 +4599,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (11)
@@ -4772,7 +5030,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1931202222}
-  - component: {fileID: 1931202221}
   - component: {fileID: 1931202220}
   - component: {fileID: 1931202219}
   - component: {fileID: 1931202225}
@@ -4844,14 +5101,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1931202221
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931202218}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1931202222
 Transform:
   m_ObjectHideFlags: 0
@@ -4863,9 +5112,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 45239177}
+  - {fileID: 360096143}
+  - {fileID: 639642418}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1931202223
 MonoBehaviour:
@@ -4880,6 +5132,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  turnSpeed: 6
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 256
+  crossHair: {fileID: 1389306241}
+  bullet: {fileID: 2060431568918424442, guid: 43e95a0b873dcdd4ca33bdd2b44a9794, type: 3}
+  firePoint: {fileID: 360096143}
+  dragPoint: {fileID: 639642418}
 --- !u!114 &1931202224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4934,9 +5197,37 @@ MonoBehaviour:
     m_ActionId: 0c05313a-4b70-4939-b465-73d7eb80298b
     m_ActionName: Default/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1931202223}
+        m_TargetAssemblyTypeName: TopDownMovement, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e562c9be-1b02-4d7a-8043-4c28086d50c2
     m_ActionName: Default/Shoot[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1931202223}
+        m_TargetAssemblyTypeName: TopDownMovement, Assembly-CSharp
+        m_MethodName: OnMouseMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: eacfb2f5-ce39-4fc3-9cba-ac8c2a43e014
+    m_ActionName: Default/Aim[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Default
@@ -4967,7 +5258,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931202218}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
   m_Extents: {x: 0.5, y: 1, z: 0.5}
@@ -5492,6 +5783,10 @@ PrefabInstance:
       propertyPath: lightPoles.Array.data[5]
       value: 
       objectReference: {fileID: 1210056459}
+    - target: {fileID: 131268936665407761, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 131268936665407763, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
       propertyPath: m_Name
       value: Villager_Maze (13)
@@ -5925,9 +6220,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5761182835013634618, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6370231928920708354, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
       propertyPath: m_Name
       value: LightPole
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370231928920708354, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8295e545b53212147900e41e8d5d33a6, type: 3}

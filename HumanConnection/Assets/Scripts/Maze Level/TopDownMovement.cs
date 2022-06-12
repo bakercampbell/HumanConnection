@@ -9,22 +9,22 @@ public class TopDownMovement : MonoBehaviour
     CharacterController character;
     Vector3 moveVector;
     [SerializeField, Range(0,20)]
-    float speed;
-    LayerMask playerMask;
+    float speed, turnSpeed;
+    [SerializeField]
+    LayerMask playerMask, interactableMask;
     [SerializeField]
     GameObject crossHair, bullet;
     [SerializeField]
     Transform firePoint;
+    public Transform dragPoint;
     bool canShoot = true;
     void Start()
     {
         character = GetComponent<CharacterController>();
-        playerMask = LayerMask.NameToLayer("Player");
     }
     void FixedUpdate()
     {
         character.Move(moveVector * speed * Time.fixedDeltaTime);
-
 
     }
 
@@ -34,7 +34,19 @@ public class TopDownMovement : MonoBehaviour
         moveVector = new Vector3(direction.x, 0, direction.y);
     }
 
-    public void OnClick()
+    public void Interact()
+    {
+        var potentialInteraction = Physics.OverlapSphere(firePoint.position, .5f, interactableMask, QueryTriggerInteraction.Ignore);
+        if (potentialInteraction.Length > 0)
+        {
+            potentialInteraction[0].GetComponent<Interactable>()?.Interact();
+            
+        }
+
+
+    }
+
+    /*public void OnClick()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame && canShoot)
         {
@@ -51,19 +63,16 @@ public class TopDownMovement : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         canShoot = true;
     }
-
+    */
     public void OnMouseMove()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            var direction = hit.point - transform.position;
-            Debug.Log(hit.point);
-            Debug.DrawRay(transform.position, direction.normalized, Color.red, .2f);
-            Debug.Log(hit.transform.gameObject.name);
-
-            crossHair.transform.position = hit.point;
+            var direction = hit.point;
+            var lookTarget = new Vector3(direction.x - transform.position.x, 0, direction.z - transform.position.z);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(-lookTarget), turnSpeed);
         }
     }
 }

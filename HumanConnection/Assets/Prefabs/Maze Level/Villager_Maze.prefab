@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 131268936665407790}
   - component: {fileID: 131268936665407761}
   - component: {fileID: 131268936665407760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Villager_Maze
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   lightDetectionRange: 100
   playerDetectionRange: 10
   hasRandomStartTime: 1
+  isCaptured: 0
 --- !u!1 &1310478533688633191
 GameObject:
   m_ObjectHideFlags: 0
