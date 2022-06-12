@@ -23,7 +23,7 @@ public class SegmentController : MonoBehaviour
 
     IEnumerator DelayFlail()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(delay);
         animator.Play(monsterFlail);
         
     }
