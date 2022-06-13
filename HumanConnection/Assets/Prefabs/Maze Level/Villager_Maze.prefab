@@ -139,6 +139,8 @@ MonoBehaviour:
   lightPoles: []
   moveTimer: 5
   moveTimerReset: 30
+  hideTimer: 10
+  hideTimerReset: 10
   lightDetectionRange: 100
   playerDetectionRange: 10
   hasRandomStartTime: 1
