@@ -256,18 +256,23 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         FindClosestHidingSpot();
         if (nav.enabled)
             nav.SetDestination(closestHidingSpot.transform.position);
-        Debug.Log(gameObject.name + " is going to hide at " + closestHidingSpot.name);
+        //Debug.Log(gameObject.name + " is going to hide at " + closestHidingSpot.name);
     }
 
     void Hidden()
     {
-        Debug.Log(gameObject.name + " is hiding at " + closestHidingSpot.gameObject.name);
+        //Debug.Log(gameObject.name + " is hiding at " + closestHidingSpot.gameObject.name);
         hideTimer -= Time.deltaTime;
         if (hideTimer < 0)
         {
             currentState = VillagerState.Moving;
             hideTimer = hideTimerReset;
         }
+    }
+
+    void ComeOut()
+    {
+        hideTimer = 0;
     }
 
     void RunAway()
@@ -304,6 +309,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (other.gameObject.GetComponent<LightPoleBehaviour>())
         {
             other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent += Hide;
+            other.gameObject.GetComponent<LightPoleBehaviour>().lightOnEvent += ComeOut;
         }
         if (other.gameObject.tag == "HidingSpot")
         {
@@ -319,6 +325,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (other.gameObject.tag == "LightPole")
         {
             other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent -= Hide;
+            other.gameObject.GetComponent<LightPoleBehaviour>().lightOnEvent -= ComeOut;
         }
     }
 }

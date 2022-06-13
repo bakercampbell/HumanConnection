@@ -18,6 +18,7 @@ public class TopDownMovement : MonoBehaviour
     Transform firePoint;
     public Transform dragPoint;
     bool canShoot = true;
+    bool isClicked;
     void Start()
     {
         character = GetComponent<CharacterController>();
@@ -35,14 +36,20 @@ public class TopDownMovement : MonoBehaviour
 
     public void Interact()
     {
-        var potentialInteraction = Physics.OverlapSphere(firePoint.position, .5f, interactableMask, QueryTriggerInteraction.Ignore);
-        if (potentialInteraction.Length > 0)
+        isClicked = !isClicked;
+        if (isClicked)
         {
-            potentialInteraction[0].GetComponent<Interactable>()?.Interact();
-            
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                var potentialInteraction = Physics.OverlapSphere(firePoint.position, .5f, interactableMask, QueryTriggerInteraction.Ignore);
+                if (potentialInteraction.Length > 0)
+                {
+                    potentialInteraction[0].GetComponent<Interactable>()?.Interact();
+
+                }
+                StartCoroutine(CanShoot());
+            }
         }
-
-
     }
 
     /*public void OnClick()
@@ -55,14 +62,14 @@ public class TopDownMovement : MonoBehaviour
             StartCoroutine(CanShoot());
         }
     }
-
+    */
     IEnumerator CanShoot()
     {
         canShoot = false;
         yield return new WaitForSeconds(.5f);
         canShoot = true;
     }
-    */
+
     public void OnMouseMove()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());

@@ -6,8 +6,9 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
 {
     public delegate void OnLightOffDelegate();
     public event OnLightOffDelegate lightOffEvent;
-    [SerializeField]
-    Light lightGlobe;
+    public delegate void OnLightOnDelegate();
+    public event OnLightOnDelegate lightOnEvent;
+    public Light lightGlobe;
 
     public void Interact()
     {
@@ -17,7 +18,12 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
 
     public void OnLightOff()
     {
-            lightOffEvent?.Invoke();
+        lightOffEvent?.Invoke();
+    }
+
+    public void OnLightOn()
+    {
+        lightOnEvent?.Invoke();
     }
 
 }
