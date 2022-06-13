@@ -25,7 +25,6 @@ public class TopDownMovement : MonoBehaviour
     void FixedUpdate()
     {
         character.Move(moveVector * speed * Time.fixedDeltaTime);
-
     }
 
     public void OnMoveChanged(InputAction.CallbackContext context)
