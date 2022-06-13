@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 131268936665407789}
   - component: {fileID: 131268936665407788}
   - component: {fileID: 131268936665407791}
+  - component: {fileID: 131268936665407760}
   - component: {fileID: 131268936665407790}
   - component: {fileID: 131268936665407761}
-  - component: {fileID: 131268936665407760}
   - component: {fileID: -3222505927041269321}
   m_Layer: 8
   m_Name: Villager_Maze
@@ -88,6 +88,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &131268936665407760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131268936665407763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164353b751a26224e807c10d0f6d2e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  startingState: 0
+  lightPoles: []
+  moveTimer: 5
+  moveTimerReset: 30
+  hideTimer: 10
+  hideTimerReset: 10
+  lightDetectionRange: 100
+  playerDetectionRange: 10
+  hasRandomStartTime: 1
+  isCaptured: 0
 --- !u!136 &131268936665407790
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -124,27 +147,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &131268936665407760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131268936665407763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 164353b751a26224e807c10d0f6d2e33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightPoles: []
-  moveTimer: 5
-  moveTimerReset: 30
-  hideTimer: 10
-  hideTimerReset: 10
-  lightDetectionRange: 100
-  playerDetectionRange: 10
-  hasRandomStartTime: 1
-  isCaptured: 0
 --- !u!54 &-3222505927041269321
 Rigidbody:
   m_ObjectHideFlags: 0

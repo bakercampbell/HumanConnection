@@ -54,42 +54,40 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (currentState == VillagerState.Moving || currentState == VillagerState.Idle)
         {
             moveTimer -= Time.deltaTime;
+            if (nav.remainingDistance == 8f)
+                currentState = VillagerState.Idle;
+
+            if (moveTimer < 0)
+            {
+                nav.stoppingDistance = 8;
+                nav.autoBraking = false;
+                moveTarget = NextMoveTarget();
+                Move();
+                moveTimer = Random.Range(moveTimerReset / 2, moveTimerReset);
+
+            }
         }
 
-        if (moveTimer < 0)
+        if (currentState == VillagerState.Running)
         {
-            currentState = VillagerState.Moving;
-            nav.stoppingDistance = 8;
-            nav.autoBraking = false;
-            moveTarget = NextMoveTarget();
-            moveTimer = Random.Range(moveTimerReset/2, moveTimerReset);
-
+            hideTimer -= Time.deltaTime;
+            if (hideTimer < 0)
+            {
+                currentState = VillagerState.Moving;
+                hideTimer = hideTimerReset;
+            }
         }
 
-
-        /*if (DetectPlayer())
-        {
-            currentState = VillagerState.Running;
-        }
-        else
-            currentState = VillagerState.Moving;
-        */
         switch (currentState)
         {
             case VillagerState.Idle:
                 Idle();
-                break;
-            case VillagerState.Moving:
-                Move();
                 break;
             case VillagerState.Hiding:
                 Hiding();
                 break;
             case VillagerState.Hidden:
                 Hidden();
-                break;
-            case VillagerState.Running:
-                RunAway();
                 break;
             case VillagerState.Captured:
                 Captured();
@@ -233,6 +231,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     void Move()
     {
+        currentState = VillagerState.Moving;
         //if (runAwayTarget != null)
             //runAwayTarget = null;
         if (nav.enabled)
@@ -256,18 +255,23 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         FindClosestHidingSpot();
         if (nav.enabled)
             nav.SetDestination(closestHidingSpot.transform.position);
-        Debug.Log(gameObject.name + " is going to hide at " + closestHidingSpot.name);
+        //Debug.Log(gameObject.name + " is going to hide at " + closestHidingSpot.name);
     }
 
     void Hidden()
     {
-        Debug.Log(gameObject.name + " is hiding at " + closestHidingSpot.gameObject.name);
+        //Debug.Log(gameObject.name + " is hiding at " + closestHidingSpot.gameObject.name);
         hideTimer -= Time.deltaTime;
         if (hideTimer < 0)
         {
             currentState = VillagerState.Moving;
             hideTimer = hideTimerReset;
         }
+    }
+
+    void ComeOut()
+    {
+        hideTimer = 0;
     }
 
     void RunAway()
@@ -283,7 +287,10 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             RunAway();
         */
         if (CheckAllLights() && nav.enabled)
+        {
             nav.SetDestination(FindFurthestLight().transform.position);
+            currentState = VillagerState.Running;
+        }
         else
             currentState = VillagerState.Hiding;
     }
@@ -298,12 +305,14 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         {
             if (currentState != VillagerState.Hidden)
             {
+                moveTimer = moveTimerReset;
                 RunAway();
             }
         }
         if (other.gameObject.GetComponent<LightPoleBehaviour>())
         {
-            other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent += Hide;
+            other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent += Hide; 
+            other.gameObject.GetComponent<LightPoleBehaviour>().lightOnEvent += ComeOut;
         }
         if (other.gameObject.tag == "HidingSpot")
         {
@@ -319,6 +328,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (other.gameObject.tag == "LightPole")
         {
             other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent -= Hide;
+            other.gameObject.GetComponent<LightPoleBehaviour>().lightOnEvent -= ComeOut;
         }
     }
 }
