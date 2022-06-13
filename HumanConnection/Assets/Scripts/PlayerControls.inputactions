@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "0e5620df-ba16-4ac0-8a6a-1b6406d445aa",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Aim",
                     "type": "PassThrough",
                     "id": "92843cad-3478-4267-952f-a07f3e00974a",
@@ -40,31 +31,27 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DodgeL",
+                    "type": "Button",
+                    "id": "d217027e-4e1e-4f23-a690-2261bb0f2c45",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DodgeR",
+                    "type": "Button",
+                    "id": "3965404e-3dc0-4a89-8a98-8f150e9dbd6d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "c079b570-17fa-41d9-9fad-f89d0be654e5",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "99581a2d-00df-45a6-a31d-9aa5d9aeff41",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "459d7b8a-6ebe-4094-a6a0-a9831be09916",
@@ -143,81 +130,37 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Left",
-                    "id": "486362a8-77f6-42b2-af91-ecbfe2c290e0",
-                    "path": "",
+                    "name": "",
+                    "id": "d43b284c-cb3d-4399-b63e-58874420b624",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Right",
-                    "id": "36a24b6f-9303-4e21-a711-e764251cdc62",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Gamepad",
-                    "id": "c193b0a9-7c5c-4b89-8c6b-97f8a862b893",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Up",
-                    "id": "c7103b05-4ae9-409d-8b9e-aab6e6692865",
-                    "path": "<Gamepad>/leftStick/up",
+                    "name": "",
+                    "id": "4cbf30e1-717e-45ae-a07b-128d18839982",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "DodgeL",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
-                    "name": "Down",
-                    "id": "1dee4806-61b3-485c-aac5-0b1ef3d34819",
-                    "path": "<Gamepad>/leftStick/down",
+                    "name": "",
+                    "id": "29d40d0e-4a87-410c-a801-5cce8517a1b6",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "DodgeR",
                     "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Left",
-                    "id": "8e7b9f1f-19fa-4cff-aef9-0db9c47a6416",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Right",
-                    "id": "8c7bbb9e-9864-4e7c-9f5c-5c047a5e8ca7",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 }
             ]
         }

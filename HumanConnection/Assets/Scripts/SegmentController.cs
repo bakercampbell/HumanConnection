@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SegmentController : MonoBehaviour
 {
+    [SerializeField] private int health = 100;
+
     private Animator animator;
     private int monsterFlail;
     private float delay;
@@ -18,7 +20,18 @@ public class SegmentController : MonoBehaviour
 
     private void Update()
     {
-        
+        if (health <= 0)
+        {
+            
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Tazer"))
+        {
+            health -= 10;
+        }
     }
 
     IEnumerator DelayFlail()
