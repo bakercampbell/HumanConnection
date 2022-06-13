@@ -16,6 +16,7 @@ public class MonsterController : MonoBehaviour
     private Animator animator;
     private int monsterSprint, monsterAttack, monsterReturn;
     private Vector3 resetPos;
+    private Vector3 offScreen;
     
     private void Start()
     {
@@ -31,7 +32,7 @@ public class MonsterController : MonoBehaviour
         monsterReturn = Animator.StringToHash("Reset");
         
         resetPos = new Vector3(42, 0, 0);
-        
+        offScreen = new Vector3(60, 0, 0);
     }
 
    
@@ -65,7 +66,11 @@ public class MonsterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        BackToStart();
+        if(other.CompareTag("Reset Trigger"))
+            {
+                BackToStart();
+            }
+        
     }
 
         private void BackToStart()
@@ -80,9 +85,9 @@ public class MonsterController : MonoBehaviour
                   {
                       transform.DOMoveY(-4, .5f).OnComplete(() =>
                       {
-                          transform.DOMoveX(46, 3).OnComplete(() =>
+                          transform.DOMoveX(60, 3).OnComplete(() =>
                           {
-                              transform.DOMoveY(0, .5f).OnComplete(() =>
+                              transform.DOMove(offScreen, .5f).OnComplete(() =>
                               {
                                   transform.DOMove(resetPos, 1).OnComplete(() =>
                                   {

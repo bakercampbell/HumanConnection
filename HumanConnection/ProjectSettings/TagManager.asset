@@ -8,6 +8,8 @@ TagManager:
   - LightPole
   - NPC
   - HidingSpot
+  - Reset Trigger
+  - Segment
   layers:
   - Default
   - TransparentFX
