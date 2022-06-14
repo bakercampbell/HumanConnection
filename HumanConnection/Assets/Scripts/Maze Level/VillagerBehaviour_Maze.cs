@@ -7,7 +7,9 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 {
     NavMeshAgent nav;
 
-    enum VillagerState {Idle, Moving, Running, Hiding, Hidden, Captured};
+    [SerializeField]
+    HiveMind hiveMind;
+    enum VillagerState {Idle, Moving, Running, Hiding, Hidden, Captured, Stunned, Swarm};
     [SerializeField]
     VillagerState currentState;
     [SerializeField]
@@ -17,8 +19,9 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     GameObject closestLight;
     GameObject furthestLight;
     GameObject closestHidingSpot;
+    GameObject swarmTarget;
     [SerializeField, Range(0, 100)]
-    float moveTimer, moveTimerReset, hideTimer, hideTimerReset;
+    float moveTimer, moveTimerReset, hideTimer, hideTimerReset, stunTimer, stunTimerReset;
     [SerializeField, Range(0, 100)]
     float lightDetectionRange, playerDetectionRange;
     int lightLayer;
@@ -47,6 +50,8 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         lightLayer = LayerMask.NameToLayer("Light");
         playerLayer = LayerMask.NameToLayer("Player");
         hidingLayer = LayerMask.NameToLayer("HidingSpot");
+
+        
     }
 
     void Update()
@@ -97,6 +102,12 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             case VillagerState.Captured:
                 Captured();
                 break;
+            case VillagerState.Stunned:
+                Stunned();
+                break;
+            case VillagerState.Swarm:
+                Swarm();
+                break;
         }
     }
 
@@ -106,11 +117,13 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         {
             Debug.Log("Captured");
             nav.enabled = false;
-            var capturedParent = FindObjectOfType<TopDownMovement>().dragPoint.transform;
-            transform.position = capturedParent.position;
-            transform.parent = capturedParent;
+            var capturedParent = FindObjectOfType<TopDownMovement>();
+            transform.position = capturedParent.dragPoint.transform.position;
+            transform.parent = capturedParent.dragPoint.transform;
+            capturedParent.isCarrying = true;
             isCaptured = true;
             currentState = VillagerState.Captured;
+            GetHit();
         }
         else
         {
@@ -284,23 +297,26 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     void RunAway()
     {
-        //Debug.Log("Player detected by" + gameObject.name);
-        /*    runAwayTarget = NextMoveTarget();
+        if (currentState != VillagerState.Swarm)
+        {
+            Debug.Log("Player detected by" + gameObject.name);
+            /*    runAwayTarget = NextMoveTarget();
 
-        if (runAwayTarget.position != moveTarget.position)
-        {
-            nav.SetDestination(runAwayTarget.position);
+            if (runAwayTarget.position != moveTarget.position)
+            {
+                nav.SetDestination(runAwayTarget.position);
+            }
+            else
+                RunAway();
+            */
+            if (CheckAllLights() && nav.enabled)
+            {
+                nav.SetDestination(FindFurthestLight().transform.position);
+                currentState = VillagerState.Running;
+            }
+            else
+                currentState = VillagerState.Hiding;
         }
-        else
-            RunAway();
-        */
-        if (CheckAllLights() && nav.enabled)
-        {
-            nav.SetDestination(FindFurthestLight().transform.position);
-            currentState = VillagerState.Running;
-        }
-        else
-            currentState = VillagerState.Hiding;
     }
 
     void Captured()
@@ -319,6 +335,59 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         hideTimer = 0;
         moveTimer = 1; 
         RunAway();
+    }
+    void GetHit()
+    {
+        Debug.Log("Help!");
+        if (currentState != VillagerState.Captured) currentState = VillagerState.Stunned;
+        hiveMind.swarmTarget = FindObjectOfType<TopDownMovement>().gameObject;
+        if (hiveMind.swarmTarget != null)
+        {
+            hiveMind.swarmTarget.GetComponent<TopDownMovement>().isSwarmed = true;
+            hiveMind.OnSwarm();
+
+        }
+    }
+
+    void Stunned()
+    {
+        Debug.Log("You will fear the proletariat!");
+        stunTimer -= Time.deltaTime;
+        nav.isStopped = true;
+        if (stunTimer <= 0)
+        {
+            CarryOn();
+        }
+    }
+
+    void Swarm()
+    {
+        Debug.Log("THE HIVEMIND HAS AWOKEN");
+        if (currentState != VillagerState.Stunned || currentState != VillagerState.Captured)
+        {
+            nav.speed = 10;
+            nav.stoppingDistance = 0;
+            nav.radius = .5f;
+            swarmTarget = hiveMind.swarmTarget;
+            currentState = VillagerState.Swarm;
+            nav.SetDestination(swarmTarget.transform.position);
+        }
+    }
+
+    void CarryOn()
+    {
+        nav.enabled = true;
+        nav.isStopped = false;
+        currentState = VillagerState.Idle;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            GetHit();
+
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

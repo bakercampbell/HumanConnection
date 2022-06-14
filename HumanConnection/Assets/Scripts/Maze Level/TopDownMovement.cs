@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(CharacterController))]
 public class TopDownMovement : MonoBehaviour
@@ -10,7 +11,7 @@ public class TopDownMovement : MonoBehaviour
     Vector3 moveVector;
     Vector3 startPos;
     [SerializeField, Range(0, 20)]
-    float speed, turnSpeed;
+    float speed, turnSpeed, carryingSpeed;
     public float prevSpeed;
     [SerializeField, Range(0, 5)]
     float captureTimer, captureTimerReset;
@@ -20,15 +21,20 @@ public class TopDownMovement : MonoBehaviour
     GameObject crossHair, bullet;
     [SerializeField]
     Transform firePoint;
+    NavMeshObstacle navObstacle;
     public Transform dragPoint;
     bool canShoot = true;
     bool isClicked;
     public bool isCaptured;
+    public bool isCarrying;
+    public bool isSwarmed;
+    
     void Start()
     {
         character = GetComponent<CharacterController>();
         startPos = transform.position;
         prevSpeed = speed;
+        navObstacle = GetComponent<NavMeshObstacle>();
     }
 
     private void Update()
@@ -49,6 +55,14 @@ public class TopDownMovement : MonoBehaviour
             captureTimer = captureTimerReset;
             isCaptured = false;
 
+        }
+        if (isCarrying)
+        {
+            speed = carryingSpeed;
+        }
+        else
+        {
+            speed = prevSpeed;
         }
     }
     void FixedUpdate()
@@ -139,6 +153,7 @@ public class TopDownMovement : MonoBehaviour
 
     void ReleaseVillager()
     {
+        isCarrying = false;
         var villager = GetComponentInChildren<VillagerBehaviour_Maze>()?.gameObject;
         if (villager != null)
             villager.GetComponent<VillagerBehaviour_Maze>().Rescue();

@@ -26,9 +26,7 @@ public class Bullet_Maze : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.name);
-        gameObject.SendMessage("GetHit", SendMessageOptions.DontRequireReceiver);
         gameObject.SetActive(false);
-
     }
 
     private void OnDisable()

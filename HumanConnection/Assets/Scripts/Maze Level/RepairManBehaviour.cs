@@ -307,9 +307,14 @@ public class RepairManBehaviour : MonoBehaviour
     }
     private void OnDisable()
     {
-        foreach (GameObject light in lightPoles)
+        if (lightPoles != null)
         {
-            light.GetComponentInChildren<LightPoleBehaviour>().lightOffEvent -= OnLightsOut;
+            foreach (GameObject light in lightPoles)
+            {
+                var tmp = light.GetComponentInChildren<LightPoleBehaviour>();
+                if (tmp != null)
+                    light.GetComponentInChildren<LightPoleBehaviour>().lightOffEvent -= OnLightsOut;
+            }
         }
     }
 }

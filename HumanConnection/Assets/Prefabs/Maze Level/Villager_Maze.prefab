@@ -107,10 +107,13 @@ MonoBehaviour:
   moveTimerReset: 30
   hideTimer: 10
   hideTimerReset: 10
+  stunTimer: 5
+  stunTimerReset: 5
   lightDetectionRange: 100
   playerDetectionRange: 10
   hasRandomStartTime: 1
   isCaptured: 0
+  isHiding: 0
 --- !u!136 &131268936665407790
 CapsuleCollider:
   m_ObjectHideFlags: 0
