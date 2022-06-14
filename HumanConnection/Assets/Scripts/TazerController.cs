@@ -9,27 +9,28 @@ public class TazerController : MonoBehaviour
 
     private Vector3 still;
     private Rigidbody rb;
-    
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        
+
     }
 
     private void Update()
     {
-        if (rb.velocity.x != 0)
+        if (rb.velocity != null)
         {
             Sway();
         }
     }
     private void Sway()
     {
-        Vector3 wibble = new(0, wobble, .2f);
-        transform.DOLocalMove(wibble, .05f).OnComplete(() =>
+        Debug.Log("TaySway");
+        Vector3 wibble = new(0f, wobble, 0f);
+        transform.DOMove(wibble, .5f * Time.deltaTime).OnComplete(() =>
         {
-            transform.DOLocalMove(-wibble, -.2f);
+            transform.DOMove(-wibble, .5f * Time.deltaTime);
         });
     }
 

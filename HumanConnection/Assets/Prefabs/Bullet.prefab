@@ -111,4 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8a279d7d7922c49ada4fb69169f9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDecal: {fileID: 46206664689999073, guid: fb7ff43f56aaa534b90e7665bc7733d4, type: 3}
+  speed: 0

@@ -23,7 +23,7 @@ public class PlayerController1 : MonoBehaviour
     [SerializeField, Tooltip("Where all the instantiated bullet prefabs should be put under, to avoid cluttering the hierarchy.")]
     private Transform bulletParent;
     [SerializeField, Tooltip("If the aim raycast does not hit the environment, this is the distance from the player when the bullet should be destroyed. This is to avoid bullet from traveling too far into the distance.")]
-    private float bulletHitMissDistance = 25f;
+    private float bulletHitMissDistance = 3f;
     [SerializeField]
     private int health = 100;
     [SerializeField]
@@ -74,15 +74,18 @@ public class PlayerController1 : MonoBehaviour
         RaycastHit hit;
         GameObject bullet = GameObject.Instantiate(bulletPrefab, barrelTransform.position, Quaternion.identity, bulletParent);
         BulletController bulletController = bullet.GetComponent<BulletController>();
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, bulletHitMissDistance))
         {
             bulletController.target = hit.point;
             bulletController.hit = true;
+            Debug.Log("HIT!!!");
+
         }
         else
         {
             bulletController.target = cameraTransform.position + cameraTransform.forward * bulletHitMissDistance;
             bulletController.hit = false;
+            Debug.Log("Oooh, and that's a bad miss...");
         }
     }
 
