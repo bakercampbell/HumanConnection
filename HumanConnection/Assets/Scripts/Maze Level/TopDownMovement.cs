@@ -36,12 +36,16 @@ public class TopDownMovement : MonoBehaviour
         if (isCaptured)
         {
             captureTimer -= Time.deltaTime;
-            speed = 0;
+            character.enabled = false;
         }
+        else
+        {
+            character.enabled = true;
+        }
+        
         if (captureTimer <= 0)
         {
-            character.Move(startPos - transform.position);
-            speed = prevSpeed;
+            transform.position = startPos;
             captureTimer = captureTimerReset;
             isCaptured = false;
 
@@ -76,17 +80,31 @@ public class TopDownMovement : MonoBehaviour
         }
     }
 
-    /*public void OnClick()
+    public void Shoot()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame && canShoot)
+        
+        if (Mouse.current.rightButton.wasPressedThisFrame && canShoot)
         {
-            var fireDir = crossHair.transform.position - transform.position;
-            var bulletObj = Instantiate(bullet, firePoint.position, Quaternion.identity);
-            bulletObj.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
+            var fireDir = firePoint.transform.position - transform.position;
+            var bulletObj = GetBullet();
+            bulletObj?.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
             StartCoroutine(CanShoot());
         }
     }
-    */
+
+    GameObject GetBullet()
+    {
+        GameObject bullet = Object_Pooler.SharedInstance.GetPooledObject();
+        if (bullet != null)
+        {
+            bullet.transform.position = firePoint.transform.position;
+            bullet.transform.rotation = firePoint.transform.rotation;
+            bullet.SetActive(true);
+            return bullet;
+        }
+        return null;
+    }
+    
     IEnumerator CanShoot()
     {
         canShoot = false;
@@ -110,6 +128,20 @@ public class TopDownMovement : MonoBehaviour
     {
         Debug.Log("Help! I'm being oppressed!");
         isCaptured = true;
+        ReleaseVillager();
+    }
+
+    public void Escaped()
+    {
+        Debug.Log("You'll never catch me!");
+        isCaptured = false;
+    }
+
+    void ReleaseVillager()
+    {
+        var villager = GetComponentInChildren<VillagerBehaviour_Maze>()?.gameObject;
+        if (villager != null)
+            villager.GetComponent<VillagerBehaviour_Maze>().Rescue();
     }
 
 }

@@ -5,9 +5,10 @@ using UnityEngine.AI;
 
 public class RepairManBehaviour : MonoBehaviour
 {
-    enum RepairManState {Patrolling, Checking, OnTheWayToRepair, Repairing, Saving}
+    enum RepairManState {Patrolling, Checking, OnTheWayToRepair, Repairing, Saving, Stunned}
     [SerializeField]
     RepairManState currentState;
+    [SerializeField]
     RepairManState prevState;
 
     public delegate void OnRescueDelegate();
@@ -26,7 +27,7 @@ public class RepairManBehaviour : MonoBehaviour
     int repairTarget = 0;
 
     [SerializeField, Range(0, 30)]
-    float checkingTimer, checkingTimerReset, repairTimer, repairTimerReset, saveTimer, saveTimerReset;
+    float checkingTimer, checkingTimerReset, repairTimer, repairTimerReset, saveTimer, saveTimerReset, stunTimer, stunTimerReset;
     [SerializeField]
     LayerMask selfMask;
 
@@ -77,6 +78,9 @@ public class RepairManBehaviour : MonoBehaviour
                     SaveVillager();
                 else if (characterTarget.tag == "Player")
                     CapturePlayer();
+                break;
+            case RepairManState.Stunned:
+                Stunned();
                 break;
         }
 
@@ -169,14 +173,15 @@ public class RepairManBehaviour : MonoBehaviour
 
     void CapturePlayer()
     {
-        Debug.Log(CheckLineOfSight());
         if (CheckLineOfSight())
         {
             saveTimer -= Time.deltaTime;
             //prevLightTarget = currentLightTarget;
 
             Debug.Log("Stop right there criminal scum!");
-            nav.isStopped = true;
+            nav.SetDestination(characterTarget.transform.position);
+            if (nav.remainingDistance < 2f)
+                nav.isStopped = true;
             transform.LookAt(characterTarget.transform.position);
             characterTarget.GetComponent<TopDownMovement>()?.Captured();
             if (saveTimer < 0)
@@ -196,6 +201,7 @@ public class RepairManBehaviour : MonoBehaviour
         //currentLightTarget = prevLightTarget;
         nav.isStopped = false;
         saveTimer = saveTimerReset;
+        stunTimer = stunTimerReset;
     }
 
     bool CheckLineOfSight()
@@ -205,7 +211,6 @@ public class RepairManBehaviour : MonoBehaviour
         Debug.DrawRay(transform.position, dir, Color.red, .1f);
         if (Physics.Raycast(transform.position, dir.normalized, out hit, Mathf.Infinity))
         {
-            Debug.Log(hit.transform.gameObject.name);
             if (hit.transform.gameObject == characterTarget)
                 return true;
         }
@@ -213,13 +218,34 @@ public class RepairManBehaviour : MonoBehaviour
 
     }
 
+    void GetHit()
+    {
+        Debug.Log("I'm hit!");
+        currentState = RepairManState.Stunned;
+    }
+
+    void Stunned()
+    {
+        Debug.Log("I can't move!");
+        stunTimer -= Time.deltaTime;
+        nav.isStopped = true;
+        characterTarget.GetComponent<TopDownMovement>()?.Escaped();
+        if (stunTimer <= 0)
+        {
+            CarryOn();
+        }
+
+    }
     bool CheckAllLights()
     {
         for (int i = 0; i < lightPoles.Length; i++)
         {
             if (!lightPoles[i].GetComponentInChildren<Light>().enabled)
             {
-                lightsToRepair.Add(lightPoles[i]);
+                if (!lightsToRepair.Contains(lightPoles[i]))
+                    lightsToRepair.Add(lightPoles[i]);
+
+                    
             }
 
         }
@@ -248,11 +274,14 @@ public class RepairManBehaviour : MonoBehaviour
 
             if (other.gameObject.GetComponent<TopDownMovement>())
             {
-                Debug.Log("You there!");
-                characterTarget = other.gameObject;
-                prevState = currentState;
-                currentState = RepairManState.Saving;
-                CapturePlayer();
+                if (currentState != RepairManState.Saving && currentState != RepairManState.Stunned)
+                {
+                    Debug.Log("You there!");
+                    characterTarget = other.gameObject;
+                    prevState = currentState;
+                    currentState = RepairManState.Saving;
+                    CapturePlayer();
+                }
             }
         }
     }
@@ -266,6 +295,14 @@ public class RepairManBehaviour : MonoBehaviour
                 currentState = RepairManState.Repairing;
             }
                 
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            GetHit();
         }
     }
     private void OnDisable()

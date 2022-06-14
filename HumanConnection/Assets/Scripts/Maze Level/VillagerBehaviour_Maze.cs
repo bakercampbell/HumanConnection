@@ -284,7 +284,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     void RunAway()
     {
-        Debug.Log("Player detected by" + gameObject.name);
+        //Debug.Log("Player detected by" + gameObject.name);
         /*    runAwayTarget = NextMoveTarget();
 
         if (runAwayTarget.position != moveTarget.position)
@@ -308,7 +308,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         //Do something
     }
 
-    void Rescue()
+    public void Rescue()
     {
         isHiding = false;
         isCaptured = false;
