@@ -21,7 +21,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     GameObject closestHidingSpot;
     GameObject swarmTarget;
     [SerializeField, Range(0, 100)]
-    float moveTimer, moveTimerReset, hideTimer, hideTimerReset, stunTimer, stunTimerReset;
+    float moveTimer, moveTimerReset, hideTimer, hideTimerReset, stunTimer, stunTimerReset, swarmTimer, swarmTimerReset;
     [SerializeField, Range(0, 100)]
     float lightDetectionRange, playerDetectionRange;
     int lightLayer;
@@ -321,7 +321,8 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     void Captured()
     {
-        //Do something
+        swarmTimer = swarmTimerReset;
+        GetHit();
     }
 
     public void Rescue()
@@ -356,6 +357,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         nav.isStopped = true;
         if (stunTimer <= 0)
         {
+            stunTimer = stunTimerReset;
             CarryOn();
         }
     }
@@ -371,12 +373,21 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             swarmTarget = hiveMind.swarmTarget;
             currentState = VillagerState.Swarm;
             nav.SetDestination(swarmTarget.transform.position);
+            swarmTimer -= Time.deltaTime;
+            if (swarmTimer <= 0)
+            {
+                swarmTimer = swarmTimerReset;
+                CarryOn();
+            }
         }
     }
 
     void CarryOn()
     {
         nav.enabled = true;
+        nav.speed = 8;
+        nav.stoppingDistance = 8;
+        nav.radius = 2;
         nav.isStopped = false;
         currentState = VillagerState.Idle;
     }

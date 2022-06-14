@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164353b751a26224e807c10d0f6d2e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hiveMind: {fileID: 0}
   currentState: 0
   startingState: 0
   lightPoles: []
@@ -109,6 +110,8 @@ MonoBehaviour:
   hideTimerReset: 10
   stunTimer: 5
   stunTimerReset: 5
+  swarmTimer: 10
+  swarmTimerReset: 10
   lightDetectionRange: 100
   playerDetectionRange: 10
   hasRandomStartTime: 1

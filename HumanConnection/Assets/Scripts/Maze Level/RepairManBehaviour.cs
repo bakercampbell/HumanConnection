@@ -192,7 +192,11 @@ public class RepairManBehaviour : MonoBehaviour
             }
         }
         else
+        {
+            characterTarget.GetComponent<TopDownMovement>()?.Escaped();
             CarryOn();
+        }
+            
     }
 
     void CarryOn()
