@@ -32,6 +32,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     [SerializeField]
     bool hasRandomStartTime = true;
     public bool isCaptured;
+    public bool isHiding;
 
 
     void Start()
@@ -46,7 +47,6 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         lightLayer = LayerMask.NameToLayer("Light");
         playerLayer = LayerMask.NameToLayer("Player");
         hidingLayer = LayerMask.NameToLayer("HidingSpot");
-
     }
 
     void Update()
@@ -78,6 +78,11 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             }
         }
 
+        if (currentState == VillagerState.Hiding || currentState == VillagerState.Hidden)
+            isHiding = true;
+        else
+            isHiding = false;
+
         switch (currentState)
         {
             case VillagerState.Idle:
@@ -104,6 +109,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             var capturedParent = FindObjectOfType<TopDownMovement>().dragPoint.transform;
             transform.position = capturedParent.position;
             transform.parent = capturedParent;
+            isCaptured = true;
             currentState = VillagerState.Captured;
         }
         else
@@ -264,6 +270,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         hideTimer -= Time.deltaTime;
         if (hideTimer < 0)
         {
+            isHiding = false;
             currentState = VillagerState.Moving;
             hideTimer = hideTimerReset;
         }
@@ -272,6 +279,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     void ComeOut()
     {
         hideTimer = 0;
+        moveTimer = 1;
     }
 
     void RunAway()
@@ -299,6 +307,19 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     {
         //Do something
     }
+
+    void Rescue()
+    {
+        isHiding = false;
+        isCaptured = false;
+        transform.parent = null;
+
+        nav.enabled = true;
+        currentState = VillagerState.Moving;
+        hideTimer = 0;
+        moveTimer = 1; 
+        RunAway();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -314,10 +335,16 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent += Hide; 
             other.gameObject.GetComponent<LightPoleBehaviour>().lightOnEvent += ComeOut;
         }
+
+        if (other.gameObject.GetComponent<RepairManBehaviour>())
+        {
+            other.gameObject.GetComponent<RepairManBehaviour>().onRescueEvent += Rescue;
+        }
         if (other.gameObject.tag == "HidingSpot")
         {
             if (currentState == VillagerState.Hiding)
             {
+                isHiding = true;
                 currentState = VillagerState.Hidden;
             }
         }
@@ -329,6 +356,10 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         {
             other.gameObject.GetComponent<LightPoleBehaviour>().lightOffEvent -= Hide;
             other.gameObject.GetComponent<LightPoleBehaviour>().lightOnEvent -= ComeOut;
+        }
+        if (other.gameObject.GetComponent<RepairManBehaviour>())
+        {
+            other.gameObject.GetComponent<RepairManBehaviour>().onRescueEvent -= Rescue;
         }
     }
 }

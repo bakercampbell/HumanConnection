@@ -8,8 +8,12 @@ public class TopDownMovement : MonoBehaviour
 {
     CharacterController character;
     Vector3 moveVector;
-    [SerializeField, Range(0,20)]
+    Vector3 startPos;
+    [SerializeField, Range(0, 20)]
     float speed, turnSpeed;
+    public float prevSpeed;
+    [SerializeField, Range(0, 5)]
+    float captureTimer, captureTimerReset;
     [SerializeField]
     LayerMask playerMask, interactableMask;
     [SerializeField]
@@ -19,13 +23,33 @@ public class TopDownMovement : MonoBehaviour
     public Transform dragPoint;
     bool canShoot = true;
     bool isClicked;
+    public bool isCaptured;
     void Start()
     {
         character = GetComponent<CharacterController>();
+        startPos = transform.position;
+        prevSpeed = speed;
+    }
+
+    private void Update()
+    {
+        if (isCaptured)
+        {
+            captureTimer -= Time.deltaTime;
+            speed = 0;
+        }
+        if (captureTimer <= 0)
+        {
+            character.Move(startPos - transform.position);
+            speed = prevSpeed;
+            captureTimer = captureTimerReset;
+            isCaptured = false;
+
+        }
     }
     void FixedUpdate()
     {
-        character.Move(moveVector * speed * Time.fixedDeltaTime);
+            character.Move(moveVector * speed * Time.fixedDeltaTime);
     }
 
     public void OnMoveChanged(InputAction.CallbackContext context)
@@ -81,4 +105,11 @@ public class TopDownMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(-lookTarget), turnSpeed);
         }
     }
+
+    public void Captured()
+    {
+        Debug.Log("Help! I'm being oppressed!");
+        isCaptured = true;
+    }
+
 }
