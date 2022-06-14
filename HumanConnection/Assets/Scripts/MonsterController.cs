@@ -70,6 +70,10 @@ public class MonsterController : MonoBehaviour
             {
                 BackToStart();
             }
+        //else if (other.CompareTag("Tazer"))
+        //    {
+        //        monsterScriptableObject.health -= 10;
+        //    }
         
     }
 
