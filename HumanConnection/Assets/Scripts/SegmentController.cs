@@ -26,13 +26,13 @@ public class SegmentController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Tazer"))
-        {
-            health -= 10;
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+   // {
+    //    if (other.CompareTag("Tazer"))
+    //    {
+   //         health -= 10;
+  //      }
+  //  }
 
     IEnumerator DelayFlail()
     {
