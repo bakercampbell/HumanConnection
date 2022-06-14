@@ -28,6 +28,7 @@ public class TopDownMovement : MonoBehaviour
     public bool isCaptured;
     public bool isCarrying;
     public bool isSwarmed;
+    int shotCount;
     
     void Start()
     {
@@ -35,6 +36,7 @@ public class TopDownMovement : MonoBehaviour
         startPos = transform.position;
         prevSpeed = speed;
         navObstacle = GetComponent<NavMeshObstacle>();
+        shotCount = 0;
     }
 
     private void Update()
@@ -47,6 +49,7 @@ public class TopDownMovement : MonoBehaviour
         else
         {
             character.enabled = true;
+            captureTimer = captureTimerReset;
         }
         
         if (captureTimer <= 0)
@@ -64,6 +67,8 @@ public class TopDownMovement : MonoBehaviour
         {
             speed = prevSpeed;
         }
+        if (transform.position.y > 2f)
+            transform.position = transform.position - new Vector3(0, 1, 0);
     }
     void FixedUpdate()
     {
@@ -99,10 +104,13 @@ public class TopDownMovement : MonoBehaviour
         
         if (Mouse.current.rightButton.wasPressedThisFrame && canShoot)
         {
+            Debug.Log(shotCount + 1);
             var fireDir = firePoint.transform.position - transform.position;
             var bulletObj = GetBullet();
             bulletObj?.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
+            shotCount++;
             StartCoroutine(CanShoot());
+            
         }
     }
 

@@ -365,19 +365,22 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     void Swarm()
     {
         Debug.Log("THE HIVEMIND HAS AWOKEN");
-        if (currentState != VillagerState.Stunned || currentState != VillagerState.Captured)
+        if (currentState != VillagerState.Stunned)
         {
-            nav.speed = 10;
-            nav.stoppingDistance = 0;
-            nav.radius = .5f;
-            swarmTarget = hiveMind.swarmTarget;
-            currentState = VillagerState.Swarm;
-            nav.SetDestination(swarmTarget.transform.position);
-            swarmTimer -= Time.deltaTime;
-            if (swarmTimer <= 0)
+            if (currentState != VillagerState.Captured)
             {
-                swarmTimer = swarmTimerReset;
-                CarryOn();
+                nav.speed = 10;
+                nav.stoppingDistance = 0;
+                nav.radius = 1f;
+                swarmTarget = hiveMind.swarmTarget;
+                currentState = VillagerState.Swarm;
+                nav.SetDestination(swarmTarget.transform.position);
+                swarmTimer -= Time.deltaTime;
+                if (swarmTimer <= 0)
+                {
+                    swarmTimer = swarmTimerReset;
+                    CarryOn();
+                }
             }
         }
     }
@@ -390,6 +393,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         nav.radius = 2;
         nav.isStopped = false;
         currentState = VillagerState.Idle;
+        moveTimer = Random.Range(0f, 5f);
     }
 
     private void OnCollisionEnter(Collision collision)
