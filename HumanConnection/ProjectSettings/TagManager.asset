@@ -11,6 +11,7 @@ TagManager:
   - Reset Trigger
   - Segment
   - RepairMan
+  - Environment
   layers:
   - Default
   - TransparentFX
