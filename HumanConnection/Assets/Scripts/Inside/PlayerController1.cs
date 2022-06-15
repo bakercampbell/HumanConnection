@@ -8,22 +8,24 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController1 : MonoBehaviour
 {
-    [SerializeField, Tooltip("How fast the player moves.")]
+    [SerializeField]
     private float playerSpeed = 2.0f;
-    [SerializeField, Tooltip("How high should the player jump.")]
+    [SerializeField]
     private float jumpHeight = 1.0f;
-    [SerializeField, Tooltip("Speed of gravity, make sure it's negative for downwards gravity.")]
+    [SerializeField]
     private float gravityValue = -9.81f;
-    [SerializeField, Tooltip("How fast the player rotates when moving the mouse around.")]
+    [SerializeField]
     private float rotationSpeed = 5f;
-    [SerializeField, Tooltip("Prefab of the bullet to spawn when the player shoots.")]
+    [SerializeField]
     private GameObject bulletPrefab;
-    [SerializeField, Tooltip("Location of the gun barrel to spawn the bullet prefab at.")]
+    [SerializeField]
     private Transform barrelTransform;
-    [SerializeField, Tooltip("Where all the instantiated bullet prefabs should be put under, to avoid cluttering the hierarchy.")]
+    [SerializeField]
     private Transform bulletParent;
-    [SerializeField, Tooltip("If the aim raycast does not hit the environment, this is the distance from the player when the bullet should be destroyed. This is to avoid bullet from traveling too far into the distance.")]
-    private float bulletHitMissDistance = 3f;
+    [SerializeField]
+    private float bulletHitMissDistance = 5f;
+    [SerializeField]
+    private GameObject tazer;
     [SerializeField]
     private int health = 100;
     [SerializeField]
@@ -33,8 +35,12 @@ public class PlayerController1 : MonoBehaviour
     private PlayerInput playerInput;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private bool isInvincible;    
+    private bool isInvincible;
+    private int tazerJab;
+    private int tazerWalk;
+    private int tazerIdle;
     private Transform cameraTransform;
+    private Animator tazerAnimator;
 
     // Cached player input action to avoid continuously using string reference such as "Move".
     private InputAction moveAction;
@@ -46,31 +52,36 @@ public class PlayerController1 : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         cameraTransform = Camera.main.transform;
-        // Cache a reference to all of the input actions to avoid them with strings constantly.
+        //reference to all of the input actions with strings
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         shootAction = playerInput.actions["Shoot"];
-        // Lock the cursor to the middle of the screen.
+        // stuff to animate the tazer
+        tazerAnimator = tazer.GetComponent<Animator>();
+        tazerJab = Animator.StringToHash("Tazer Jab");
+        tazerWalk = Animator.StringToHash("Tazer Walk");
+        tazerIdle = Animator.StringToHash("TazerIdle");
+        // lock the cursor to the middle of the screen.
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    //shoot action
     private void OnEnable()
     {
-        shootAction.performed += _ => ShootGun();
+        shootAction.performed += _ => ShootGun(); 
+
     }
 
     private void OnDisable()
     {
         shootAction.performed -= _ => ShootGun();
+       
     }
 
-    /// <summary>
-    /// Spawn a bullet and shoot in the direction of the gun barrel.If the raycast hits the environment,
-    /// the bullet travels towards to point of contact, else it will not have a target and be destroyed
-    /// at a certain distance away from the player.
-    /// </summary>
+    //spawns a bullet, referencing the bullet controller script.
     private void ShootGun()
     {
+        
         RaycastHit hit;
         GameObject bullet = GameObject.Instantiate(bulletPrefab, barrelTransform.position, Quaternion.identity, bulletParent);
         BulletController bulletController = bullet.GetComponent<BulletController>();
@@ -87,25 +98,43 @@ public class PlayerController1 : MonoBehaviour
             bulletController.hit = false;
             Debug.Log("Oooh, and that's a bad miss...");
         }
+        
     }
 
+
+
     void Update()
+    {   //checks if player is grounded, stops downward velocity
+        Grounded();
+
+        //directs movement and jumping
+        Movement();
+        
+        //dead..
+        Dead();
+
+        
+    }
+
+    private void Grounded()
     {
         groundedPlayer = controller.isGrounded;
-        // If the player is on the ground, there is no need to apply a downwards force.
+        
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
+    }
 
+    private void Movement()
+    { 
         Vector2 input = moveAction.ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
-        // Take into account the camera direction when moving the player.
+      
         move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
         move.y = 0f;
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        // Changes the height position of the player.
         if (jumpAction.triggered && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -117,10 +146,10 @@ public class PlayerController1 : MonoBehaviour
         // Rotate the player towards aim/camera direction.
         Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        if (health <= 0) Dead();
     }
 
+
+    //triggers damage
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Segment"))
@@ -131,6 +160,7 @@ public class PlayerController1 : MonoBehaviour
         }
     }
 
+    //subtracts health and starts temporary invincibility coroutine
     public void LoseHealth()
     {
         
@@ -143,16 +173,21 @@ public class PlayerController1 : MonoBehaviour
         StartCoroutine(BecomeInvincible());
     }
 
+    //starts death sequence if health is zero or below
     public void Dead()
     {
-        //player is dead
-        
+        if (health > 0.1)
+        {
+            return;
+        }
+        else
         health = 0;
         Debug.Log("You dead, buddy.");
         StartCoroutine(DeathSequence());
         return;
     } 
 
+    //invincibility Cooldown upon taking damage.
     private IEnumerator BecomeInvincible()
     {
         Debug.Log("Player turned invincible...");
@@ -164,6 +199,7 @@ public class PlayerController1 : MonoBehaviour
         Debug.Log("You are able to die!!!");
     }
 
+    //waits druing animation then loads the next level
     private IEnumerator DeathSequence()
     {
 
