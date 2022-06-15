@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 982196106}
   - component: {fileID: 4668747566295609867}
   - component: {fileID: 371131563}
+  - component: {fileID: -8868582629381833266}
   m_Layer: 10
   m_Name: RepairMan
   m_TagString: RepairMan
@@ -114,7 +115,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 1
   m_AngularSpeed: 120
@@ -139,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  prevState: 0
   lightPoles:
   - {fileID: 0}
   - {fileID: 0}
@@ -151,8 +153,13 @@ MonoBehaviour:
   checkingTimerReset: 5
   repairTimer: 5
   repairTimerReset: 5
-  saveTimer: 0
-  saveTimerReset: 0
+  saveTimer: 2
+  saveTimerReset: 2
+  stunTimer: 5
+  stunTimerReset: 5
+  selfMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!135 &4668747566295609867
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -164,7 +171,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 8
   m_Center: {x: 0, y: -1, z: 0}
 --- !u!54 &371131563
 Rigidbody:
@@ -182,6 +189,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &-8868582629381833266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3781701501132134474}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.8490566, g: 0.7848728, b: 0.01201493, a: 1}
+  outlineWidth: 1.5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8233350193519783837
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +219,7 @@ GameObject:
   - component: {fileID: 1321359654884356938}
   - component: {fileID: 952560496333627568}
   - component: {fileID: 6535440982331262093}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,6 +9,7 @@ public class TopDownMovement : MonoBehaviour
 {
     CharacterController character;
     Vector3 moveVector;
+    Vector3 rotateVector;
     Vector3 startPos;
     [SerializeField, Range(0, 20)]
     float speed, turnSpeed, carryingSpeed;
@@ -17,8 +18,6 @@ public class TopDownMovement : MonoBehaviour
     float captureTimer, captureTimerReset;
     [SerializeField]
     LayerMask playerMask, interactableMask;
-    [SerializeField]
-    GameObject crossHair, bullet;
     [SerializeField]
     Transform firePoint;
     NavMeshObstacle navObstacle;
@@ -41,6 +40,7 @@ public class TopDownMovement : MonoBehaviour
 
     private void Update()
     {
+        OutlineInteractable();
         if (isCaptured)
         {
             captureTimer -= Time.deltaTime;
@@ -72,7 +72,7 @@ public class TopDownMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-            character.Move(moveVector * speed * Time.fixedDeltaTime);
+        character.Move(speed * Time.fixedDeltaTime * moveVector);
     }
 
     public void OnMoveChanged(InputAction.CallbackContext context)
@@ -95,6 +95,21 @@ public class TopDownMovement : MonoBehaviour
 
                 }
                 StartCoroutine(CanShoot());
+            }
+        }
+    }
+
+    void OutlineInteractable()
+    {
+        RaycastHit hit;
+        var rayDirection = firePoint.position - transform.position;
+        if (Physics.Raycast(firePoint.position, rayDirection, out hit, 5.5f, ~playerMask, QueryTriggerInteraction.Ignore))
+        {
+            Debug.DrawRay(firePoint.position, rayDirection);
+            if (hit.transform.gameObject.GetComponent<Outline>())
+            {
+                Debug.Log("Are you in range?");
+                hit.transform.gameObject.SendMessage("Outlined");
             }
         }
     }
@@ -142,10 +157,9 @@ public class TopDownMovement : MonoBehaviour
         {
             var direction = hit.point;
             var lookTarget = new Vector3(direction.x - transform.position.x, 0, direction.z - transform.position.z);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(-lookTarget), turnSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookTarget), turnSpeed);
         }
     }
-
     public void Captured()
     {
         Debug.Log("Help! I'm being oppressed!");

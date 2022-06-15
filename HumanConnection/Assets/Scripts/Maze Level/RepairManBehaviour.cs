@@ -31,6 +31,9 @@ public class RepairManBehaviour : MonoBehaviour
     [SerializeField]
     LayerMask selfMask;
 
+    Outline outline;
+    float outlineTimer;
+
 
     void Start()
     {
@@ -40,7 +43,7 @@ public class RepairManBehaviour : MonoBehaviour
             light.GetComponentInChildren<LightPoleBehaviour>().lightOffEvent += OnLightsOut;
         }
         currentLightTarget = lightPoles[lightTarget];
-        
+        outline = GetComponent<Outline>();
     }
 
     void OnLightsOut()
@@ -54,9 +57,24 @@ public class RepairManBehaviour : MonoBehaviour
             currentState = RepairManState.Patrolling;
 
     }
+    public void Outlined()
+    {
+        Debug.Log("How dare you target me!");
+        outlineTimer = .1f;
+    }
+
+    void CheckOutline()
+    {
+        outlineTimer -= Time.deltaTime;
+        if (outlineTimer <= 0)
+            outline.enabled = false;
+        else
+            outline.enabled = true;
+    }
 
     void Update()
     {
+        CheckOutline();
         if (lightTarget > lightPoles.Length - 1)
         {
             lightTarget = 0;

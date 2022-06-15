@@ -27,6 +27,9 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     int lightLayer;
     int playerLayer;
     int hidingLayer;
+
+    Outline outline;
+    float outlineTimer;
     
     Transform moveTarget;
     Transform runAwayTarget;
@@ -36,6 +39,9 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     bool hasRandomStartTime = true;
     public bool isCaptured;
     public bool isHiding;
+
+    [SerializeField]
+    Color outlineColor, hidingOutline;
 
 
     void Start()
@@ -50,12 +56,15 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         lightLayer = LayerMask.NameToLayer("Light");
         playerLayer = LayerMask.NameToLayer("Player");
         hidingLayer = LayerMask.NameToLayer("HidingSpot");
-
+        outline = GetComponent<Outline>();
         
     }
 
     void Update()
     {
+        if (currentState != VillagerState.Hidden)
+            CheckOutline();
+
         if (currentState == VillagerState.Moving || currentState == VillagerState.Idle)
         {
             moveTimer -= Time.deltaTime;
@@ -129,6 +138,21 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         {
             currentState = VillagerState.Running;
         }
+    }
+
+    public void Outlined()
+    {
+        Debug.Log("I'm in range");
+        outlineTimer = .1f;
+    }
+
+    void CheckOutline()
+    {
+        outlineTimer -= Time.deltaTime;
+        if (outlineTimer <= 0)
+            outline.enabled = false;
+        else
+            outline.enabled = true;
     }
     Transform NextMoveTarget()
     {
@@ -281,8 +305,10 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     {
         //Debug.Log(gameObject.name + " is hiding at " + closestHidingSpot.gameObject.name);
         hideTimer -= Time.deltaTime;
+        outline.OutlineColor = hidingOutline;
         if (hideTimer < 0)
         {
+            outline.OutlineColor = outlineColor;
             isHiding = false;
             currentState = VillagerState.Moving;
             hideTimer = hideTimerReset;

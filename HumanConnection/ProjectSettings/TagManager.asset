@@ -14,6 +14,7 @@ TagManager:
   - Environment
   - Ground
   - Bullet
+  - Outline
   layers:
   - Default
   - TransparentFX
