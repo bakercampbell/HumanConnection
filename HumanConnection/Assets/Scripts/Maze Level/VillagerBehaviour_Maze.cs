@@ -43,6 +43,9 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     [SerializeField]
     Color outlineColor, hidingOutline;
 
+    [SerializeField]
+    Animator anim;
+
 
     void Start()
     {
