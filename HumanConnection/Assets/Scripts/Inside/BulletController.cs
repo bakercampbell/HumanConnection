@@ -5,8 +5,8 @@ public class BulletController : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed = 5f;
-    private float timeToDestroy = 1f;
+    private float speed = 2f;
+    private float timeToDestroy = 5f;
 
     public Vector3 target { get; set; }
     public bool hit { get; set; }

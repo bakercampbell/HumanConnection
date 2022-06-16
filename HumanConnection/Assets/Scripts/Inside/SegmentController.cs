@@ -12,7 +12,7 @@ public class SegmentController : MonoBehaviour
 
     private void Awake()
     {
-        delay = Random.Range(0f, 1f);
+        delay = Random.Range(0f, 4f);
         animator = GetComponent<Animator>();
         monsterFlail = Animator.StringToHash("Flailing");
         StartCoroutine (DelayFlail());        
