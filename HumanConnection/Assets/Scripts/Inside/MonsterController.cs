@@ -21,6 +21,8 @@ public class MonsterController : MonoBehaviour
     private void Start()
     {
         StartCoroutine(MonsterMoveToward());
+            monsterScriptableObject.health = 100;
+
 
     }
     
@@ -37,11 +39,7 @@ public class MonsterController : MonoBehaviour
 
    
 
-    private void Update()
-    {
 
-      
-    }
 
     IEnumerator MonsterMoveToward()
     {
@@ -51,7 +49,7 @@ public class MonsterController : MonoBehaviour
             Vector3 destination = Vector3.MoveTowards(transform.position, target.transform.position, monsterScriptableObject.speed * Time.deltaTime);
             destination.y = transform.position.y;
             transform.position = destination;
-            transform.LookAt(target.transform);
+            transform.LookAt(target.transform.position);
             yield return null;
         }
         StartCoroutine(MonsterAttack());
@@ -70,10 +68,10 @@ public class MonsterController : MonoBehaviour
             {
                 BackToStart();
             }
-        //else if (other.CompareTag("Tazer"))
-        //    {
-        //        monsterScriptableObject.health -= 10;
-        //    }
+         else if (other.CompareTag("Bullet"))
+            {
+                monsterScriptableObject.health -= 10;
+            }
         
     }
 
