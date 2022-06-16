@@ -109,7 +109,7 @@ public class TopDownMovement : MonoBehaviour
             if (hit.transform.gameObject.GetComponent<Outline>())
             {
                 Debug.Log("Are you in range?");
-                hit.transform.gameObject.SendMessage("Outlined");
+                hit.transform.gameObject.SendMessage("Outlined", SendMessageOptions.DontRequireReceiver);
             }
         }
     }
