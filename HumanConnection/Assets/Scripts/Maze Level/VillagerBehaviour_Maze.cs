@@ -43,7 +43,6 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     [SerializeField]
     Color outlineColor, hidingOutline;
 
-    [SerializeField]
     Animator anim;
 
 
@@ -60,6 +59,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         playerLayer = LayerMask.NameToLayer("Player");
         hidingLayer = LayerMask.NameToLayer("HidingSpot");
         outline = GetComponent<Outline>();
+        anim = GetComponentInChildren<Animator>();
         
     }
 
@@ -141,6 +141,12 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         {
             currentState = VillagerState.Running;
         }
+    }
+
+    private void LateUpdate()
+    {
+        float moveSpeed = nav.velocity.magnitude;
+        anim.SetFloat("MoveSpeed", moveSpeed);
     }
 
     public void Outlined()
@@ -278,6 +284,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     void Move()
     {
         currentState = VillagerState.Moving;
+        nav.speed = 6;
         //if (runAwayTarget != null)
             //runAwayTarget = null;
         if (nav.enabled)
@@ -307,12 +314,14 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     void Hidden()
     {
         //Debug.Log(gameObject.name + " is hiding at " + closestHidingSpot.gameObject.name);
+        anim.SetBool("isHidden", true);
         hideTimer -= Time.deltaTime;
         outline.OutlineColor = hidingOutline;
         if (hideTimer < 0)
         {
             outline.OutlineColor = outlineColor;
             isHiding = false;
+            anim.SetBool("isHidden", false);
             currentState = VillagerState.Moving;
             hideTimer = hideTimerReset;
         }
@@ -326,6 +335,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     void RunAway()
     {
+        nav.speed = 8;
         if (currentState != VillagerState.Swarm)
         {
             Debug.Log("Player detected by" + gameObject.name);
@@ -382,6 +392,8 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     void Stunned()
     {
         Debug.Log("You will fear the proletariat!");
+        anim.SetBool("isStunned", true);
+        nav.velocity = Vector3.zero;
         stunTimer -= Time.deltaTime;
         nav.isStopped = true;
         if (stunTimer <= 0)
@@ -422,6 +434,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         nav.radius = 2;
         nav.isStopped = false;
         currentState = VillagerState.Idle;
+        anim.SetBool("isStunned", false);
         moveTimer = Random.Range(0f, 5f);
     }
 
