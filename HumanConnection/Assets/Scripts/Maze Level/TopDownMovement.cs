@@ -30,11 +30,7 @@ public class TopDownMovement : MonoBehaviour
     public int swarmCounter = 0;
     [SerializeField]
     int swarmLimit;
-    [SerializeField]
-    int shotsLeft, shotsMax;
-    [SerializeField]
-    GameObject ammoBar;
-    Vector3 startingAmmoBarScale;
+    public float shotsLeft, shotsMax;
     
     void Start()
     {
@@ -42,7 +38,6 @@ public class TopDownMovement : MonoBehaviour
         startPos = transform.position;
         prevSpeed = speed;
         navObstacle = GetComponent<NavMeshObstacle>();
-       startingAmmoBarScale = ammoBar.transform.localScale;
     }
 
     private void Update()
@@ -157,15 +152,17 @@ public class TopDownMovement : MonoBehaviour
         
         if (Mouse.current.rightButton.wasPressedThisFrame && canShoot)
         {
-            //Debug.Log(shotCount + 1);
-            var fireDir = firePoint.transform.position - transform.position;
-            var bulletObj = GetBullet();
-            bulletObj?.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
-            shotsLeft--;
-            float ammoCount = shotsLeft / shotsMax;
-            ammoBar.transform.DOScaleX(ammoCount, .5f);
-            Debug.Log(ammoCount);
-            
+            if (shotsLeft > 0)
+            {
+                //Debug.Log(shotCount + 1);
+                var fireDir = firePoint.transform.position - transform.position;
+                var bulletObj = GetBullet();
+                bulletObj?.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
+                shotsLeft--;
+                StartCoroutine(CanShoot());
+            }
+            else
+                Debug.Log("Out of ammo");
         }
     }
 
@@ -204,6 +201,7 @@ public class TopDownMovement : MonoBehaviour
     {
         Debug.Log("Help! I'm being oppressed!");
         isCaptured = true;
+        shotsLeft = shotsMax;
         ReleaseVillager();
     }
 

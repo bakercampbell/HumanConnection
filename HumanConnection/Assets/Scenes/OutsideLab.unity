@@ -1510,6 +1510,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4472228560907375046, guid: 98f7470559e4e0841953852b000ef245, type: 3}
+      propertyPath: objectToPool
+      value: 
+      objectReference: {fileID: 2060431568918424442, guid: 43e95a0b873dcdd4ca33bdd2b44a9794, type: 3}
     - target: {fileID: 4472228560907375065, guid: 98f7470559e4e0841953852b000ef245, type: 3}
       propertyPath: m_Name
       value: Player_Maze
@@ -1517,7 +1521,7 @@ PrefabInstance:
     - target: {fileID: 4472228560907375068, guid: 98f7470559e4e0841953852b000ef245, type: 3}
       propertyPath: ammoBar
       value: 
-      objectReference: {fileID: 504693474}
+      objectReference: {fileID: 0}
     - target: {fileID: 4472228560907375068, guid: 98f7470559e4e0841953852b000ef245, type: 3}
       propertyPath: shotsMax
       value: 10
@@ -1525,6 +1529,14 @@ PrefabInstance:
     - target: {fileID: 4472228560907375068, guid: 98f7470559e4e0841953852b000ef245, type: 3}
       propertyPath: shotsLeft
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472228560907375068, guid: 98f7470559e4e0841953852b000ef245, type: 3}
+      propertyPath: swarmTimer
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472228560907375068, guid: 98f7470559e4e0841953852b000ef245, type: 3}
+      propertyPath: swarmTimerReset
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4472228560907375069, guid: 98f7470559e4e0841953852b000ef245, type: 3}
       propertyPath: m_RootOrder
@@ -1996,11 +2008,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 131268936665407789, guid: 3d72b47fb029a084284ad0b1f86515ac, type: 3}
   m_PrefabInstance: {fileID: 1338179910}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &504693474 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4889942502912352547, guid: 98f7470559e4e0841953852b000ef245, type: 3}
-  m_PrefabInstance: {fileID: 369774856}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &520913373 stripped
 Transform:
@@ -4795,7 +4802,7 @@ MonoBehaviour:
   labZone: {fileID: 359942460}
   TM_text: {fileID: 557343336}
   villagersCollected: 0
-  villagerGoal: 1
+  villagerGoal: 3
   completionDelay: 1
 --- !u!4 &1076096598
 Transform:

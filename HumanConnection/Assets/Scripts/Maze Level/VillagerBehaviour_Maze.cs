@@ -478,6 +478,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         {
             if (currentState != VillagerState.Captured)
             {
+                anim.SetBool("isYelling", true);
                 swarmTimer -= Time.deltaTime;
                 nav.speed = 10;
                 nav.stoppingDistance = 0;
@@ -506,6 +507,8 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         nav.radius = 2;
         nav.isStopped = false;
         anim.SetBool("isStunned", false);
+        anim.SetBool("isYelling", false);
+        anim.SetBool("isHidden", false);
         currentState = VillagerState.Running;
         RunAway();
         moveTimer = Random.Range(0f, 5f);
