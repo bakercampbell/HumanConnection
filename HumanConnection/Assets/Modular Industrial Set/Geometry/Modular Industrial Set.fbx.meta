@@ -1,19 +1,90 @@
 fileFormatVersion: 2
 guid: 9a11dc181bf288f478a5d6acba2e86ef
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bricks_00
+    second: {fileID: 2100000, guid: d1b76ed7c893d8749a35ae0961959bf5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bricks_01
+    second: {fileID: 2100000, guid: 5660ceca9b8475045899eb94f66de376, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete_00
+    second: {fileID: 2100000, guid: 15af7666b9a58924db5e471878515830, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MIS_Fences
+    second: {fileID: 2100000, guid: 0d8154025c43a5e48b01d107fb54c368, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MIS_FloorsAndRoofs_00
+    second: {fileID: 2100000, guid: fc318b57860c81c4795eab326ed0fdbe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MIS_Metal_00
+    second: {fileID: 2100000, guid: 03197e7dc09ee084693c5e709b4ee45c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MIS_Roads_00
+    second: {fileID: 2100000, guid: 7c836c3785e4ed84a87218ae355a4040, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MIS_Scaffolding
+    second: {fileID: 2100000, guid: 9a743a738c7acc142ab62412d758f6e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MIS_Storage
+    second: {fileID: 2100000, guid: 9adde2f1d4a04594299fbc142f912268, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MIS_Tubes
+    second: {fileID: 2100000, guid: 63a0635aa6d2700429d50ca34fb1bf75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_01
+    second: {fileID: 2100000, guid: 42246043e1887e248a606e4373a96b86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_01.001
+    second: {fileID: 2100000, guid: 2f701c006c3445a4dac35d21b0618af1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VertexAlphaDebug
+    second: {fileID: 2100000, guid: 2f621b79067a10d4596bd76c011482c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Windows_00
+    second: {fileID: 2100000, guid: e08800da1038cdd4db10f56ff2af199a, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
-    materialSearch: 1
-    materialLocation: 1
+    materialSearch: 2
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -43,6 +114,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 1
@@ -54,6 +126,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
