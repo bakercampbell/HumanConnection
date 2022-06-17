@@ -8,77 +8,77 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bricks_00
-    second: {fileID: 2100000, guid: d1b76ed7c893d8749a35ae0961959bf5, type: 2}
+    second: {fileID: 2100000, guid: a5cb7059d436eae4f9a406a1c4bacac0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bricks_01
-    second: {fileID: 2100000, guid: 5660ceca9b8475045899eb94f66de376, type: 2}
+    second: {fileID: 2100000, guid: 9a624169d7544a64c8af9706c6994191, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Concrete_00
-    second: {fileID: 2100000, guid: 15af7666b9a58924db5e471878515830, type: 2}
+    second: {fileID: 2100000, guid: 2191a8bd717e42443beea96bee8aa19a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MIS_Fences
-    second: {fileID: 2100000, guid: 0d8154025c43a5e48b01d107fb54c368, type: 2}
+    second: {fileID: 2100000, guid: 8a70a50ae21451b4fa49164d695ee4f0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MIS_FloorsAndRoofs_00
-    second: {fileID: 2100000, guid: fc318b57860c81c4795eab326ed0fdbe, type: 2}
+    second: {fileID: 2100000, guid: 3ec9c36b628b45345be4228dab1f4339, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MIS_Metal_00
-    second: {fileID: 2100000, guid: 03197e7dc09ee084693c5e709b4ee45c, type: 2}
+    second: {fileID: 2100000, guid: 9c62cd96f2b9a5441b42bd140688d2cf, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MIS_Roads_00
-    second: {fileID: 2100000, guid: 7c836c3785e4ed84a87218ae355a4040, type: 2}
+    second: {fileID: 2100000, guid: 9f1a0ca5ec1b9a647b59aab84e8506db, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MIS_Scaffolding
-    second: {fileID: 2100000, guid: 9a743a738c7acc142ab62412d758f6e9, type: 2}
+    second: {fileID: 2100000, guid: 768075fc456858e4ba7d39ba579bc353, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MIS_Storage
-    second: {fileID: 2100000, guid: 9adde2f1d4a04594299fbc142f912268, type: 2}
+    second: {fileID: 2100000, guid: cbfc28a480c088a4bb1dabc3f7e6175c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MIS_Tubes
-    second: {fileID: 2100000, guid: 63a0635aa6d2700429d50ca34fb1bf75, type: 2}
+    second: {fileID: 2100000, guid: bae833694def7c94b8bf74f6138493e2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal_01
-    second: {fileID: 2100000, guid: 42246043e1887e248a606e4373a96b86, type: 2}
+    second: {fileID: 2100000, guid: 395651e8d8f9c8b46b779341288a503d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal_01.001
-    second: {fileID: 2100000, guid: 2f701c006c3445a4dac35d21b0618af1, type: 2}
+    second: {fileID: 2100000, guid: 395651e8d8f9c8b46b779341288a503d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: VertexAlphaDebug
-    second: {fileID: 2100000, guid: 2f621b79067a10d4596bd76c011482c6, type: 2}
+    second: {fileID: 2100000, guid: b2bf10ef7535f5f4fb8265098d273d75, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Windows_00
-    second: {fileID: 2100000, guid: e08800da1038cdd4db10f56ff2af199a, type: 2}
+    second: {fileID: 2100000, guid: 1cf2680e9d214a84caf70c05e36f1c69, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 2
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

@@ -1649,6 +1649,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7976439620972537591}
     m_Modifications:
+    - target: {fileID: 751972521281017030, guid: 79c32b0644e62fb45badefa11e5ad481, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbfc28a480c088a4bb1dabc3f7e6175c, type: 2}
     - target: {fileID: 2666533477397026209, guid: 79c32b0644e62fb45badefa11e5ad481, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -2689,6 +2693,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7885421121087005940, guid: 27797d80d0967234180a509ec5584b09, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbfc28a480c088a4bb1dabc3f7e6175c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27797d80d0967234180a509ec5584b09, type: 3}
 --- !u!4 &5053500535566048072 stripped
@@ -4991,6 +4999,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2646155317842745652, guid: ba67e38fe0691f94099ac37c2e9be92c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 395651e8d8f9c8b46b779341288a503d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba67e38fe0691f94099ac37c2e9be92c, type: 3}
 --- !u!4 &1007123035539617081 stripped
@@ -8175,6 +8187,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7976439620972537591}
     m_Modifications:
+    - target: {fileID: 7096488365622495861, guid: 1d05e98323b90b2439108efd791032e4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 395651e8d8f9c8b46b779341288a503d, type: 2}
     - target: {fileID: 7425502304298607491, guid: 1d05e98323b90b2439108efd791032e4, type: 3}
       propertyPath: m_Name
       value: Props_01_Cardboard_01 (1)
