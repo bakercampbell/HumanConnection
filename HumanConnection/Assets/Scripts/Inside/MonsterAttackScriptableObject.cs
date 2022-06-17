@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace baker
-{
+
+
     [CreateAssetMenu(fileName = "MonsterAttackScriptableObject", menuName = "ScriptableObjects/MonsterAttack")]
     public class MonsterAttackScriptableObject : ScriptableObject
     {
@@ -10,4 +10,4 @@ namespace baker
         [field: SerializeField]
         public float attackRange { get; private set; } = 10f;
     }
-}
+

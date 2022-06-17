@@ -1349,7 +1349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861405803}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.17000008, z: 0}
+  m_LocalPosition: {x: 0, y: -7.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1365,12 +1365,12 @@ Light:
   m_GameObject: {fileID: 861405803}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 0
+  m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 16.6
-  m_Range: 8.92
-  m_SpotAngle: 29.5
+  m_Color: {r: 0.5377358, g: 0.3903103, b: 0.18009079, a: 1}
+  m_Intensity: 0.72
+  m_Range: 11.55
+  m_SpotAngle: 66.6
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -2025,8 +2025,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0080789, y: 0.61779374, z: 1.098209}
-  m_Center: {x: -0.05219513, y: 0.34695247, z: -0.09129721}
+  m_Size: {x: 1.0080789, y: 1.472538, z: 1.2036132}
+  m_Center: {x: -0.05219513, y: -0.08041966, z: -0.03859514}
 --- !u!1 &1184702063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,7 +2898,7 @@ PrefabInstance:
     - target: {fileID: -4571605982943762130, guid: 6728a8473c6b5e64eaf64ee4bd108688, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 95fcf9331ca635c459a201f2c56f44dc, type: 2}
+      objectReference: {fileID: 2100000, guid: b8ae617cc8b8e0f4ebf26d2df473557c, type: 2}
     - target: {fileID: -4454556173267821136, guid: 6728a8473c6b5e64eaf64ee4bd108688, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.33138233
@@ -3965,7 +3965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8155812263928727500, guid: 6728a8473c6b5e64eaf64ee4bd108688, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.498
       objectReference: {fileID: 0}
     - target: {fileID: 8203105720458603109, guid: 6728a8473c6b5e64eaf64ee4bd108688, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4074,30 +4074,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6728a8473c6b5e64eaf64ee4bd108688, type: 3}
   m_PrefabInstance: {fileID: 1369367115}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1369367124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369367116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Weight: 1
-  m_Data:
-    m_Root: {fileID: 1369367122}
-    m_Mid: {fileID: 1878407323}
-    m_Tip: {fileID: 1883941142}
-    m_Target: {fileID: 0}
-    m_Hint: {fileID: 0}
-    m_TargetPositionWeight: 1
-    m_TargetRotationWeight: 1
-    m_HintWeight: 1
-    m_MaintainTargetPositionOffset: 1
-    m_MaintainTargetRotationOffset: 1
 --- !u!1 &1399782841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4403,16 +4379,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9016349640709151619, guid: 3d307fe26da562b4f87fd6be4cc1b5b3, type: 3}
   m_PrefabInstance: {fileID: 577796217}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1878407323 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8397712863396121396, guid: 3d307fe26da562b4f87fd6be4cc1b5b3, type: 3}
-  m_PrefabInstance: {fileID: 577796217}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1883941142 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9200947120450511398, guid: f57c1ac99dde15f469f032fe17051d73, type: 3}
-  m_PrefabInstance: {fileID: 809240503546938101}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1896482739
 GameObject:
   m_ObjectHideFlags: 0
@@ -4537,7 +4503,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896482739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d155563dc1cb09b4fbe460261ec882fc, type: 2}
   m_CullingMode: 0

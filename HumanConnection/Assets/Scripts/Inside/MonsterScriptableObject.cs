@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace baker {
+
     [CreateAssetMenu(fileName = "MonsterScriptableObject", menuName = "ScriptableObjects/Monster")]
     public class MonsterScriptableObject : ScriptableObject
     {
@@ -11,4 +11,4 @@ namespace baker {
         [field: SerializeField]
         public MonsterAttackScriptableObject monsterAttackType { get; set; }     
     }
-}
+

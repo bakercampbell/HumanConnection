@@ -1,43 +1,61 @@
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+
 
 public class SegmentController : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
 
+    GameObject monster;
+    private MonsterController monsterController;
     private Animator animator;
-    private int monsterFlail;
+    private int monsterFlail, segmentIdle;
     private float delay;
 
-    private void Awake()
+
+
+    private void Start()
     {
+        monster = GameObject.FindGameObjectWithTag("Monster");
+        monsterController = monster.GetComponent<MonsterController>();
         delay = Random.Range(0f, 2f);
         animator = GetComponent<Animator>();
         monsterFlail = Animator.StringToHash("Flailing");
-        StartCoroutine (DelayFlail());        
+        segmentIdle = Animator.StringToHash("Segment Idle");
+
+    }
+
+
+
+    private void Awake()
+    {
+         
+   
+        StartCoroutine (DelayFlail());      
+            
     }
 
     private void Update()
     {
-        if (health <= 0)
+        if (monsterController.health <= 0)
         {
-            
+            Debug.Log("Segments Are Vulnerable");
+            animator.Play(segmentIdle);
+            StartCoroutine(DownTime());
         }
-    }
 
-    //private void OnTriggerEnter(Collider other)
-   // {
-    //    if (other.CompareTag("Tazer"))
-    //    {
-   //         health -= 10;
-  //      }
-  //  }
+    }
 
     IEnumerator DelayFlail()
     {
-        yield return new WaitForSeconds(delay);
+        Debug.Log("Iss gone flail");
         animator.Play(monsterFlail);
-        
+        yield return new WaitForSeconds(delay);
+    }
+
+    IEnumerator DownTime()
+    {
+        monsterController.health += 125;
+        yield return new WaitForSeconds(7.5f);
     }
 }
