@@ -2250,6 +2250,7 @@ GameObject:
   - component: {fileID: -3472382907524507615}
   - component: {fileID: 3431483660760381769}
   - component: {fileID: 4716640688365171051}
+  - component: {fileID: 8203039485781797930}
   m_Layer: 0
   m_Name: Segment
   m_TagString: Segment
@@ -2359,3 +2360,16 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!65 &8203039485781797930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9205775417041228174}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0305226, z: 0.45207325}
+  m_Center: {x: 0, y: 1.4737962, z: 0.09630035}

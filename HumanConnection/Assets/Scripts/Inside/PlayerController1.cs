@@ -129,16 +129,12 @@ public class PlayerController1 : MonoBehaviour
     private void Movement()
     { 
         Vector2 input = moveAction.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, 0, input.y);
-      
-        move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
-        move.y = 0f;
+        Vector3 move = new Vector3(input.y, 0, input.x * -1);
+        
+        
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        if (jumpAction.triggered && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
+   
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
