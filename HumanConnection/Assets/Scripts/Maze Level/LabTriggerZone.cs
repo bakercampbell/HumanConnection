@@ -11,6 +11,8 @@ public class LabTriggerZone : MonoBehaviour
         {
             other.gameObject.transform.SetParent(null);
             other.gameObject.SetActive(false);
+            var player = FindObjectOfType<TopDownMovement>();
+            player.isCarrying = false;
         }
     }
 }
