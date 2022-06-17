@@ -89,15 +89,20 @@ MonoBehaviour:
   moveTimerReset: 30
   hideTimer: 10
   hideTimerReset: 10
-  stunTimer: 97
-  stunTimerReset: 5
+  stunTimer: 1
+  stunTimerReset: 1
   swarmTimer: 3
   swarmTimerReset: 3
   lightDetectionRange: 100
   playerDetectionRange: 10
+  villagerDetectionRange: 20
   hasRandomStartTime: 1
   isCaptured: 0
   isHiding: 0
+  isInLight: 0
+  isInCrowd: 0
+  isProtected: 0
+  isSafe: 0
   outlineColor: {r: 0.5188679, g: 0.05139729, b: 0.05139729, a: 1}
 --- !u!136 &131268936665407790
 CapsuleCollider:

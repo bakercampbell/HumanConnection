@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LabTriggerZone : MonoBehaviour
 {
+    public int villagersCollected = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -11,6 +12,7 @@ public class LabTriggerZone : MonoBehaviour
         {
             other.gameObject.transform.SetParent(null);
             other.gameObject.SetActive(false);
+            villagersCollected++;
             var player = FindObjectOfType<TopDownMovement>();
             player.isCarrying = false;
         }

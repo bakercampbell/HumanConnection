@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
-
+using DG.Tweening;
 [RequireComponent(typeof(CharacterController))]
 public class TopDownMovement : MonoBehaviour
 {
@@ -30,7 +30,11 @@ public class TopDownMovement : MonoBehaviour
     public int swarmCounter = 0;
     [SerializeField]
     int swarmLimit;
-    int shotCount;
+    [SerializeField]
+    int shotsLeft, shotsMax;
+    [SerializeField]
+    GameObject ammoBar;
+    Vector3 startingAmmoBarScale;
     
     void Start()
     {
@@ -38,7 +42,7 @@ public class TopDownMovement : MonoBehaviour
         startPos = transform.position;
         prevSpeed = speed;
         navObstacle = GetComponent<NavMeshObstacle>();
-        shotCount = 0;
+       startingAmmoBarScale = ammoBar.transform.localScale;
     }
 
     private void Update()
@@ -121,6 +125,11 @@ public class TopDownMovement : MonoBehaviour
                 if (potentialInteraction.Length > 0)
                 {
                     potentialInteraction[0].GetComponent<Interactable>()?.Interact();
+                    
+                    if (potentialInteraction[0].GetComponentInParent<LightPoleBehaviour>())
+                    {
+                        shotsLeft = shotsMax;
+                    }
 
                 }
                 StartCoroutine(CanShoot());
@@ -152,8 +161,10 @@ public class TopDownMovement : MonoBehaviour
             var fireDir = firePoint.transform.position - transform.position;
             var bulletObj = GetBullet();
             bulletObj?.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
-            shotCount++;
-            StartCoroutine(CanShoot());
+            shotsLeft--;
+            float ammoCount = shotsLeft / shotsMax;
+            ammoBar.transform.DOScaleX(ammoCount, .5f);
+            Debug.Log(ammoCount);
             
         }
     }
