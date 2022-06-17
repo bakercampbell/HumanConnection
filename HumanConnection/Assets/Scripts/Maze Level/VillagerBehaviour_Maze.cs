@@ -23,10 +23,11 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     [SerializeField, Range(0, 100)]
     float moveTimer, moveTimerReset, hideTimer, hideTimerReset, stunTimer, stunTimerReset, swarmTimer, swarmTimerReset;
     [SerializeField, Range(0, 100)]
-    float lightDetectionRange, playerDetectionRange;
+    float lightDetectionRange, playerDetectionRange, villagerDetectionRange;
     int lightLayer;
     int playerLayer;
     int hidingLayer;
+    int villagerLayer;
 
     Outline outline;
     float outlineTimer;
@@ -61,7 +62,9 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         lightLayer = LayerMask.NameToLayer("Light");
         playerLayer = LayerMask.NameToLayer("Player");
         hidingLayer = LayerMask.NameToLayer("HidingSpot");
+        villagerLayer = LayerMask.NameToLayer("Interactable");
         outline = GetComponent<Outline>();
+        outline.enabled = true;
         anim = GetComponentInChildren<Animator>();
         
     }
@@ -129,7 +132,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     public void Interact()
     {
-        if (currentState == VillagerState.Stunned && !isSafe)
+        if (!isSafe)
         {
             Debug.Log("Captured");
             nav.enabled = false;
@@ -157,10 +160,12 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (isInLight || isInCrowd || isProtected)
         {
             isSafe = true;
+            outline.enabled = false;
         }
         else
         {
             isSafe = false;
+            outline.enabled = true;
             Debug.Log("I'm so scared");
         }
     }
@@ -291,13 +296,13 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         {
             if (collider != null)
             {
-                if (CheckLineOfSight(collider.gameObject))
-                {
+//if (CheckLineOfSight(collider.gameObject))
+                //{
                     Debug.Log("I see you, you sicko!");
                     return true;
-                }
-                else
-                    return false;
+                //}
+               // else
+                    //return false;
             }
         }
         return false;
@@ -305,7 +310,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     bool DetectOthers()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, playerDetectionRange);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, villagerDetectionRange, 1 << villagerLayer);
         if (hitColliders.Length > 1)
         {
             foreach (Collider collider in hitColliders)
@@ -469,7 +474,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     {
         var player = target.GetComponent<TopDownMovement>();
         Debug.Log("I'm making a citizens arrest!");
-        if (currentState != VillagerState.Stunned)
+        if (currentState == VillagerState.Idle || currentState == VillagerState.Moving || currentState == VillagerState.Swarm)
         {
             if (currentState != VillagerState.Captured)
             {
@@ -564,6 +569,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
                     Debug.Log("What are you doing with them?");
                     if (DetectPlayer())
                     {
+                        Debug.Log(Vector3.Distance(transform.position, player.gameObject.transform.position));
                         swarmTarget = other.gameObject;
                         currentState = VillagerState.Swarm;
                         Swarm(other.gameObject);
@@ -571,6 +577,19 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
                 }
             }
         }
+
+        if (other.gameObject.tag == "LightPole")
+        {
+            if (other.gameObject.GetComponentInParent<LightPoleBehaviour>().isOn)
+            {
+                isSafe = true;
+            }
+            else
+            {
+                isSafe = false;
+            }
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
