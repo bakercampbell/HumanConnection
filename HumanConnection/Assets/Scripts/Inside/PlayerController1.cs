@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 
-
+namespace baker { 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController1 : MonoBehaviour
 {
@@ -23,9 +23,7 @@ public class PlayerController1 : MonoBehaviour
     [SerializeField]
     private Transform bulletParent;
     [SerializeField]
-    private float bulletHitMissDistance = 5f;
-    [SerializeField]
-    private GameObject tazer;
+    private float bulletHitMissDistance = 5f;    
     [SerializeField]
     private int health = 100;
     [SerializeField]
@@ -35,32 +33,39 @@ public class PlayerController1 : MonoBehaviour
     private PlayerInput playerInput;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private bool isInvincible;
-    private int tazerJab;
-    private int tazerWalk;
-    private int tazerIdle;
+    private bool isInvincible = false;
+
+    
     private Transform cameraTransform;
-    private Animator tazerAnimator;
+
 
     // Cached player input action to avoid continuously using string reference such as "Move".
     private InputAction moveAction;
-    private InputAction jumpAction;
     private InputAction shootAction;
+
+    private GameObject monster;
+    private MonsterController monsterController;
+
+    private GameObject tazer;
+    private TazerController tazerController;
+
+    private void Start()
+    {
+        monster = GameObject.FindGameObjectWithTag("Monster");
+        monsterController = monster.GetComponent<MonsterController>();
+        tazer = GameObject.FindGameObjectWithTag("Tazer");
+        tazerController = tazer.GetComponent<TazerController>();
+    }
 
     private void Awake()
     {
+        
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         cameraTransform = Camera.main.transform;
         //reference to all of the input actions with strings
         moveAction = playerInput.actions["Move"];
-        jumpAction = playerInput.actions["Jump"];
         shootAction = playerInput.actions["Shoot"];
-        // stuff to animate the tazer
-        tazerAnimator = tazer.GetComponent<Animator>();
-        tazerJab = Animator.StringToHash("Tazer Jab");
-        tazerWalk = Animator.StringToHash("Tazer Walk");
-        tazerIdle = Animator.StringToHash("TazerIdle");
         // lock the cursor to the middle of the screen.
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -113,7 +118,10 @@ public class PlayerController1 : MonoBehaviour
         //dead..
         Dead();
 
-        
+        if (shootAction.triggered)
+        {
+            tazerController.attacking = true;
+        }
     }
 
     private void Grounded()
@@ -152,9 +160,15 @@ public class PlayerController1 : MonoBehaviour
         {
             Debug.Log("you were hit.");
             LoseHealth();
-            
+        }
+        else if (other.CompareTag("GotBehind"))
+        {
+            Debug.Log("too far, bud.");
+            monsterController.behindBoss = true;
         }
     }
+
+ 
 
     //subtracts health and starts temporary invincibility coroutine
     public void LoseHealth()
@@ -205,7 +219,7 @@ public class PlayerController1 : MonoBehaviour
 
     }
 
-   
-  
+
 
 }
+    }

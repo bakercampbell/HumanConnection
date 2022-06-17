@@ -15,6 +15,9 @@ TagManager:
   - Ground
   - Bullet
   - Outline
+  - GotBehind
+  - Monster
+  - Tazer
   layers:
   - Default
   - TransparentFX

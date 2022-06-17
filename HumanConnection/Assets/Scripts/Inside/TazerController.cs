@@ -5,40 +5,46 @@ using UnityEngine.InputSystem;
 
 
 
+
 public class TazerController : MonoBehaviour
 {
 
 
-    //private PlayerInput playerInput;
-    //private Animator animator;
-    //private InputAction moveAction;
-    //private InputAction shootAction;
-    
-    //private int tazerJab;
-    //private int tazerWalk;
-    //private int tazerIdle;
+
+    private Animator animator;
 
 
-    //private void Start()
-    //{
-    //    playerInput = GetComponent<PlayerInput>();
-    //    moveAction = playerInput.actions["Move"];
-    //    shootAction = playerInput.actions["Shoot"];
+    private int tazerJab;
+    private int tazerWalk;
+    private int tazerIdle;
 
-    //    animator = GetComponent<Animator>();
-    //    tazerJab = Animator.StringToHash("Tazer Jab");
-    //    tazerWalk = Animator.StringToHash("TazerWalk");
-    //    tazerIdle = Animator.StringToHash("Tazer Idle");
-    //}
+    public bool walking { get; set; }
+    public bool attacking { get; set; }
 
-    //private void Update()
-    //{
 
-    //}
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        tazerJab = Animator.StringToHash("Tazer Jab");
+        tazerWalk = Animator.StringToHash("TazerWalk");
+        tazerIdle = Animator.StringToHash("Tazer Idle");
+    }
 
-    //private void OnEnable()
-    //{
-        
-    //}
+    private void Awake()
+    {
+        animator.Play(tazerIdle);
+    }
 
+    private void Update()
+    {
+        if (walking == true)
+        {
+            animator.Play(tazerWalk);
+        }
+        else if (attacking == true)
+        {
+            animator.Play(tazerJab);
+        }
+        else animator.Play(tazerIdle);
+    }
 }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MonsterAttackScriptableObject
   m_EditorClassIdentifier: 
   <attackDamage>k__BackingField: 20
-  <attackRange>k__BackingField: 3
+  <attackRange>k__BackingField: 2
