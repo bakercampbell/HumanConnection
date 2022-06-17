@@ -14,8 +14,8 @@ public class TopDownMovement : MonoBehaviour
     [SerializeField, Range(0, 20)]
     float speed, turnSpeed, carryingSpeed;
     public float prevSpeed;
-    [SerializeField, Range(0, 5)]
-    float captureTimer, captureTimerReset;
+    [SerializeField, Range(0, 20)]
+    float captureTimer, captureTimerReset, swarmTimer, swarmTimerReset;
     [SerializeField]
     LayerMask playerMask, interactableMask;
     [SerializeField]
@@ -27,6 +27,9 @@ public class TopDownMovement : MonoBehaviour
     public bool isCaptured;
     public bool isCarrying;
     public bool isSwarmed;
+    public int swarmCounter = 0;
+    [SerializeField]
+    int swarmLimit;
     int shotCount;
     
     void Start()
@@ -67,6 +70,32 @@ public class TopDownMovement : MonoBehaviour
         {
             speed = prevSpeed;
         }
+
+        if (isSwarmed)
+        {
+            swarmTimer -= Time.deltaTime;
+            if (swarmCounter >= swarmLimit)
+            {
+                ReleaseVillager();
+            }
+            else if (swarmCounter <= 0)
+            {
+                isSwarmed = false;
+                swarmTimer = swarmTimerReset;
+            }
+            else if (swarmTimer <= 0)
+            {
+                Mathf.Max(swarmCounter--, 0);
+                swarmTimer = swarmTimerReset;
+
+            }
+        }
+        else if (!isSwarmed)
+        {
+            swarmCounter = 0;
+            swarmTimer = swarmTimerReset;
+        }
+
         if (transform.position.y > 2f)
             transform.position = transform.position - new Vector3(0, 1, 0);
     }
@@ -119,7 +148,7 @@ public class TopDownMovement : MonoBehaviour
         
         if (Mouse.current.rightButton.wasPressedThisFrame && canShoot)
         {
-            Debug.Log(shotCount + 1);
+            //Debug.Log(shotCount + 1);
             var fireDir = firePoint.transform.position - transform.position;
             var bulletObj = GetBullet();
             bulletObj?.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
@@ -176,6 +205,7 @@ public class TopDownMovement : MonoBehaviour
     void ReleaseVillager()
     {
         isCarrying = false;
+        isSwarmed = false;
         var villager = GetComponentInChildren<VillagerBehaviour_Maze>()?.gameObject;
         if (villager != null)
             villager.GetComponent<VillagerBehaviour_Maze>().Rescue();

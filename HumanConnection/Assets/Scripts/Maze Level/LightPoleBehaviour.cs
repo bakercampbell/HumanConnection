@@ -9,6 +9,7 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
     public delegate void OnLightOnDelegate();
     public event OnLightOnDelegate lightOnEvent;
     public Light lightGlobe;
+    public bool isOn = true;
 
     public void Interact()
     {
@@ -18,11 +19,13 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
 
     public void OnLightOff()
     {
+        isOn = false;
         lightOffEvent?.Invoke();
     }
 
     public void OnLightOn()
     {
+        isOn = true;
         lightOnEvent?.Invoke();
     }
 
