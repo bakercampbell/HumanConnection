@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40758459eed8e1b488257d75eb733ebb, type: 3}
   m_Name: MonsterScriptableObject
   m_EditorClassIdentifier: 
-  <health>k__BackingField: 120
+  <health>k__BackingField: 50
   <speed>k__BackingField: 1.25
+  <chargeSpeed>k__BackingField: 20
   <monsterAttackType>k__BackingField: {fileID: 11400000, guid: 2e174817e2e2044478c1e3ada0c9d0d8, type: 2}

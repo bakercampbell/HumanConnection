@@ -31,7 +31,7 @@ public class HeadController : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            health -= 5;
+            health -= 3;
 
         }
     }

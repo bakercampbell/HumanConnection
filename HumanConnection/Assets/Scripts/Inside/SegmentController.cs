@@ -7,9 +7,10 @@ public class SegmentController : MonoBehaviour
     GameObject monster;
     private MonsterController monsterController;
     [SerializeField] private Animator animator;
-    private int monsterFlail, segmentIdle, segmentCharge;
+    private int monsterFlail, segmentIdle, segmentCharge, segmentWham;
     private float delay;
-    public bool charging { get; set; }
+
+    public bool wham { get; set; }
 
 
     private void Start()
@@ -21,6 +22,7 @@ public class SegmentController : MonoBehaviour
         monsterFlail = Animator.StringToHash("Flailing");
         segmentIdle = Animator.StringToHash("Segment Idle");
         segmentCharge = Animator.StringToHash("SegmentCharge");
+        segmentWham = Animator.StringToHash("Segment Wham");
         StartCoroutine(DelayFlail());
     }
 
@@ -33,9 +35,11 @@ public class SegmentController : MonoBehaviour
            
             StartCoroutine(DownTime());
         }
-        if (charging == true)
+
+        if (wham == true)
         {
-            StartCoroutine(Charge());
+            Debug.Log("Wham!");
+            StartCoroutine(Wham());
         }
     }
 
@@ -52,15 +56,15 @@ public class SegmentController : MonoBehaviour
         Debug.Log("Segments Are Vulnerable");
         animator.Play(segmentIdle);
         yield return new WaitForSeconds(7.5f);
-        Debug.Log("Good job! But he's recharging!");
-        animator.Play(segmentCharge);
-        
+        StartCoroutine(DelayFlail());
     }
 
-    IEnumerator Charge()
+
+
+    IEnumerator Wham()
     {
-        animator.Play(segmentCharge);
-        yield return !charging;
+        animator.Play(segmentWham);
+        yield return new WaitForSeconds(1);
         StartCoroutine(DelayFlail());
     }
 }

@@ -11,10 +11,9 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private float chargeSpeed = 10;
 
     private Animator animator;
-    private int monsterSprint, monsterAttack, monsterDouble, monsterReturn, monsterWasHit, monsterWait, monsterIdle, monsterCharge;
+    private int monsterSprint, monsterAttack, monsterDouble, monsterWasHit, monsterWait, monsterIdle;
 
-    GameObject segment;
-    SegmentController segmentController;
+
 
 
     private bool wasHit = false;
@@ -30,21 +29,20 @@ public class MonsterController : MonoBehaviour
         
         StartCoroutine(MonsterMoveToward());
         monsterScriptableObject.health = 100;
+        monsterScriptableObject.speed = 1.25f;
     }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         monsterAttack = Animator.StringToHash("wham");
-        monsterSprint = Animator.StringToHash("Walk");
-        monsterReturn = Animator.StringToHash("Return");
+        monsterSprint = Animator.StringToHash("Walk");        
         monsterWasHit = Animator.StringToHash("Was Hit");
         monsterWait = Animator.StringToHash("Stand Up");
         monsterIdle = Animator.StringToHash("Idle");
         monsterDouble = Animator.StringToHash("Double Wham");
-        monsterCharge = Animator.StringToHash("Charge");
-        segment = GameObject.FindGameObjectWithTag("Segment");
-        segmentController = segment.GetComponent<SegmentController>();
+
+
 
     }
     private void Update()
@@ -55,29 +53,32 @@ public class MonsterController : MonoBehaviour
         }
 
 
-            MonsterDown();
-        if(transform.position.y > 1.5 && transform.position.x < 40 && transform.position.z == 0)
+        MonsterDown();
+
+        if (transform.position.y < .5f)
         {
-            BackToStart();
-        }
-        else if (transform.position.y < .292f)
-        {
-            transform.Translate(new Vector3(transform.position.x, .292f, transform.position.z));
+            transform.Translate(new Vector3(transform.position.x, .5f, transform.position.z));
         }
 
         health = monsterScriptableObject.health;
 
         
 
+
         if (monsterScriptableObject.health <= 0)
         {
-
-            StartCoroutine(MonsterDown());
+            StopAllCoroutines();
+            
 
 
         }
     }
 
+    private void LateUpdate()
+    {
+        if (monsterScriptableObject.health <= 0)
+        StartCoroutine(MonsterDown());
+    }
 
     IEnumerator MonsterMoveToward()
     {
@@ -90,16 +91,20 @@ public class MonsterController : MonoBehaviour
             transform.LookAt(target.transform.position);
             yield return null;
         }
-        StartCoroutine(MonsterAttack()); 
-            
+
+            StartCoroutine(MonsterAttack());
+
     }
 
     IEnumerator MonsterAttack() 
     {
+        
+        
         animator.Play(monsterAttack);
         StartCoroutine(StandUp());
         yield return waitForSeconds;
         StartCoroutine(MonsterMoveToward());
+        
     }
 
     IEnumerator StandUp()
@@ -131,7 +136,7 @@ public class MonsterController : MonoBehaviour
             }
             if (!tempInvincible && !wasHit)
             {
-                monsterScriptableObject.health -= 35;
+                monsterScriptableObject.health -= 15;
                 tempInvincible = true;
                 animator.Play(monsterWasHit);
                 wasHit = true;
@@ -141,11 +146,9 @@ public class MonsterController : MonoBehaviour
             }
             else if (!tempInvincible && wasHit)
             {
-                monsterScriptableObject.health -= 35;
+                monsterScriptableObject.health -= 15;
                 tempInvincible = true;
-                animator.Play(monsterAttack);
                 StartCoroutine(DoubleAttack());
-
                 StartCoroutine(InvincibleCooldown());
             }
 
@@ -154,22 +157,14 @@ public class MonsterController : MonoBehaviour
     IEnumerator MonsterDown()
     {
         animator.Play(monsterIdle);
+        monsterScriptableObject.speed = 0;
         monsterScriptableObject.health += 125;
-        yield return new WaitForSeconds(7.5f);
-        
-        BackToStart();
+        yield return new WaitForSeconds(7.5f);        
+        monsterScriptableObject.speed = 1.25f;
+        StartCoroutine(MonsterMoveToward());
     }
 
-    private void Charge()
-    {
-        segmentController.charging = true;
-        Vector3 charge = Vector3.MoveTowards(transform.position, target.transform.position, monsterScriptableObject.speed * Time.deltaTime);
 
-        transform.position = charge;
-        transform.LookAt(target.transform.position);
-
-        Return();
-    }
 
     IEnumerator InvincibleCooldown()
     {
@@ -183,37 +178,26 @@ public class MonsterController : MonoBehaviour
     {
         Debug.Log("Oo he mad..");
         yield return new WaitForSeconds(2);
-        animator.Play(monsterAttack);
+        StartCoroutine(MonsterAttack());
     }
 
     IEnumerator DoubleAttack()
     {
         Debug.Log("OOOOoo he REAL mad!");
-        yield return new WaitForSeconds(2);
         animator.Play(monsterDouble);
+        yield return new WaitForSeconds(2);
+        StartCoroutine(MonsterAttack());
     }
-
-
-
 
     private void BackToStart()
     {
-        Vector3 reset = new Vector3(47, .3f, 0);
-        animator.Play(monsterCharge);
+
+        Vector3 reset = new Vector3(47, .56f, 0);
         
-            transform.DOMove(reset, 3f).OnComplete(() =>
-            {
-                Charge();
-            });
+
+        transform.DOMove(reset, 1f);
         
     }
 
-    private void Return()
-    {
-        Vector3 reset = new Vector3(47, 0, 0);
-        animator.Play(monsterCharge);
-
-        transform.DOMove(reset, 3f);
-    }
 }
 
