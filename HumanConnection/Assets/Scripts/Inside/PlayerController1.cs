@@ -23,7 +23,7 @@ public class PlayerController1 : MonoBehaviour
     [SerializeField]
     private Transform bulletParent;
     [SerializeField]
-    private float bulletHitMissDistance = 5f;    
+    private float bulletHitMissDistance = 5f;
     [SerializeField]
     private int health = 100;
     [SerializeField]
@@ -35,13 +35,14 @@ public class PlayerController1 : MonoBehaviour
     private bool groundedPlayer;
     private bool isInvincible = false;
 
-    
+
     private Transform cameraTransform;
 
 
     // Cached player input action to avoid continuously using string reference such as "Move".
     private InputAction moveAction;
     private InputAction shootAction;
+    private InputAction jumpAction;
 
     private GameObject monster;
     private MonsterController monsterController;
@@ -59,13 +60,14 @@ public class PlayerController1 : MonoBehaviour
 
     private void Awake()
     {
-        
+
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         cameraTransform = Camera.main.transform;
         //reference to all of the input actions with strings
         moveAction = playerInput.actions["Move"];
         shootAction = playerInput.actions["Shoot"];
+        jumpAction = playerInput.actions["Jump"];
         // lock the cursor to the middle of the screen.
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -73,20 +75,20 @@ public class PlayerController1 : MonoBehaviour
     //shoot action
     private void OnEnable()
     {
-        shootAction.performed += _ => ShootGun(); 
+        shootAction.performed += _ => ShootGun();
 
     }
 
     private void OnDisable()
     {
         shootAction.performed -= _ => ShootGun();
-       
+
     }
 
     //spawns a bullet, referencing the bullet controller script.
     private void ShootGun()
     {
-        
+
         RaycastHit hit;
         GameObject bullet = GameObject.Instantiate(bulletPrefab, barrelTransform.position, Quaternion.identity, bulletParent);
         BulletController bulletController = bullet.GetComponent<BulletController>();
@@ -103,7 +105,7 @@ public class PlayerController1 : MonoBehaviour
             bulletController.hit = false;
             Debug.Log("Oooh, and that's a bad miss...");
         }
-        
+
     }
 
 
@@ -114,7 +116,7 @@ public class PlayerController1 : MonoBehaviour
 
         //directs movement and jumping
         Movement();
-        
+
         //dead..
         Dead();
 
@@ -123,13 +125,13 @@ public class PlayerController1 : MonoBehaviour
         {
             transform.position = tooFar;
         }
-     
+
     }
 
     private void Grounded()
     {
         groundedPlayer = controller.isGrounded;
-        
+
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -137,14 +139,19 @@ public class PlayerController1 : MonoBehaviour
     }
 
     private void Movement()
-    { 
+    {
         Vector2 input = moveAction.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.y, 0, input.x * -1);
-        
-        
+        Vector3 move = new Vector3(input.x, 0, input.y);
+
+        move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
+        controller.Move(move * Time.deltaTime * playerSpeed);
+        move.y = 0f;
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-   
+        if (jumpAction.triggered && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
@@ -170,18 +177,18 @@ public class PlayerController1 : MonoBehaviour
         }
     }
 
- 
+
 
     //subtracts health and starts temporary invincibility coroutine
     public void LoseHealth()
     {
-        
-        if (isInvincible) return;
-        
-        health -= 20;
 
-        
-        
+        if (isInvincible) return;
+
+        health -= 5;
+
+
+
         StartCoroutine(BecomeInvincible());
     }
 
@@ -193,11 +200,11 @@ public class PlayerController1 : MonoBehaviour
             return;
         }
         else
-        health = 0;
+            health = 0;
         Debug.Log("You dead, buddy.");
         StartCoroutine(DeathSequence());
         return;
-    } 
+    }
 
     //invincibility Cooldown upon taking damage.
     private IEnumerator BecomeInvincible()
@@ -216,7 +223,7 @@ public class PlayerController1 : MonoBehaviour
     {
 
         SceneManager.LoadScene("OutsideLab", LoadSceneMode.Single);
-        
+
         yield return new WaitForSeconds(4);
 
     }
@@ -224,4 +231,3 @@ public class PlayerController1 : MonoBehaviour
 
 
 }
-    
