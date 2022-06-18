@@ -305,7 +305,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: MonsterHead
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5508601344611071575, guid: 3d307fe26da562b4f87fd6be4cc1b5b3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3d307fe26da562b4f87fd6be4cc1b5b3, type: 3}
 --- !u!4 &4450804959462557866 stripped
 Transform:

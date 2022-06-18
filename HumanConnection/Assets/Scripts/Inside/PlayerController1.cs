@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 
-namespace baker { 
+
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController1 : MonoBehaviour
 {
@@ -118,10 +118,12 @@ public class PlayerController1 : MonoBehaviour
         //dead..
         Dead();
 
-        //if (shootAction.triggered)
-        //{
-        //    tazerController.attacking = true;
-        //}
+        Vector3 tooFar = new Vector3(46, transform.position.y, transform.position.z);
+        if (transform.position.x > 46)
+        {
+            transform.position = tooFar;
+        }
+     
     }
 
     private void Grounded()
@@ -222,4 +224,4 @@ public class PlayerController1 : MonoBehaviour
 
 
 }
-    }
+    

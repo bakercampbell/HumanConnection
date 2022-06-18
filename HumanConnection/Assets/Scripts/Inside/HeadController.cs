@@ -6,6 +6,26 @@ using UnityEngine.SceneManagement;
 public class HeadController : MonoBehaviour
 {
     [SerializeField] private int health = 100;
+    GameObject monster;
+    MonsterController monsterController;
+    Animator animator;
+    private void Start()
+    {
+        monster = GameObject.FindGameObjectWithTag("Monster");
+        monsterController = monster.GetComponent<MonsterController>();
+        animator = GetComponent<Animator>();
+
+    }
+
+    private void Update()
+    {
+        if (monsterController.health <= 0)
+        {
+            StartCoroutine(DownTime());
+        }
+        
+        Dead();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,13 +36,18 @@ public class HeadController : MonoBehaviour
         }
     }
 
-    private IEnumerator DeathSequence()
+    IEnumerator DeathSequence()
     {
-
-        SceneManager.LoadScene("OutsideLab", LoadSceneMode.Single);
-
+        Debug.Log("He dead, buddy.");
         yield return new WaitForSeconds(4);
+        SceneManager.LoadScene("OutsideLab", LoadSceneMode.Single);
+    }
 
+    IEnumerator DownTime()
+    {
+        animator.Play("Spazzing");
+        yield return new WaitForSeconds(7.5f);
+        animator.Play("Head Hanging");
     }
 
     public void Dead()
@@ -33,11 +58,11 @@ public class HeadController : MonoBehaviour
         }
         else
         health = 0;
-        
-        Debug.Log("He dead, buddy.");
-        Destroy(gameObject);
         StartCoroutine(DeathSequence());
-        return;
         
+        
+        
+        return;
+
     }
 }

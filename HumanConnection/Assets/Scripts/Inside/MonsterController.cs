@@ -7,20 +7,16 @@ public class MonsterController : MonoBehaviour
 {
     [SerializeField] private GameObject target;
     [SerializeField] private MonsterScriptableObject monsterScriptableObject;
-    [SerializeField] private WaitForSeconds waitForSeconds = new(5);
-
-
-
-
-
-
+    [SerializeField] private WaitForSeconds waitForSeconds = new(2);
+    [SerializeField] private float chargeSpeed = 10;
 
     private Animator animator;
-    private int monsterSprint, monsterAttack, monsterDouble, monsterReturn, monsterWasHit, monsterWait, monsterIdle;
-    
-    private Vector3 resetPos;
-    private Vector3 offScreen;
-    
+    private int monsterSprint, monsterAttack, monsterDouble, monsterReturn, monsterWasHit, monsterWait, monsterIdle, monsterCharge;
+
+    GameObject segment;
+    SegmentController segmentController;
+
+
     private bool wasHit = false;
     private bool tempInvincible = false;
 
@@ -31,18 +27,13 @@ public class MonsterController : MonoBehaviour
 
     private void Start()
     {
+        
         StartCoroutine(MonsterMoveToward());
         monsterScriptableObject.health = 100;
-
-
-        health = monsterScriptableObject.health;
-
-
     }
 
     private void Awake()
     {
-        
         animator = GetComponent<Animator>();
         monsterAttack = Animator.StringToHash("wham");
         monsterSprint = Animator.StringToHash("Walk");
@@ -51,11 +42,11 @@ public class MonsterController : MonoBehaviour
         monsterWait = Animator.StringToHash("Stand Up");
         monsterIdle = Animator.StringToHash("Idle");
         monsterDouble = Animator.StringToHash("Double Wham");
-        resetPos = new Vector3(47f, 9f, 0f);
-        offScreen = new Vector3(45f, 10f, 2.5f);
+        monsterCharge = Animator.StringToHash("Charge");
+        segment = GameObject.FindGameObjectWithTag("Segment");
+        segmentController = segment.GetComponent<SegmentController>();
+
     }
-
-
     private void Update()
     {
         if(behindBoss)
@@ -65,7 +56,26 @@ public class MonsterController : MonoBehaviour
 
 
             MonsterDown();
-               
+        if(transform.position.y > 1.5 && transform.position.x < 40 && transform.position.z == 0)
+        {
+            BackToStart();
+        }
+        else if (transform.position.y < .292f)
+        {
+            transform.Translate(new Vector3(transform.position.x, .292f, transform.position.z));
+        }
+
+        health = monsterScriptableObject.health;
+
+        
+
+        if (monsterScriptableObject.health <= 0)
+        {
+
+            StartCoroutine(MonsterDown());
+
+
+        }
     }
 
 
@@ -87,16 +97,17 @@ public class MonsterController : MonoBehaviour
     IEnumerator MonsterAttack() 
     {
         animator.Play(monsterAttack);
-            StartCoroutine(StandUp());
+        StartCoroutine(StandUp());
         yield return waitForSeconds;
         StartCoroutine(MonsterMoveToward());
     }
 
-        IEnumerator StandUp()
-        {
-            animator.Play(monsterWait);
-            yield return new WaitForSeconds(1);
-        }
+    IEnumerator StandUp()
+    {
+        Debug.Log("gettin up...");
+        yield return new WaitForSeconds(1);
+        animator.Play(monsterWait);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -140,34 +151,46 @@ public class MonsterController : MonoBehaviour
 
     }
 
-    private void MonsterDown()
+    IEnumerator MonsterDown()
     {
-        if (monsterScriptableObject.health <= 0)
-        {
+        animator.Play(monsterIdle);
+        monsterScriptableObject.health += 125;
+        yield return new WaitForSeconds(7.5f);
+        
+        BackToStart();
+    }
 
-            animator.Play(monsterIdle);
+    private void Charge()
+    {
+        segmentController.charging = true;
+        Vector3 charge = Vector3.MoveTowards(transform.position, target.transform.position, monsterScriptableObject.speed * Time.deltaTime);
 
+        transform.position = charge;
+        transform.LookAt(target.transform.position);
 
-        }
+        Return();
     }
 
     IEnumerator InvincibleCooldown()
     {
-        tempInvincible = false;
+        Debug.Log("He's Invincible!!!");
         yield return new WaitForSeconds(3);
+        tempInvincible = false;
+        Debug.Log("Ok you can hit him again");
     }
 
     IEnumerator NormalAttack()
     {
-        animator.Play(monsterAttack);
+        Debug.Log("Oo he mad..");
         yield return new WaitForSeconds(2);
-
+        animator.Play(monsterAttack);
     }
 
     IEnumerator DoubleAttack()
     {
-        animator.Play(monsterDouble);
+        Debug.Log("OOOOoo he REAL mad!");
         yield return new WaitForSeconds(2);
+        animator.Play(monsterDouble);
     }
 
 
@@ -175,36 +198,22 @@ public class MonsterController : MonoBehaviour
 
     private void BackToStart()
     {
-        animator.Play(monsterReturn);
-        {
-            transform.DOMoveY(1, .5f).OnComplete(() =>
+        Vector3 reset = new Vector3(47, .3f, 0);
+        animator.Play(monsterCharge);
+        
+            transform.DOMove(reset, 3f).OnComplete(() =>
             {
-                transform.DOMoveZ(3.19f, .5f).OnComplete(() =>
-                {
-                    transform.DOMoveY(3f, .25f).OnComplete(() =>
-                    {
-                        transform.DOMove(offScreen, .75f).OnComplete(() =>
-                        {
-                            transform.DOMove(resetPos, .5f).OnComplete(() =>
-                            {
-                                transform.DOMove(resetPos, 1).OnComplete(() =>
-                                {
-                                    transform.DOMoveY(1.6f, .5f).OnComplete(() =>
-                                    {
-                                        transform.DOMoveY(0f, 1f).OnComplete(() =>
-                                        {
-                                            Debug.Log("start move");
-                                            StartCoroutine(MonsterMoveToward());
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
+                Charge();
             });
-        }
+        
+    }
 
+    private void Return()
+    {
+        Vector3 reset = new Vector3(47, 0, 0);
+        animator.Play(monsterCharge);
+
+        transform.DOMove(reset, 3f);
     }
 }
 
