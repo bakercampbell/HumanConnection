@@ -18,6 +18,7 @@ TagManager:
   - GotBehind
   - Monster
   - Tazer
+  - MonsterHead
   layers:
   - Default
   - TransparentFX

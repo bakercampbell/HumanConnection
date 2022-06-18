@@ -4,40 +4,63 @@ using UnityEngine;
 
 public class SegmentController : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
-
-    private Animator animator;
-    private int monsterFlail;
+    GameObject monster;
+    private MonsterController monsterController;
+    [SerializeField] private Animator animator;
+    private int monsterFlail, segmentIdle, segmentCharge;
     private float delay;
+    public bool charging { get; set; }
 
-    private void Awake()
+
+    private void Start()
     {
+        monster = GameObject.FindGameObjectWithTag("Monster");
+        monsterController = monster.GetComponent<MonsterController>();
         delay = Random.Range(0f, 2f);
         animator = GetComponent<Animator>();
         monsterFlail = Animator.StringToHash("Flailing");
-        StartCoroutine (DelayFlail());        
+        segmentIdle = Animator.StringToHash("Segment Idle");
+        segmentCharge = Animator.StringToHash("SegmentCharge");
+        StartCoroutine(DelayFlail());
     }
+
+
 
     private void Update()
     {
-        if (health <= 0)
+        if (monsterController.health <= 0)
         {
-            
+           
+            StartCoroutine(DownTime());
+        }
+        if (charging == true)
+        {
+            StartCoroutine(Charge());
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-   // {
-    //    if (other.CompareTag("Tazer"))
-    //    {
-   //         health -= 10;
-  //      }
-  //  }
-
     IEnumerator DelayFlail()
     {
+        Debug.Log("Iss gone flail");
+        
         yield return new WaitForSeconds(delay);
         animator.Play(monsterFlail);
+    }
+
+    IEnumerator DownTime()
+    {
+        Debug.Log("Segments Are Vulnerable");
+        animator.Play(segmentIdle);
+        yield return new WaitForSeconds(7.5f);
+        Debug.Log("Good job! But he's recharging!");
+        animator.Play(segmentCharge);
         
+    }
+
+    IEnumerator Charge()
+    {
+        animator.Play(segmentCharge);
+        yield return !charging;
+        StartCoroutine(DelayFlail());
     }
 }

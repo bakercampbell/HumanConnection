@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 
-namespace baker { 
+
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController1 : MonoBehaviour
 {
@@ -46,15 +46,15 @@ public class PlayerController1 : MonoBehaviour
     private GameObject monster;
     private MonsterController monsterController;
 
-    private GameObject tazer;
-    private TazerController tazerController;
+    //private GameObject tazer;
+    //private TazerController tazerController;
 
     private void Start()
     {
         monster = GameObject.FindGameObjectWithTag("Monster");
         monsterController = monster.GetComponent<MonsterController>();
-        tazer = GameObject.FindGameObjectWithTag("Tazer");
-        tazerController = tazer.GetComponent<TazerController>();
+        //tazer = GameObject.FindGameObjectWithTag("Tazer");
+        //tazerController = tazer.GetComponent<TazerController>();
     }
 
     private void Awake()
@@ -118,10 +118,12 @@ public class PlayerController1 : MonoBehaviour
         //dead..
         Dead();
 
-        if (shootAction.triggered)
+        Vector3 tooFar = new Vector3(46, transform.position.y, transform.position.z);
+        if (transform.position.x > 46)
         {
-            tazerController.attacking = true;
+            transform.position = tooFar;
         }
+     
     }
 
     private void Grounded()
@@ -213,7 +215,7 @@ public class PlayerController1 : MonoBehaviour
     private IEnumerator DeathSequence()
     {
 
-        SceneManager.LoadScene("MazeLevel", LoadSceneMode.Single);
+        SceneManager.LoadScene("OutsideLab", LoadSceneMode.Single);
         
         yield return new WaitForSeconds(4);
 
@@ -222,4 +224,4 @@ public class PlayerController1 : MonoBehaviour
 
 
 }
-    }
+    
