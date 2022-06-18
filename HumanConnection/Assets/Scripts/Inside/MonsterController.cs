@@ -7,7 +7,8 @@ public class MonsterController : MonoBehaviour
 {
     [SerializeField] private GameObject target;
     [SerializeField] private MonsterScriptableObject monsterScriptableObject;
-    [SerializeField] private WaitForSeconds waitForSeconds = new(2);
+    [SerializeField] private WaitForSeconds waitForSeconds = new(5);
+    [SerializeField] private float attackRange;
     [SerializeField] private float chargeSpeed = 10;
 
     private Animator animator;
@@ -22,11 +23,11 @@ public class MonsterController : MonoBehaviour
     public int health;
     
     public bool behindBoss { get; set; }
-    public bool isDefeated { get; set; }
+
 
     private void Start()
     {
-        
+        attackRange = monsterScriptableObject.monsterAttackType.attackRange;
         StartCoroutine(MonsterMoveToward());
         monsterScriptableObject.health = 100;
         monsterScriptableObject.speed = 1.25f;
@@ -34,6 +35,7 @@ public class MonsterController : MonoBehaviour
 
     private void Awake()
     {
+        
         animator = GetComponent<Animator>();
         monsterAttack = Animator.StringToHash("wham");
         monsterSprint = Animator.StringToHash("Walk");        
@@ -47,10 +49,6 @@ public class MonsterController : MonoBehaviour
     }
     private void Update()
     {
-        if(behindBoss)
-        {
-                BackToStart();
-        }
 
 
         MonsterDown();
@@ -98,29 +96,26 @@ public class MonsterController : MonoBehaviour
 
     IEnumerator MonsterAttack() 
     {
-        
-        
+
+        attackRange = 0;
         animator.Play(monsterAttack);
         StartCoroutine(StandUp());
         yield return waitForSeconds;
         StartCoroutine(MonsterMoveToward());
-        
+        attackRange = 2.5f;
     }
 
     IEnumerator StandUp()
     {
         Debug.Log("gettin up...");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(chargeSpeed);
         animator.Play(monsterWait);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Reset Trigger"))
-        {
-            BackToStart();
-        }
-        else if (other.CompareTag("Bullet") && monsterScriptableObject.health > 1)
+
+        if (other.CompareTag("Bullet") && monsterScriptableObject.health > 1)
         {
             
             Hit();
@@ -130,27 +125,28 @@ public class MonsterController : MonoBehaviour
     }
     private void Hit()
     {
-            if (tempInvincible)
-            {
+            
+        if (tempInvincible)
+        {
                 return;
-            }
-            if (!tempInvincible && !wasHit)
-            {
-                monsterScriptableObject.health -= 15;
-                tempInvincible = true;
-                animator.Play(monsterWasHit);
-                wasHit = true;
+        }
+        if (!tempInvincible && !wasHit)
+        {
+            monsterScriptableObject.health -= 15;
+            tempInvincible = true;
+            animator.Play(monsterWasHit);
+            wasHit = true;
 
-                StartCoroutine(NormalAttack());
-                StartCoroutine(InvincibleCooldown());
-            }
-            else if (!tempInvincible && wasHit)
-            {
-                monsterScriptableObject.health -= 15;
-                tempInvincible = true;
-                StartCoroutine(DoubleAttack());
-                StartCoroutine(InvincibleCooldown());
-            }
+            StartCoroutine(NormalAttack());
+            StartCoroutine(InvincibleCooldown());
+        }
+        else if (!tempInvincible && wasHit)
+        {
+            monsterScriptableObject.health -= 15;            
+            tempInvincible = true;
+            StartCoroutine(DoubleAttack());
+            StartCoroutine(InvincibleCooldown());
+        }
 
     }
 
@@ -177,27 +173,21 @@ public class MonsterController : MonoBehaviour
     IEnumerator NormalAttack()
     {
         Debug.Log("Oo he mad..");
-        yield return new WaitForSeconds(2);
-        StartCoroutine(MonsterAttack());
+        animator.Play(monsterAttack);
+        yield return new WaitForSeconds(chargeSpeed);
+        StartCoroutine(MonsterMoveToward());
     }
 
     IEnumerator DoubleAttack()
     {
         Debug.Log("OOOOoo he REAL mad!");
-        animator.Play(monsterDouble);
+        animator.Play(monsterAttack);
         yield return new WaitForSeconds(2);
-        StartCoroutine(MonsterAttack());
+        animator.Play(monsterDouble);
+        StartCoroutine(MonsterMoveToward());
     }
 
-    private void BackToStart()
-    {
 
-        Vector3 reset = new Vector3(47, .56f, 0);
-        
-
-        transform.DOMove(reset, 1f);
-        
-    }
 
 }
 
