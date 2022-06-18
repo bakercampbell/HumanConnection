@@ -19,12 +19,14 @@ public class TopDownMovement : MonoBehaviour
     [SerializeField]
     LayerMask playerMask, interactableMask;
     [SerializeField]
-    Transform firePoint;
+    Transform firePoint, crossHairPoint;
     LightPoleBehaviour[] lightPoles;
     NavMeshObstacle navObstacle;
+    Animator anim;
     public Transform dragPoint;
     bool canShoot = true;
     bool isClicked;
+    bool isPaused;
     public bool isCaptured;
     public bool isCarrying;
     public bool isSwarmed;
@@ -34,10 +36,13 @@ public class TopDownMovement : MonoBehaviour
     
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
         character = GetComponent<CharacterController>();
         startPos = transform.position;
         prevSpeed = speed;
         navObstacle = GetComponent<NavMeshObstacle>();
+        anim = GetComponentInChildren<Animator>();
         lightPoles = FindObjectsOfType<LightPoleBehaviour>();
         foreach (LightPoleBehaviour lights in lightPoles)
         {
@@ -110,6 +115,7 @@ public class TopDownMovement : MonoBehaviour
     void FixedUpdate()
     {
         character.Move(speed * Time.fixedDeltaTime * moveVector);
+        anim.SetFloat("MoveSpeed", character.velocity.magnitude);
     }
 
     public void OnMoveChanged(InputAction.CallbackContext context)
@@ -120,25 +126,28 @@ public class TopDownMovement : MonoBehaviour
 
     public void Interact()
     {
-        isClicked = !isClicked;
-        if (isClicked)
+        if (!isPaused)
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            isClicked = !isClicked;
+            if (isClicked)
             {
-                var potentialInteraction = Physics.OverlapSphere(firePoint.position, .5f, interactableMask, QueryTriggerInteraction.Ignore);
-                if (potentialInteraction.Length > 0)
+                if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
-                    potentialInteraction[0].GetComponent<Interactable>()?.Interact();
-                    
-                    if (potentialInteraction[0].GetComponentInParent<LightPoleBehaviour>())
+                    var potentialInteraction = Physics.OverlapSphere(firePoint.position, .5f, interactableMask, QueryTriggerInteraction.Ignore);
+                    if (potentialInteraction.Length > 0)
                     {
-                        shotsLeft = shotsMax;
-                    }
+                        potentialInteraction[0].GetComponent<Interactable>()?.Interact();
 
+                        if (potentialInteraction[0].GetComponentInParent<LightPoleBehaviour>())
+                        {
+                            shotsLeft = shotsMax;
+                        }
+
+                    }
+                    else
+                        Shoot();
+                    StartCoroutine(CanShoot());
                 }
-                else
-                    Shoot();
-                StartCoroutine(CanShoot());
             }
         }
     }
@@ -167,7 +176,7 @@ public class TopDownMovement : MonoBehaviour
             if (shotsLeft > 0)
             {
                 //Debug.Log(shotCount + 1);
-                var fireDir = firePoint.transform.position - transform.position;
+                var fireDir = crossHairPoint.position - firePoint.position;
                 var bulletObj = GetBullet();
                 bulletObj?.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
                 shotsLeft--;
@@ -200,13 +209,30 @@ public class TopDownMovement : MonoBehaviour
 
     public void OnMouseMove()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (!isPaused)
         {
-            var direction = hit.point;
-            var lookTarget = new Vector3(direction.x - transform.position.x, 0, direction.z - transform.position.z);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookTarget), turnSpeed);
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                var direction = hit.point;
+                var lookTarget = new Vector3(direction.x - transform.position.x, 0, direction.z - transform.position.z);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookTarget), turnSpeed);
+            }
+        }
+    }
+
+    public void OnPause()
+    {
+        if (!isPaused)
+        {
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            isPaused = false;
         }
     }
 

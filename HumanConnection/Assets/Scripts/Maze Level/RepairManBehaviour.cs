@@ -36,6 +36,8 @@ public class RepairManBehaviour : MonoBehaviour
         stunTimer, stunTimerReset, captureDelayTimer, captureDelayTimerReset, emergencyOverrideTimer, emergencyOverrideTimerReset;
     [SerializeField]
     LayerMask selfMask;
+    [SerializeField]
+    GameObject particleSystem;
 
 
     void Start()
@@ -271,11 +273,13 @@ public class RepairManBehaviour : MonoBehaviour
     void Stunned()
     {
         Debug.Log("I can't move!");
+        particleSystem.SetActive(true);
         stunTimer -= Time.deltaTime;
         nav.isStopped = true;
         characterTarget.GetComponent<TopDownMovement>()?.Escaped();
         if (stunTimer <= 0)
         {
+            particleSystem.SetActive(false);
             CarryOn();
         }
 

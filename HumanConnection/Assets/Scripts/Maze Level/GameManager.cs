@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     LabTriggerZone labZone;
     [SerializeField]
     TMP_Text TM_text;
-    public int villagersCollected;
+    public int villagersCollected = 0;
     [SerializeField, Range(1,10)]
     int villagerGoal;
     [SerializeField, Range (1,10)]
@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
     {
         score = villagersCollected + "/" + villagerGoal;
         TM_text.text = score;
-        villagersCollected = labZone.villagersCollected;
         if (villagersCollected == villagerGoal)
         {
             completionDelay -= Time.deltaTime;
@@ -63,7 +62,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator UpdateLightsCoRoute()
     {
-        scoreLights[Mathf.Clamp(villagersCollected - 1, 0, villagerGoal)].color = scoreLightcolor;
+        scoreLights[Mathf.Clamp(villagersCollected, 0, villagerGoal)].color = scoreLightcolor;
+        villagersCollected++;
         yield return new WaitForSeconds(2f);
     }
 

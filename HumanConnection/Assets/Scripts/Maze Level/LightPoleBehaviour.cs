@@ -10,7 +10,23 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
     public event OnLightOnDelegate lightOnEvent;
     public Light lightGlobe;
     public bool isOn = true;
+    [SerializeField]
+    GameObject particles;
+    [SerializeField]
+    float particleTimer, particleTimerReset;
 
+
+    private void Update()
+    {
+        if (!isOn)
+        {
+            particles.SetActive(true);
+            particleTimer -= Time.deltaTime;
+            if (particleTimer <= 0)
+                particles.SetActive(false);
+
+        }
+    }
     public void Interact()
     {
         lightGlobe.enabled = false;
@@ -26,6 +42,7 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
     public void OnLightOn()
     {
         isOn = true;
+        particleTimer = particleTimerReset;
         lightOnEvent?.Invoke();
     }
 
