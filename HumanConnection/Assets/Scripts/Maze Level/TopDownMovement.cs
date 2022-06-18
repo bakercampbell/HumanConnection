@@ -27,9 +27,8 @@ public class TopDownMovement : MonoBehaviour
     public bool isCaptured;
     public bool isCarrying;
     public bool isSwarmed;
-    public int swarmCounter = 0;
-    [SerializeField]
-    int swarmLimit;
+    public float swarmCounter = 0;
+    public float swarmLimit;
     public float shotsLeft, shotsMax;
     
     void Start()
@@ -96,7 +95,11 @@ public class TopDownMovement : MonoBehaviour
         }
 
         if (transform.position.y > 2f)
-            transform.position = transform.position - new Vector3(0, 1, 0);
+        {
+            character.enabled = false;
+            transform.position = transform.position - new Vector3(0, 1.5f, 0);
+            character.enabled = true;
+        }
     }
     void FixedUpdate()
     {
@@ -127,6 +130,8 @@ public class TopDownMovement : MonoBehaviour
                     }
 
                 }
+                else
+                    Shoot();
                 StartCoroutine(CanShoot());
             }
         }
@@ -145,12 +150,13 @@ public class TopDownMovement : MonoBehaviour
                 hit.transform.gameObject.SendMessage("Outlined", SendMessageOptions.DontRequireReceiver);
             }
         }
+        
     }
 
     public void Shoot()
     {
         
-        if (Mouse.current.rightButton.wasPressedThisFrame && canShoot)
+        if (Mouse.current.leftButton.wasPressedThisFrame && canShoot)
         {
             if (shotsLeft > 0)
             {

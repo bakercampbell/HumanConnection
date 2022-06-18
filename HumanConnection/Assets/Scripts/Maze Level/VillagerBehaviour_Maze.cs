@@ -115,9 +115,6 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             case VillagerState.Idle:
                 Idle();
                 break;
-            case VillagerState.Hiding:
-                Hiding();
-                break;
             case VillagerState.Hidden:
                 Hidden();
                 break;
@@ -262,11 +259,11 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         }
         return null;
     }
-    void FindClosestHidingSpot()
+    GameObject FindClosestHidingSpot()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightDetectionRange, 1 << hidingLayer);
         float minimumDistance = Mathf.Infinity;
-        foreach (Collider collider in hitColliders)
+        /*foreach (Collider collider in hitColliders)
         {
             bool isSpotOccupied = collider.gameObject.GetComponent<HidingSpotBehaviour>().isOccupied;
             if (!isSpotOccupied)
@@ -278,15 +275,9 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
                     closestHidingSpot = collider.gameObject;
                 }
             }
-        }
-        if (closestHidingSpot != null)
-        {
-            
-        }
-        else
-        {
-            
-        }
+        }*/
+        closestHidingSpot = hitColliders[Random.Range(0, hitColliders.Length - 1)].gameObject;
+        return closestHidingSpot;
     }
 
     bool DetectPlayer()
@@ -319,7 +310,9 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
                 {
                     if (collider.gameObject.tag == "NPC")
                     {
-                        if (CheckLineOfSight(collider.gameObject))
+                        if (Vector3.Distance(collider.gameObject.transform.position, transform.position) < villagerDetectionRange / 3)
+                            return true;
+                        else if (CheckLineOfSight(collider.gameObject))
                         {
                             Debug.Log("I feel safe in a crowd");
                             return true;
@@ -368,14 +361,13 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         currentState = VillagerState.Hiding;
         nav.stoppingDistance = 0.5f;
         nav.autoBraking = true;
+        Hiding();
     }
 
     void Hiding()
     {
-        FindClosestHidingSpot();
         if (nav.enabled)
             nav.SetDestination(closestHidingSpot.transform.position);
-        //Debug.Log(gameObject.name + " is going to hide at " + closestHidingSpot.name);
     }
 
     void Hidden()

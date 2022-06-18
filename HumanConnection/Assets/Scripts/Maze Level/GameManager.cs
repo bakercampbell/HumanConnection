@@ -22,9 +22,9 @@ public class GameManager : MonoBehaviour
     string score;
 
     [SerializeField]
-    Image ammoBarRight, ammoBarLeft;
+    Image ammoBar, villagerBar, villagerOuterBar;
     [SerializeField, Range(0, 1)]
-    float ammoFillDuration;
+    float ammoFillDuration, villagerFillDuration, villagerBarFadeTime;
 
     void Start()
     {
@@ -44,13 +44,32 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateAmmoBar();
+        UpdateVillagerBar();
 
     }
 
     void UpdateAmmoBar()
     {
         var ammoFill = Mathf.Clamp(player.shotsLeft / player.shotsMax, 0, 1f);
-        ammoBarRight.DOFillAmount(ammoFill, ammoFillDuration);
-        ammoBarLeft.DOFillAmount(ammoFill, ammoFillDuration);
+        ammoBar.DOFillAmount(ammoFill, ammoFillDuration);
+        BarJiggle(ammoBar);
+    }
+
+    void UpdateVillagerBar()
+    {
+        if (player.isCarrying)
+            villagerOuterBar.DOFade(1f, villagerBarFadeTime);
+        else
+            villagerOuterBar.DOFade(1f, villagerBarFadeTime);
+        var villagerFill = Mathf.Clamp(player.swarmCounter / player.swarmLimit, 0, 1f);
+        villagerBar.DOFillAmount(villagerFill, villagerFillDuration);
+    }
+
+    void BarJiggle(Image bar)
+    {
+        bar.transform.DOMoveX(500, .01f).OnComplete(() =>
+        {
+            bar.transform.DOMoveX(510, .01f);
+        });
     }
 }

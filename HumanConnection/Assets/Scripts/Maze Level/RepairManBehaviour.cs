@@ -29,7 +29,7 @@ public class RepairManBehaviour : MonoBehaviour
     float detectPlayerRange;
     [SerializeField, Range(0, 30)]
     float checkingTimer, checkingTimerReset, repairTimer, repairTimerReset, saveTimer, saveTimerReset, 
-        stunTimer, stunTimerReset, captureDelayTimer, captureDelayTimerReset;
+        stunTimer, stunTimerReset, captureDelayTimer, captureDelayTimerReset, emergencyOverrideTimer, emergencyOverrideTimerReset;
     [SerializeField]
     LayerMask selfMask;
 
@@ -78,6 +78,17 @@ public class RepairManBehaviour : MonoBehaviour
 
     void Update()
     {
+        if(nav.enabled && nav.velocity.magnitude < .1)
+        {
+            emergencyOverrideTimer -= Time.deltaTime;
+            if (emergencyOverrideTimer <= 0)
+            {
+                nav.SetDestination(NextLight());
+                lightsToRepair.Clear();
+                currentState = RepairManState.Patrolling;
+                emergencyOverrideTimer = emergencyOverrideTimerReset;
+            }
+        }
         CheckOutline();
         if (lightTarget > lightPoles.Length - 1)
         {
@@ -125,12 +136,13 @@ public class RepairManBehaviour : MonoBehaviour
         {
                 checkingTimer -= Time.deltaTime;
                 transform.LookAt(currentLightTarget.transform.position);
-                if (checkingTimer < 0)
+                if (checkingTimer <= 0)
                 {
-                    currentState = RepairManState.Patrolling;
                     lightTarget++;
                     nav.SetDestination(NextLight());
+                    currentState = RepairManState.Patrolling;
                     checkingTimer = checkingTimerReset;
+                    
             }
         }
     }
@@ -141,6 +153,7 @@ public class RepairManBehaviour : MonoBehaviour
         {
             if (nav.remainingDistance < 4f)
                 currentState = RepairManState.Checking;
+            emergencyOverrideTimer = emergencyOverrideTimerReset;
         }
     }
 
@@ -247,7 +260,7 @@ public class RepairManBehaviour : MonoBehaviour
         RaycastHit hit;
         Vector3 dir = characterTarget.transform.position - transform.position;
         Debug.DrawRay(transform.position, dir, Color.red, .1f);
-        if (Physics.Raycast(transform.position, dir.normalized, out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, dir.normalized, out hit, detectPlayerRange))
         {
             if (hit.transform.gameObject == characterTarget)
                 return true;

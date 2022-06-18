@@ -29,4 +29,10 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
         lightOnEvent?.Invoke();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+            Interact();
+    }
+
 }
