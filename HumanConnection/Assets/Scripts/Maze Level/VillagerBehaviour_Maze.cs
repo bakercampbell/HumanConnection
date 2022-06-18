@@ -28,9 +28,6 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     int playerLayer;
     int hidingLayer;
     int villagerLayer;
-
-    Outline outline;
-    float outlineTimer;
     
     Transform moveTarget;
     Transform runAwayTarget;
@@ -63,8 +60,6 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         playerLayer = LayerMask.NameToLayer("Player");
         hidingLayer = LayerMask.NameToLayer("HidingSpot");
         villagerLayer = LayerMask.NameToLayer("Interactable");
-        outline = GetComponent<Outline>();
-        outline.enabled = true;
         anim = GetComponentInChildren<Animator>();
         
     }
@@ -129,8 +124,6 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     public void Interact()
     {
-        if (!isSafe)
-        {
             Debug.Log("Captured");
             nav.enabled = false;
             var capturedParent = FindObjectOfType<TopDownMovement>();
@@ -141,9 +134,6 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             anim.SetBool("isStunned", false);
             anim.SetBool("isHidden", true);
             currentState = VillagerState.Captured;
-        }
-        else
-            currentState = VillagerState.Running;
     }
 
     private void LateUpdate()
@@ -157,20 +147,12 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (isInLight || isInCrowd || isProtected)
         {
             isSafe = true;
-            outline.enabled = false;
         }
         else
         {
             isSafe = false;
-            outline.enabled = true;
             Debug.Log("I'm so scared");
         }
-    }
-
-    public void Outlined()
-    {
-        Debug.Log("I'm in range");
-        outlineTimer = .1f;
     }
 
     /*void CheckOutline()
@@ -562,7 +544,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
                 if (player.isCarrying)
                 {
                     Debug.Log("What are you doing with them?");
-                    if (DetectPlayer())
+                    if (DetectPlayer() && currentState != VillagerState.Stunned)
                     {
                         Debug.Log(Vector3.Distance(transform.position, player.gameObject.transform.position));
                         swarmTarget = other.gameObject;
