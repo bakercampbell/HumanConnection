@@ -45,7 +45,8 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     Color outlineColor;//, hidingOutline;
 
     Animator anim;
-
+    [SerializeField]
+    GameObject particleSystem;
 
     void Start()
     {
@@ -123,17 +124,24 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     }
 
     public void Interact()
-    {
+    {           
+        var capturedParent = FindObjectOfType<TopDownMovement>();
+        if (!capturedParent.isCarrying)
+        {
             Debug.Log("Captured");
             nav.enabled = false;
-            var capturedParent = FindObjectOfType<TopDownMovement>();
+
             transform.position = capturedParent.dragPoint.transform.position;
+            transform.rotation = capturedParent.transform.rotation;
             transform.parent = capturedParent.dragPoint.transform;
             capturedParent.isCarrying = true;
             isCaptured = true;
             anim.SetBool("isStunned", false);
             anim.SetBool("isHidden", true);
             currentState = VillagerState.Captured;
+        }
+        else
+            GetHit();
     }
 
     private void LateUpdate()
@@ -429,6 +437,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     {
         Debug.Log("You will fear the proletariat!");
         anim.SetBool("isStunned", true);
+        particleSystem.SetActive(true);
         nav.velocity = Vector3.zero;
         if (currentState != VillagerState.Captured) stunTimer -= Time.deltaTime;
         nav.isStopped = true;
@@ -437,6 +446,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             stunTimer = stunTimerReset;
             if (currentState != VillagerState.Captured)
             {
+                particleSystem.SetActive(false);
                 CarryOn();
                 currentState = VillagerState.Running;
                 RunAway();
