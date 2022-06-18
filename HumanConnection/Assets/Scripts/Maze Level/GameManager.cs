@@ -63,8 +63,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator UpdateLightsCoRoute()
     {
-        scoreLights[villagersCollected - 1].color = scoreLightcolor;
-        yield return new WaitForSeconds(1f);
+        scoreLights[Mathf.Clamp(villagersCollected - 1, 0, villagerGoal)].color = scoreLightcolor;
+        yield return new WaitForSeconds(2f);
     }
 
     void UpdateAmmoBar()

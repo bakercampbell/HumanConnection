@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class RepairManBehaviour : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class RepairManBehaviour : MonoBehaviour
     public event OnRescueDelegate onRescueEvent;
     
     NavMeshAgent nav;
+
+    [SerializeField]
+    GameObject body, head;
 
     [SerializeField]
     GameObject[] lightPoles;
@@ -33,9 +37,6 @@ public class RepairManBehaviour : MonoBehaviour
     [SerializeField]
     LayerMask selfMask;
 
-    Outline outline;
-    float outlineTimer;
-
 
     void Start()
     {
@@ -47,7 +48,6 @@ public class RepairManBehaviour : MonoBehaviour
                 repairableLight.lightOffEvent += OnLightsOut;
         }
         currentLightTarget = lightPoles[lightTarget];
-        outline = GetComponent<Outline>();
     }
 
     void OnLightsOut()
@@ -60,20 +60,6 @@ public class RepairManBehaviour : MonoBehaviour
         else
             currentState = RepairManState.Patrolling;
 
-    }
-    public void Outlined()
-    {
-        Debug.Log("How dare you target me!");
-        outlineTimer = .1f;
-    }
-
-    void CheckOutline()
-    {
-        outlineTimer -= Time.deltaTime;
-        if (outlineTimer <= 0)
-            outline.enabled = false;
-        else
-            outline.enabled = true;
     }
 
     void Update()
@@ -89,7 +75,6 @@ public class RepairManBehaviour : MonoBehaviour
                 emergencyOverrideTimer = emergencyOverrideTimerReset;
             }
         }
-        CheckOutline();
         if (lightTarget > lightPoles.Length - 1)
         {
             lightTarget = 0;
@@ -134,14 +119,15 @@ public class RepairManBehaviour : MonoBehaviour
         //Animation, look around lightPole
         if (currentState == RepairManState.Checking && nav.velocity.magnitude < 1)
         {
-                checkingTimer -= Time.deltaTime;
-                transform.LookAt(currentLightTarget.transform.position);
-                if (checkingTimer <= 0)
-                {
-                    lightTarget++;
-                    nav.SetDestination(NextLight());
-                    currentState = RepairManState.Patrolling;
-                    checkingTimer = checkingTimerReset;
+            checkingTimer -= Time.deltaTime;
+            head.transform.DOLookAt(currentLightTarget.transform.position, .5f);
+            if (checkingTimer <= 0)
+            {
+                head.transform.DOLookAt(Vector3.forward, .5f);
+                lightTarget++;
+                nav.SetDestination(NextLight());
+                currentState = RepairManState.Patrolling;
+                checkingTimer = checkingTimerReset;
                     
             }
         }
@@ -172,7 +158,7 @@ public class RepairManBehaviour : MonoBehaviour
         {
             repairTimer -= Time.deltaTime;
             if (lightsToRepair[repairTarget] != null)
-                transform.LookAt(lightsToRepair[repairTarget].transform.position);
+                head.transform.LookAt(lightsToRepair[repairTarget].transform.position);
 
             if (repairTimer < 0)
             {
@@ -201,7 +187,7 @@ public class RepairManBehaviour : MonoBehaviour
             Debug.Log("I've come to save the day!");
 
             nav.isStopped = true;
-            transform.LookAt(characterTarget.transform.position);
+            head.transform.DOLookAt(characterTarget.transform.position, .5f);
 
             if (saveTimer < 0)
             {
@@ -212,7 +198,10 @@ public class RepairManBehaviour : MonoBehaviour
             }
         }
         else
+        {
+            head.transform.DOLookAt(Vector3.forward, .5f);
             CarryOn();
+        }
     }
 
     void CapturePlayer()
@@ -225,9 +214,12 @@ public class RepairManBehaviour : MonoBehaviour
 
             Debug.Log("Stop right there criminal scum!");
             nav.SetDestination(characterTarget.transform.position);
-            if (nav.remainingDistance < 2f)
+            if (nav.remainingDistance < 3f)
+            {
+                nav.velocity = Vector3.zero;
                 nav.isStopped = true;
-            transform.LookAt(characterTarget.transform.position);
+            }
+            head.transform.DOLookAt(characterTarget.transform.position, .5f);
             if (captureDelayTimer <= 0)
                 characterTarget.GetComponent<TopDownMovement>()?.Captured();
             if (saveTimer < 0)
@@ -239,6 +231,7 @@ public class RepairManBehaviour : MonoBehaviour
         }
         else
         {
+            head.transform.DOLookAt(Vector3.forward, .5f);
             characterTarget.GetComponent<TopDownMovement>()?.Escaped();
             captureDelayTimer = captureDelayTimerReset;
             CarryOn();
@@ -258,7 +251,7 @@ public class RepairManBehaviour : MonoBehaviour
     bool CheckLineOfSight()
     {
         RaycastHit hit;
-        Vector3 dir = characterTarget.transform.position - transform.position;
+        Vector3 dir = characterTarget.transform.position - head.transform.position;
         Debug.DrawRay(transform.position, dir, Color.red, .1f);
         if (Physics.Raycast(transform.position, dir.normalized, out hit, detectPlayerRange))
         {
