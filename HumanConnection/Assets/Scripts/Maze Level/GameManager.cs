@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     [SerializeField, Range (1,10)]
     float completionDelay;
     string score;
+    [SerializeField]
+    Light[] scoreLights;
+    [SerializeField]
+    Color scoreLightcolor;
 
     [SerializeField]
     Image ammoBar, villagerBar, villagerOuterBar;
@@ -28,10 +32,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        labZone.onHarvestEvent += UpdateLights;
     }
 
     void Update()
+    {
+
+        UpdateScore();
+        UpdateAmmoBar();
+        UpdateVillagerBar();
+
+    }
+
+    void UpdateScore()
     {
         score = villagersCollected + "/" + villagerGoal;
         TM_text.text = score;
@@ -42,17 +55,22 @@ public class GameManager : MonoBehaviour
             if (completionDelay <= 0)
                 SceneManager.LoadScene(0);
         }
+    }
+    void UpdateLights()
+    {
+        StartCoroutine(UpdateLightsCoRoute());
+    }
 
-        UpdateAmmoBar();
-        UpdateVillagerBar();
-
+    IEnumerator UpdateLightsCoRoute()
+    {
+        scoreLights[villagersCollected - 1].color = scoreLightcolor;
+        yield return new WaitForSeconds(1f);
     }
 
     void UpdateAmmoBar()
     {
         var ammoFill = Mathf.Clamp(player.shotsLeft / player.shotsMax, 0, 1f);
         ammoBar.DOFillAmount(ammoFill, ammoFillDuration);
-        BarJiggle(ammoBar);
     }
 
     void UpdateVillagerBar()
@@ -60,16 +78,13 @@ public class GameManager : MonoBehaviour
         if (player.isCarrying)
             villagerOuterBar.DOFade(1f, villagerBarFadeTime);
         else
-            villagerOuterBar.DOFade(1f, villagerBarFadeTime);
+            villagerOuterBar.DOFade(0f, villagerBarFadeTime);
         var villagerFill = Mathf.Clamp(player.swarmCounter / player.swarmLimit, 0, 1f);
         villagerBar.DOFillAmount(villagerFill, villagerFillDuration);
     }
 
     void BarJiggle(Image bar)
     {
-        bar.transform.DOMoveX(500, .01f).OnComplete(() =>
-        {
-            bar.transform.DOMoveX(510, .01f);
-        });
+
     }
 }

@@ -20,6 +20,7 @@ public class TopDownMovement : MonoBehaviour
     LayerMask playerMask, interactableMask;
     [SerializeField]
     Transform firePoint;
+    LightPoleBehaviour[] lightPoles;
     NavMeshObstacle navObstacle;
     public Transform dragPoint;
     bool canShoot = true;
@@ -37,6 +38,11 @@ public class TopDownMovement : MonoBehaviour
         startPos = transform.position;
         prevSpeed = speed;
         navObstacle = GetComponent<NavMeshObstacle>();
+        lightPoles = FindObjectsOfType<LightPoleBehaviour>();
+        foreach (LightPoleBehaviour lights in lightPoles)
+        {
+            lights.lightOffEvent += LightOff;
+        }
     }
 
     private void Update()
@@ -202,6 +208,11 @@ public class TopDownMovement : MonoBehaviour
             var lookTarget = new Vector3(direction.x - transform.position.x, 0, direction.z - transform.position.z);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookTarget), turnSpeed);
         }
+    }
+
+    void LightOff()
+    {
+        shotsLeft = shotsMax;
     }
     public void Captured()
     {

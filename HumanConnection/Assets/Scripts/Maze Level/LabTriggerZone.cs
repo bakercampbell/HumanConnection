@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LabTriggerZone : MonoBehaviour
 {
+    public delegate void OnVillagerHarvested();
+    public event OnVillagerHarvested onHarvestEvent;
     public int villagersCollected = 0;
 
     private void OnTriggerEnter(Collider other)
@@ -15,6 +17,7 @@ public class LabTriggerZone : MonoBehaviour
             villagersCollected++;
             var player = FindObjectOfType<TopDownMovement>();
             player.isCarrying = false;
+            onHarvestEvent?.Invoke();
         }
     }
 }
