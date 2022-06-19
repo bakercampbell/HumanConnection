@@ -19847,7 +19847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimer
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: detectPlayerRange
@@ -19863,7 +19863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimerReset
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: emergencyOverrideTimer
@@ -29673,7 +29673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimer
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: detectPlayerRange
@@ -29685,7 +29685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimerReset
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: emergencyOverrideTimer
@@ -32793,7 +32793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimer
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: detectPlayerRange
@@ -32809,7 +32809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimerReset
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: emergencyOverrideTimer
