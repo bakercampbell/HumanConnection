@@ -36,11 +36,6 @@ public class SegmentController : MonoBehaviour
             StartCoroutine(DownTime());
         }
 
-        if (wham == true)
-        {
-            Debug.Log("Wham!");
-            StartCoroutine(Wham());
-        }
     }
 
     IEnumerator DelayFlail()
@@ -61,10 +56,5 @@ public class SegmentController : MonoBehaviour
 
 
 
-    IEnumerator Wham()
-    {
-        animator.Play(segmentWham);
-        yield return new WaitForSeconds(1);
-        StartCoroutine(DelayFlail());
-    }
+
 }

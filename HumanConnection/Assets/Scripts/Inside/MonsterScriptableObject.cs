@@ -11,6 +11,6 @@ public class MonsterScriptableObject : ScriptableObject
     [field: SerializeField]
     public float chargeSpeed { get; set; } = 10f;
     [field: SerializeField]
-    public MonsterAttackScriptableObject monsterAttackType { get; set; }     
+    public MonsterAttackScriptableObject monsterAttackType { get; set; }
 }
 
