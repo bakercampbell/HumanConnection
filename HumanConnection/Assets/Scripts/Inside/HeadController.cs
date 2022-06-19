@@ -9,11 +9,15 @@ public class HeadController : MonoBehaviour
     GameObject monster;
     MonsterController monsterController;
     Animator animator;
+    AudioSource audioSource;
+    [SerializeField]GameObject victoryScreen;
     private void Start()
     {
+        
         monster = GameObject.FindGameObjectWithTag("Monster");
         monsterController = monster.GetComponent<MonsterController>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -31,7 +35,7 @@ public class HeadController : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            health -= 1;
+            health -= 2;
 
         }
     }
@@ -39,7 +43,7 @@ public class HeadController : MonoBehaviour
     IEnumerator DeathSequence()
     {
         Debug.Log("He dead, buddy.");
-
+        victoryScreen.SetActive(true);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("OutsideLab", LoadSceneMode.Single);
     }
@@ -47,6 +51,8 @@ public class HeadController : MonoBehaviour
     IEnumerator DownTime()
     {
         animator.Play("Spazzing");
+        audioSource.Play(); 
+        
         yield return new WaitForSeconds(7.5f);
         animator.Play("Head Hanging");
     }

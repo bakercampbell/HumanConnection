@@ -19,6 +19,9 @@ TagManager:
   - Monster
   - Tazer
   - MonsterHead
+  - Daddy
+  - Victory
+  - Canvas
   layers:
   - Default
   - TransparentFX

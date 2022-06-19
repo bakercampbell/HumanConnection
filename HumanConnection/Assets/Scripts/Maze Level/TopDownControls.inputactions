@@ -109,6 +109,17 @@
                 },
                 {
                     "name": "",
+                    "id": "34ed9184-f091-4261-9a70-253d290b8944",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "51005a05-ae1f-47a1-bb42-f3ed8619d460",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -120,8 +131,30 @@
                 },
                 {
                     "name": "",
+                    "id": "6fa1e268-9446-4347-a92b-d3923b2ccbf0",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c4e945ab-45d8-4dcc-ade2-9af31c4a7c78",
                     "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc3ff9ee-6e48-406b-8abd-78bec000cc78",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -144,6 +177,17 @@
                     "name": "",
                     "id": "a3e79067-7f90-4c69-98d3-5caca5fa98ac",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22a0e2e3-8118-4217-b484-cf7a9e8b649e",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

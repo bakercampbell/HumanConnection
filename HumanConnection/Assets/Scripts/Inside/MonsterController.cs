@@ -15,7 +15,8 @@ public class MonsterController : MonoBehaviour
     private int monsterSprint, monsterAttack, monsterDouble, monsterWasHit, monsterWait, monsterIdle;
 
 
-
+    private GameObject daddy;
+    private AudioSource sooth;
     private AudioSource monsterIsHit;
     private bool wasHit = false;
     private bool tempInvincible = false;
@@ -35,6 +36,8 @@ public class MonsterController : MonoBehaviour
 
     private void Awake()
     {
+        daddy = GameObject.FindGameObjectWithTag("Daddy");
+        sooth = daddy.GetComponent<AudioSource>();
         monsterIsHit = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         monsterAttack = Animator.StringToHash("wham");
@@ -143,7 +146,7 @@ public class MonsterController : MonoBehaviour
         }
         else if (!tempInvincible && wasHit)
         {
-            monsterIsHit.Play();
+            monsterIsHit.Play(); 
             monsterScriptableObject.health -= 15;            
             tempInvincible = true;
             StartCoroutine(DoubleAttack());
@@ -154,6 +157,7 @@ public class MonsterController : MonoBehaviour
 
     IEnumerator MonsterDown()
     {
+        sooth.Play();
         animator.Play(monsterIdle);
         monsterScriptableObject.speed = 0;
         monsterScriptableObject.health += 125;
