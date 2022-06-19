@@ -8,9 +8,6 @@ using UnityEngine.AI;
 
 public class TutorialToolTips : MonoBehaviour
 {
-    public delegate void OnCamera();
-    public event OnCamera onCameraEvent;
-
     [SerializeField]
     GameObject toolTipPanel;
     [SerializeField]
@@ -22,19 +19,19 @@ public class TutorialToolTips : MonoBehaviour
     TopDownMovement player;
     [SerializeField]
     GameObject lightPole;
-    bool isFirstLight, isLightVisible;
+    bool isFirstLight;
     [SerializeField]
     GameObject AmmoBar, VillagerBar;
-    bool isFirstAmmoBar, isAmmoBarVisible, isFirstVillagerBar, isVillagerBarVisible;
+    bool isFirstVillagerBar;
     [SerializeField]
     RepairManBehaviour[] repairMen;
     GameObject onScreenRepairMan;
     [SerializeField]
     GameObject tutorialRepairMan, tutorialVillager;
-    bool isFirstRepairMan, isRepairManVisible;
+    bool isFirstRepairMan;
     [SerializeField]
     GameObject villager;
-    bool isFirstVillager, isVillagerVisible;
+    bool isFirstVillager;
 
     [SerializeField]
     float delayTimer, delayTimerReset, threshold;
@@ -42,8 +39,6 @@ public class TutorialToolTips : MonoBehaviour
     {
 
     }
-
-
 
     void Update()
     {

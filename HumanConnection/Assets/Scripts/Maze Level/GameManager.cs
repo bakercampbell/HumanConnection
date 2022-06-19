@@ -17,7 +17,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject toolTipPanel, pausePanel;
     [SerializeField]
+    Canvas pauseMenuCanvas;
+    public bool hasGameStarted;
+    [SerializeField]
     TutorialToolTips tutorial;
+    [SerializeField]
+    TMP_Text playbuttonText;
     public int villagersCollected = 0;
     [SerializeField, Range(1,10)]
     int villagerGoal;
@@ -96,9 +101,13 @@ public class GameManager : MonoBehaviour
     {
         startCam.enabled = false;
         mainCam.enabled = true;
+        pauseMenuCanvas.worldCamera = mainCam;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
         player.GetComponent<CharacterController>().enabled = true;
+        hasGameStarted = true;
+        playbuttonText.text = "Resume";
+        if (toolTipPanel.activeInHierarchy) player.OnPause();
     }
 
     public void ToggleTutorial()

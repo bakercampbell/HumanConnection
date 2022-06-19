@@ -29,6 +29,8 @@ public class TopDownMovement : MonoBehaviour
     LightPoleBehaviour[] lightPoles;
     NavMeshObstacle navObstacle;
     Animator anim;
+    [SerializeField]
+    AudioSource tazerSound;
     public Transform dragPoint;
     bool canShoot = true;
     bool isClicked;
@@ -189,6 +191,7 @@ public class TopDownMovement : MonoBehaviour
                 var bulletObj = GetBullet();
                 bulletObj?.GetComponent<Rigidbody>().AddForce(fireDir.normalized * 10);
                 shotsLeft--;
+                tazerSound.Play();
                 StartCoroutine(CanShoot());
             }
             else
