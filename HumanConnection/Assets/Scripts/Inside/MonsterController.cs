@@ -16,7 +16,7 @@ public class MonsterController : MonoBehaviour
 
 
 
-
+    private AudioSource monsterIsHit;
     private bool wasHit = false;
     private bool tempInvincible = false;
 
@@ -35,7 +35,7 @@ public class MonsterController : MonoBehaviour
 
     private void Awake()
     {
-        
+        monsterIsHit = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         monsterAttack = Animator.StringToHash("wham");
         monsterSprint = Animator.StringToHash("Walk");        
@@ -119,7 +119,7 @@ public class MonsterController : MonoBehaviour
         {
             
             Hit();
-
+            
         }
 
     }
@@ -132,6 +132,7 @@ public class MonsterController : MonoBehaviour
         }
         if (!tempInvincible && !wasHit)
         {
+            monsterIsHit.Play();
             monsterScriptableObject.health -= 15;
             tempInvincible = true;
             animator.Play(monsterWasHit);
@@ -142,6 +143,7 @@ public class MonsterController : MonoBehaviour
         }
         else if (!tempInvincible && wasHit)
         {
+            monsterIsHit.Play();
             monsterScriptableObject.health -= 15;            
             tempInvincible = true;
             StartCoroutine(DoubleAttack());
