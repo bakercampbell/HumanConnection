@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 {
+    public delegate void OnCamera();
+    public event OnCamera onCameraEvent;
+
     NavMeshAgent nav;
 
     [SerializeField]
@@ -37,7 +40,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     bool hasRandomStartTime = true;
     public bool isCaptured;
     public bool isHiding;
-
+    public bool isVisible;
     //These bools monitor the AI's safety
     public bool isInLight, isInCrowd, isProtected, isSafe;
 
@@ -77,17 +80,20 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         if (currentState == VillagerState.Moving || currentState == VillagerState.Idle)
         {
             moveTimer -= Time.deltaTime;
-            if (currentState == VillagerState.Moving && nav.remainingDistance < 8f)
-                currentState = VillagerState.Idle;
-
-            if (moveTimer < 0)
+            if (nav.enabled)
             {
-                nav.stoppingDistance = 8;
-                nav.autoBraking = false;
-                moveTarget = NextMoveTarget();
-                Move();
-                moveTimer = Random.Range(moveTimerReset / 2, moveTimerReset);
+                if (currentState == VillagerState.Moving && nav.remainingDistance < 8f)
+                    currentState = VillagerState.Idle;
 
+                if (moveTimer < 0)
+                {
+                    nav.stoppingDistance = 8;
+                    nav.autoBraking = false;
+                    moveTarget = NextMoveTarget();
+                    Move();
+                    moveTimer = Random.Range(moveTimerReset / 2, moveTimerReset);
+
+                }
             }
         }
 
@@ -556,7 +562,6 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
                     Debug.Log("What are you doing with them?");
                     if (DetectPlayer() && currentState != VillagerState.Stunned)
                     {
-                        Debug.Log(Vector3.Distance(transform.position, player.gameObject.transform.position));
                         swarmTarget = other.gameObject;
                         currentState = VillagerState.Swarm;
                         Swarm(other.gameObject);
@@ -598,5 +603,11 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             isProtected = false;
             Debug.Log("Leaving so soon?");
         }
+    }
+
+    private void OnBecameVisible()
+    {
+        isVisible = true;
+        onCameraEvent?.Invoke();
     }
 }

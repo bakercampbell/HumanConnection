@@ -20,13 +20,15 @@ public class TopDownMovement : MonoBehaviour
     LayerMask playerMask, interactableMask;
     [SerializeField]
     Transform firePoint, crossHairPoint;
+    [SerializeField]
+    GameObject toolTipPanel;
     LightPoleBehaviour[] lightPoles;
     NavMeshObstacle navObstacle;
     Animator anim;
     public Transform dragPoint;
     bool canShoot = true;
     bool isClicked;
-    bool isPaused;
+    public bool isPaused;
     public bool isCaptured;
     public bool isCarrying;
     public bool isSwarmed;
@@ -231,6 +233,8 @@ public class TopDownMovement : MonoBehaviour
         }
         else
         {
+            if (toolTipPanel.activeInHierarchy)
+                toolTipPanel.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
         }

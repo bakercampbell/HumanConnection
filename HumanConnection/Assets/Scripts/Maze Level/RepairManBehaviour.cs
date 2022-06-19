@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class RepairManBehaviour : MonoBehaviour
 {
+    public delegate void OnCamera();
+    public event OnCamera onCameraEvent;
     enum RepairManState {Patrolling, Checking, OnTheWayToRepair, Repairing, Saving, Stunned}
     [SerializeField]
     RepairManState currentState;
@@ -38,6 +40,7 @@ public class RepairManBehaviour : MonoBehaviour
     LayerMask selfMask;
     [SerializeField]
     GameObject particleSystem;
+    public bool isVisible;
 
 
     void Start()
@@ -364,5 +367,11 @@ public class RepairManBehaviour : MonoBehaviour
                     light.GetComponentInChildren<LightPoleBehaviour>().lightOffEvent -= OnLightsOut;
             }
         }
+    }
+
+    private void OnBecameVisible()
+    {
+        isVisible = true;
+        onCameraEvent?.Invoke();
     }
 }
