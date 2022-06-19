@@ -4707,6 +4707,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4472228560907375068, guid: 98f7470559e4e0841953852b000ef245, type: 3}
+      propertyPath: swarmLimit
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472228560907375068, guid: 98f7470559e4e0841953852b000ef245, type: 3}
       propertyPath: swarmTimer
       value: 0.4
       objectReference: {fileID: 0}
@@ -18459,7 +18463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimer
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: detectPlayerRange
@@ -18475,7 +18479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimerReset
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: emergencyOverrideTimer
@@ -18527,7 +18531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5442560853745527225, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.37
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5442560853745527225, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18535,7 +18539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5442560853745527225, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39
+      value: 34.9
       objectReference: {fileID: 0}
     - target: {fileID: 5442560853745527225, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: m_LocalRotation.w
@@ -27949,7 +27953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimer
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: detectPlayerRange
@@ -27961,7 +27965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimerReset
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: emergencyOverrideTimer
@@ -30532,7 +30536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimer
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: detectPlayerRange
@@ -30548,7 +30552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: captureDelayTimerReset
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 982196106, guid: 71937bcdf1dfcd54cbe13ce2e358a693, type: 3}
       propertyPath: emergencyOverrideTimer

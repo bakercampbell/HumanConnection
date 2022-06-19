@@ -226,12 +226,16 @@ public class RepairManBehaviour : MonoBehaviour
             }
             head.transform.DOLookAt(characterTarget.transform.position, .5f);
             if (captureDelayTimer <= 0)
-                characterTarget.GetComponent<TopDownMovement>()?.Captured();
-            if (saveTimer < 0)
             {
-
-                CarryOn();
                 captureDelayTimer = captureDelayTimerReset;
+                characterTarget.GetComponent<TopDownMovement>()?.Captured();
+            }
+
+                if (saveTimer < 0)
+            {
+                captureDelayTimer = captureDelayTimerReset;
+                CarryOn();
+                
             }
         }
         else
