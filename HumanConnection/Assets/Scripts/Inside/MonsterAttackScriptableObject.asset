@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa952ce3090f9b744b920d583851fede, type: 3}
   m_Name: MonsterAttackScriptableObject
   m_EditorClassIdentifier: 
-  <attackDamage>k__BackingField: 5
-  <attackRange>k__BackingField: 2.5
+  <attackDamage>k__BackingField: 20
+  <attackRange>k__BackingField: 1.5

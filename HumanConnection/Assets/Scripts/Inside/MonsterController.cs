@@ -100,7 +100,7 @@ public class MonsterController : MonoBehaviour
         attackRange = 0;
         animator.Play(monsterAttack);
         StartCoroutine(StandUp());
-        yield return waitForSeconds;
+        yield return new WaitForSeconds(chargeSpeed);
         StartCoroutine(MonsterMoveToward());
         attackRange = 2.5f;
     }
@@ -165,7 +165,7 @@ public class MonsterController : MonoBehaviour
     IEnumerator InvincibleCooldown()
     {
         Debug.Log("He's Invincible!!!");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
         tempInvincible = false;
         Debug.Log("Ok you can hit him again");
     }
@@ -182,7 +182,7 @@ public class MonsterController : MonoBehaviour
     {
         Debug.Log("OOOOoo he REAL mad!");
         animator.Play(monsterAttack);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(chargeSpeed);
         animator.Play(monsterDouble);
         StartCoroutine(MonsterMoveToward());
     }

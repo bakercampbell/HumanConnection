@@ -39,6 +39,7 @@ public class HeadController : MonoBehaviour
     IEnumerator DeathSequence()
     {
         Debug.Log("He dead, buddy.");
+
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("OutsideLab", LoadSceneMode.Single);
     }
