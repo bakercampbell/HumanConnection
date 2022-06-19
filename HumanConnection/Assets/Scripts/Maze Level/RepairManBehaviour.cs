@@ -69,7 +69,7 @@ public class RepairManBehaviour : MonoBehaviour
 
     void Update()
     {
-        if(nav.enabled && nav.velocity.magnitude < .1)
+        if(nav.enabled && nav.velocity.magnitude == 0)
         {
             emergencyOverrideTimer -= Time.deltaTime;
             if (emergencyOverrideTimer <= 0)

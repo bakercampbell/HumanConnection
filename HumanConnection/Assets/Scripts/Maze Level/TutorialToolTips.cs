@@ -30,7 +30,7 @@ public class TutorialToolTips : MonoBehaviour
     RepairManBehaviour[] repairMen;
     GameObject onScreenRepairMan;
     [SerializeField]
-    GameObject tutorialRepairMan;
+    GameObject tutorialRepairMan, tutorialVillager;
     bool isFirstRepairMan, isRepairManVisible;
     [SerializeField]
     GameObject villager;
@@ -52,6 +52,7 @@ public class TutorialToolTips : MonoBehaviour
         {
             if (Vector3.Distance(playerPos, lightPole.transform.position) < threshold)
             {
+                tutorialVillager.SetActive(true);
                 delayTimer -= Time.deltaTime;
                 if (delayTimer <= 0)
                 {
@@ -73,7 +74,7 @@ public class TutorialToolTips : MonoBehaviour
             toolTipPanel.SetActive(true);
             flavorTextBox.text = "Don't run away! Let me bring you inside...";
             textBox.text = "Capture the citizens and bring them back to your lab.";
-            tutorialRepairMan.SetActive(true);
+            tutorialRepairMan.transform.position = new Vector3(3, .75f, 35);
             villager.GetComponent<NavMeshAgent>().enabled = true;
             isFirstVillager = true;
         }

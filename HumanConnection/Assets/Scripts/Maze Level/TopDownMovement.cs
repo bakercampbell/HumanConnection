@@ -11,6 +11,10 @@ public class TopDownMovement : MonoBehaviour
     Vector3 moveVector;
     Vector3 rotateVector;
     Vector3 startPos;
+    [SerializeField]
+    Camera mainCam;
+    [SerializeField]
+    GameObject pausePanel;
     [SerializeField, Range(0, 20)]
     float speed, turnSpeed, carryingSpeed;
     public float prevSpeed;
@@ -38,9 +42,6 @@ public class TopDownMovement : MonoBehaviour
     
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
-        if (toolTipPanel.activeInHierarchy) OnPause();
         character = GetComponent<CharacterController>();
         startPos = transform.position;
         prevSpeed = speed;
@@ -55,6 +56,11 @@ public class TopDownMovement : MonoBehaviour
 
     private void Update()
     {
+        if (pausePanel.activeInHierarchy)
+        {
+            character.enabled = false;
+        }
+
         OutlineInteractable();
         if (isCaptured)
         {
@@ -214,13 +220,16 @@ public class TopDownMovement : MonoBehaviour
     {
         if (!isPaused)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (mainCam.enabled)
             {
-                var direction = hit.point;
-                var lookTarget = new Vector3(direction.x - transform.position.x, 0, direction.z - transform.position.z);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookTarget), turnSpeed);
+                Ray ray = mainCam.ScreenPointToRay(Mouse.current.position.ReadValue());
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    var direction = hit.point;
+                    var lookTarget = new Vector3(direction.x - transform.position.x, 0, direction.z - transform.position.z);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookTarget), turnSpeed);
+                }
             }
         }
     }

@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     LabTriggerZone labZone;
     [SerializeField]
     TMP_Text TM_text;
+    [SerializeField]
+    GameObject toolTipPanel, pausePanel;
+    [SerializeField]
+    TutorialToolTips tutorial;
     public int villagersCollected = 0;
     [SerializeField, Range(1,10)]
     int villagerGoal;
@@ -30,8 +34,13 @@ public class GameManager : MonoBehaviour
     [SerializeField, Range(0, 1)]
     float ammoFillDuration, villagerFillDuration, villagerBarFadeTime;
 
+    [SerializeField]
+    Camera mainCam, startCam;
+
     void Start()
     {
+        mainCam.enabled = false;
+        startCam.enabled = true;
         labZone.onHarvestEvent += UpdateLights;
     }
 
@@ -83,8 +92,23 @@ public class GameManager : MonoBehaviour
         villagerBar.DOFillAmount(villagerFill, villagerFillDuration);
     }
 
-    void BarJiggle(Image bar)
+    public void Play()
     {
+        startCam.enabled = false;
+        mainCam.enabled = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+        player.GetComponent<CharacterController>().enabled = true;
+    }
 
+    public void ToggleTutorial()
+    {
+        tutorial.enabled = !tutorial.enabled;
+        toolTipPanel.SetActive(!toolTipPanel.activeInHierarchy);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
