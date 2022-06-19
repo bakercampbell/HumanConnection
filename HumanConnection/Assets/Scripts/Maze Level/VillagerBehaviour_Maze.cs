@@ -49,6 +49,8 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     Animator anim;
     [SerializeField]
+    AudioSource[] helpBarks;
+    [SerializeField]
     GameObject particleSystem;
 
     void Start()
@@ -145,6 +147,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
             anim.SetBool("isStunned", false);
             anim.SetBool("isHidden", true);
             currentState = VillagerState.Captured;
+            helpBarks[Random.Range(0, helpBarks.Length)].Play();
         }
         else
             GetHit();

@@ -124,11 +124,16 @@ MonoBehaviour:
   hasRandomStartTime: 1
   isCaptured: 0
   isHiding: 0
+  isVisible: 0
   isInLight: 0
   isInCrowd: 0
   isProtected: 0
   isSafe: 0
   outlineColor: {r: 0.5188679, g: 0.05139729, b: 0.05139729, a: 1}
+  helpBarks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   particleSystem: {fileID: 9161522040458442183}
 --- !u!136 &131268936665407790
 CapsuleCollider:

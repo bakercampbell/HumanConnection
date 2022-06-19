@@ -30,7 +30,7 @@ public class TopDownMovement : MonoBehaviour
     NavMeshObstacle navObstacle;
     Animator anim;
     [SerializeField]
-    AudioSource tazerSound;
+    AudioSource tazerSound, depressed;
     public Transform dragPoint;
     bool canShoot = true;
     bool isClicked;
@@ -243,6 +243,8 @@ public class TopDownMovement : MonoBehaviour
         {
             Time.timeScale = 0f;
             isPaused = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else
         {
@@ -250,6 +252,8 @@ public class TopDownMovement : MonoBehaviour
                 toolTipPanel.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
         }
     }
 
@@ -278,6 +282,11 @@ public class TopDownMovement : MonoBehaviour
         var villager = GetComponentInChildren<VillagerBehaviour_Maze>()?.gameObject;
         if (villager != null)
             villager.GetComponent<VillagerBehaviour_Maze>().Rescue();
+    }
+
+    private void OnEnable()
+    {
+        depressed.PlayDelayed(1f);
     }
 
 }

@@ -7,6 +7,8 @@ public class LabTriggerZone : MonoBehaviour
     public delegate void OnVillagerHarvested();
     public event OnVillagerHarvested onHarvestEvent;
 
+    [SerializeField]
+    AudioSource bodyHitFloor;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "NPC")
@@ -15,6 +17,7 @@ public class LabTriggerZone : MonoBehaviour
             other.gameObject.SetActive(false);
             var player = FindObjectOfType<TopDownMovement>();
             player.isCarrying = false;
+            bodyHitFloor.Play();
             onHarvestEvent?.Invoke();
         }
     }

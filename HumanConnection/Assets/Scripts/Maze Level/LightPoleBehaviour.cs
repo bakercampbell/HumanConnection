@@ -16,6 +16,9 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
     GameObject particles;
     [SerializeField]
     float particleTimer, particleTimerReset;
+
+    [SerializeField]
+    AudioSource lightDown;
     public bool isVisible;
 
 
@@ -33,6 +36,7 @@ public class LightPoleBehaviour : MonoBehaviour, Interactable
     public void Interact()
     {
         lightGlobe.enabled = false;
+        lightDown.Play();
         OnLightOff();
     }
 

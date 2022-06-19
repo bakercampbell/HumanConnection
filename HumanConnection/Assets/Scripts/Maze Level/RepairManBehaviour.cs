@@ -42,6 +42,9 @@ public class RepairManBehaviour : MonoBehaviour
     GameObject particleSystem;
     public bool isVisible;
 
+    [SerializeField]
+    AudioSource moving;
+
 
     void Start()
     {
@@ -53,6 +56,7 @@ public class RepairManBehaviour : MonoBehaviour
                 repairableLight.lightOffEvent += OnLightsOut;
         }
         currentLightTarget = lightPoles[lightTarget];
+        moving.Play();
     }
 
     void OnLightsOut()
@@ -74,6 +78,7 @@ public class RepairManBehaviour : MonoBehaviour
             emergencyOverrideTimer -= Time.deltaTime;
             if (emergencyOverrideTimer <= 0)
             {
+                moving.Stop();
                 nav.SetDestination(NextLight());
                 lightsToRepair.Clear();
                 currentState = RepairManState.Patrolling;
@@ -250,6 +255,7 @@ public class RepairManBehaviour : MonoBehaviour
 
     void CarryOn()
     {
+        moving.Play();
         currentState = prevState;
         //currentLightTarget = prevLightTarget;
         nav.isStopped = false;
@@ -279,6 +285,7 @@ public class RepairManBehaviour : MonoBehaviour
 
     void Stunned()
     {
+        moving.Stop();
         Debug.Log("I can't move!");
         particleSystem.SetActive(true);
         stunTimer -= Time.deltaTime;

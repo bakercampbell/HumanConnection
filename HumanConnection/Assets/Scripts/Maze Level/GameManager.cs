@@ -42,11 +42,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Camera mainCam, startCam;
 
+    [SerializeField]
+    AudioSource music;
+
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         mainCam.enabled = false;
         startCam.enabled = true;
         labZone.onHarvestEvent += UpdateLights;
+        music.Play();
     }
 
     void Update()
@@ -89,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateVillagerBar()
     {
-        if (player.isCarrying)
+        if (player !=null && player.isCarrying)
             villagerOuterBar.DOFade(1f, villagerBarFadeTime);
         else
             villagerOuterBar.DOFade(0f, villagerBarFadeTime);
@@ -104,9 +110,11 @@ public class GameManager : MonoBehaviour
         pauseMenuCanvas.worldCamera = mainCam;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+        player.gameObject.SetActive(true);
         player.GetComponent<CharacterController>().enabled = true;
         hasGameStarted = true;
         playbuttonText.text = "Resume";
+        pausePanel.SetActive(false);
         if (toolTipPanel.activeInHierarchy) player.OnPause();
     }
 
