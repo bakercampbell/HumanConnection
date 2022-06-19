@@ -14,7 +14,9 @@ public class TutorialToolTips : MonoBehaviour
     [SerializeField]
     GameObject toolTipPanel;
     [SerializeField]
-    TMP_Text textBox;
+    TMP_Text textBox, flavorTextBox;
+    [SerializeField]
+    Color flavorTextColor;
 
     [SerializeField]
     TopDownMovement player;
@@ -38,7 +40,7 @@ public class TutorialToolTips : MonoBehaviour
     float delayTimer, delayTimerReset, threshold;
     void Start()
     {
-        toolTipPanel.SetActive(false);
+
     }
 
 
@@ -55,7 +57,10 @@ public class TutorialToolTips : MonoBehaviour
                 {
                     if (!player.isPaused) player.OnPause();
                     toolTipPanel.SetActive(true);
-                    textBox.text = "This is a test";
+                    flavorTextBox.color = flavorTextColor;
+                    flavorTextBox.alignment = TextAlignmentOptions.Left;
+                    flavorTextBox.text = "Blasted bright lights! I have a better idea...";
+                    textBox.text = "Deactivate the lights to recharge your stun gun. The blue bar is your charge.";
                     isFirstLight = true;
                     delayTimer = delayTimerReset;
                 }
@@ -66,7 +71,8 @@ public class TutorialToolTips : MonoBehaviour
         {
             if (!player.isPaused) player.OnPause();
             toolTipPanel.SetActive(true);
-            textBox.text = "Villager test.";
+            flavorTextBox.text = "Don't run away! Let me bring you inside...";
+            textBox.text = "Capture the citizens and bring them back to your lab.";
             tutorialRepairMan.SetActive(true);
             villager.GetComponent<NavMeshAgent>().enabled = true;
             isFirstVillager = true;
@@ -74,14 +80,15 @@ public class TutorialToolTips : MonoBehaviour
 
         if (!isFirstRepairMan && RepairManVisible())
         {
-            if (Vector3.Distance(playerPos, onScreenRepairMan.transform.position) < threshold + 1)
+            if (Vector3.Distance(playerPos, onScreenRepairMan.transform.position) < threshold + 5)
             {
                 delayTimer -= Time.deltaTime;
                 if (delayTimer <= 0)
                 {
                     if (!player.isPaused) player.OnPause();
                     toolTipPanel.SetActive(true);
-                    textBox.text = "This is another test";
+                    flavorTextBox.text = "I wasn't doing anything, honest!";
+                    textBox.text = "Sentry tanks are on the look out for you! Stun them to run away.";
                     isFirstRepairMan = true;
                     delayTimer = delayTimerReset;
                 }
@@ -97,7 +104,8 @@ public class TutorialToolTips : MonoBehaviour
             {
                 if (!player.isPaused) player.OnPause();
                 toolTipPanel.SetActive(true);
-                textBox.text = "First Victim";
+                flavorTextBox.text = "Oof. You're a big one!";
+                textBox.text = "The other citizens don't make kidnapping easy. If the yellow bar fills up, you'll drop him.";
                 isFirstVillagerBar = true;
                 delayTimer = delayTimerReset;
             }

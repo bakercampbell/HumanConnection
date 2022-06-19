@@ -40,6 +40,7 @@ public class TopDownMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+        if (toolTipPanel.activeInHierarchy) OnPause();
         character = GetComponent<CharacterController>();
         startPos = transform.position;
         prevSpeed = speed;
