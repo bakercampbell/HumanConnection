@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             completionDelay -= Time.deltaTime;
             if (completionDelay <= 0)
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
         }
     }
     void UpdateLights()

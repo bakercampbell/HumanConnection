@@ -72,10 +72,10 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     void Update()
     {
-        if (DetectOthers())
-            isInCrowd = true;
-        else
-            isInCrowd = false;
+        //if (DetectOthers())
+        //    isInCrowd = true;
+        //else
+        //    isInCrowd = false;
 
         AmISafe();
 
@@ -298,32 +298,32 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
         return false;
     }
 
-    bool DetectOthers()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, villagerDetectionRange, 1 << villagerLayer);
-        if (hitColliders.Length > 1)
-        {
-            foreach (Collider collider in hitColliders)
-            {
-                if (collider != null)
-                {
-                    if (collider.gameObject.tag == "NPC")
-                    {
-                        if (Vector3.Distance(collider.gameObject.transform.position, transform.position) < villagerDetectionRange / 3)
-                            return true;
-                        else if (CheckLineOfSight(collider.gameObject))
-                        {
-                            Debug.Log("I feel safe in a crowd");
-                            return true;
-                        }
-                        else
-                            return false;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+    //bool DetectOthers()
+    //{
+    //    Collider[] hitColliders = Physics.OverlapSphere(transform.position, villagerDetectionRange, 1 << villagerLayer);
+    //    if (hitColliders.Length > 1)
+    //    {
+    //        foreach (Collider collider in hitColliders)
+    //        {
+    //            if (collider != null)
+    //            {
+    //                if (collider.gameObject.tag == "NPC")
+    //                {
+    //                    if (Vector3.Distance(collider.gameObject.transform.position, transform.position) < villagerDetectionRange / 3)
+    //                        return true;
+    //                    else if (CheckLineOfSight(collider.gameObject))
+    //                    {
+    //                        Debug.Log("I feel safe in a crowd");
+    //                        return true;
+    //                    }
+    //                    else
+    //                        return false;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    return false;
+    //}
 
     bool CheckLineOfSight(GameObject target)
     {

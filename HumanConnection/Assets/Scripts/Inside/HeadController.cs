@@ -44,7 +44,7 @@ public class HeadController : MonoBehaviour
     {
         Debug.Log("He dead, buddy.");
         victoryScreen.SetActive(true);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(6);
         SceneManager.LoadScene("OutsideLab", LoadSceneMode.Single);
     }
 
