@@ -5224,6 +5224,7 @@ GameObject:
   - component: {fileID: 4668747566295609867}
   - component: {fileID: 371131563}
   - component: {fileID: -8868582629381833266}
+  - component: {fileID: 1459570280829322668}
   - component: {fileID: 4643216363814166082}
   m_Layer: 10
   m_Name: RepairMan
@@ -5328,6 +5329,7 @@ MonoBehaviour:
     m_Bits: 1024
   particleSystem: {fileID: 9104740650463104269}
   isVisible: 0
+  moving: {fileID: 0}
 --- !u!135 &4668747566295609867
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5375,6 +5377,20 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1459570280829322668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3781701501132134474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a400c4c890ea7c742aa1a1229eae3bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlines:
+  - {fileID: -8868582629381833266}
 --- !u!23 &4643216363814166082
 MeshRenderer:
   m_ObjectHideFlags: 0

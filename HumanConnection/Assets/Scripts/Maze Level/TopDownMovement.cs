@@ -25,7 +25,7 @@ public class TopDownMovement : MonoBehaviour
     [SerializeField]
     Transform firePoint, crossHairPoint;
     [SerializeField]
-    GameObject toolTipPanel;
+    GameObject toolTipPanel, pauseScreen;
     LightPoleBehaviour[] lightPoles;
     NavMeshObstacle navObstacle;
     Animator anim;
@@ -78,6 +78,7 @@ public class TopDownMovement : MonoBehaviour
         if (captureTimer <= 0)
         {
             transform.position = startPos;
+            shotsLeft = shotsMax;
             captureTimer = captureTimerReset;
             isCaptured = false;
 
@@ -243,6 +244,7 @@ public class TopDownMovement : MonoBehaviour
         {
             Time.timeScale = 0f;
             isPaused = true;
+            pauseScreen.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
@@ -252,6 +254,7 @@ public class TopDownMovement : MonoBehaviour
                 toolTipPanel.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
+            pauseScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
         }
@@ -265,7 +268,6 @@ public class TopDownMovement : MonoBehaviour
     {
         Debug.Log("Help! I'm being oppressed!");
         isCaptured = true;
-        shotsLeft = shotsMax;
         ReleaseVillager();
     }
 

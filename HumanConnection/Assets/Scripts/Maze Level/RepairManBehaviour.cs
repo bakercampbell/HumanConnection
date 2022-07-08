@@ -8,7 +8,7 @@ public class RepairManBehaviour : MonoBehaviour
 {
     public delegate void OnCamera();
     public event OnCamera onCameraEvent;
-    enum RepairManState {Patrolling, Checking, OnTheWayToRepair, Repairing, Saving, Stunned}
+    enum RepairManState {Patrolling, Checking, OnTheWayToRepair, Repairing, Saving, Stunned, Capturing}
     [SerializeField]
     RepairManState currentState;
     [SerializeField]
@@ -36,8 +36,6 @@ public class RepairManBehaviour : MonoBehaviour
     [SerializeField, Range(0, 30)]
     float checkingTimer, checkingTimerReset, repairTimer, repairTimerReset, saveTimer, saveTimerReset, 
         stunTimer, stunTimerReset, captureDelayTimer, captureDelayTimerReset, emergencyOverrideTimer, emergencyOverrideTimerReset;
-    [SerializeField]
-    LayerMask selfMask;
     [SerializeField]
     GameObject particleSystem;
     public bool isVisible;
@@ -126,30 +124,35 @@ public class RepairManBehaviour : MonoBehaviour
 
     void Checking()
     {
-        //Animation, look around lightPole
-        if (currentState == RepairManState.Checking && nav.velocity.magnitude < 1)
+        if (currentState != RepairManState.Stunned)
         {
-            checkingTimer -= Time.deltaTime;
-            head.transform.DOLookAt(currentLightTarget.transform.position, .5f);
-            if (checkingTimer <= 0)
+            if (currentState == RepairManState.Checking && nav.velocity.magnitude < 1)
             {
-                head.transform.DOLookAt(Vector3.forward, .5f);
-                lightTarget++;
-                nav.SetDestination(NextLight());
-                currentState = RepairManState.Patrolling;
-                checkingTimer = checkingTimerReset;
-                    
+                checkingTimer -= Time.deltaTime;
+                head.transform.DOLookAt(currentLightTarget.transform.position, .5f);
+                if (checkingTimer <= 0)
+                {
+                    head.transform.DOLookAt(Vector3.forward, .5f);
+                    lightTarget++;
+                    nav.SetDestination(NextLight());
+                    currentState = RepairManState.Patrolling;
+                    checkingTimer = checkingTimerReset;
+
+                }
             }
         }
     }
 
     void Patrol()
     {
-        if (currentState == RepairManState.Patrolling)
+        if (currentState != RepairManState.Stunned)
         {
-            if (nav.remainingDistance < 4f)
-                currentState = RepairManState.Checking;
-            emergencyOverrideTimer = emergencyOverrideTimerReset;
+            if (currentState == RepairManState.Patrolling)
+            {
+                if (nav.remainingDistance < 4f)
+                    currentState = RepairManState.Checking;
+                emergencyOverrideTimer = emergencyOverrideTimerReset;
+            }
         }
     }
 
@@ -216,41 +219,46 @@ public class RepairManBehaviour : MonoBehaviour
 
     void CapturePlayer()
     {
-        if (CheckLineOfSight())
+        if (currentState != RepairManState.Stunned)
         {
-            captureDelayTimer -= Time.deltaTime;
-            saveTimer -= Time.deltaTime;
-            //prevLightTarget = currentLightTarget;
+            if (CheckLineOfSight())
+            {
+                if (currentState != RepairManState.Capturing)
+                    prevState = currentState;
+                //currentState = RepairManState.Capturing;
+                captureDelayTimer -= Time.deltaTime;
+                saveTimer -= Time.deltaTime;
+                //prevLightTarget = currentLightTarget;
 
-            Debug.Log("Stop right there criminal scum!");
-            nav.SetDestination(characterTarget.transform.position);
-            if (nav.remainingDistance < 3f)
-            {
-                nav.velocity = Vector3.zero;
-                nav.isStopped = true;
-            }
-            head.transform.DOLookAt(characterTarget.transform.position, .5f);
-            if (captureDelayTimer <= 0)
-            {
-                captureDelayTimer = captureDelayTimerReset;
-                characterTarget.GetComponent<TopDownMovement>()?.Captured();
-            }
+                Debug.Log("Stop right there criminal scum!");
+                nav.SetDestination(characterTarget.transform.position);
+                if (nav.remainingDistance < 3f)
+                {
+                    nav.velocity = Vector3.zero;
+                    nav.isStopped = true;
+                }
+                head.transform.DOLookAt(characterTarget.transform.position, .5f);
+                if (captureDelayTimer <= 0)
+                {
+                    captureDelayTimer = captureDelayTimerReset;
+                    characterTarget.GetComponent<TopDownMovement>()?.Captured();
+                }
 
                 if (saveTimer < 0)
+                {
+                    captureDelayTimer = captureDelayTimerReset;
+                    CarryOn();
+
+                }
+            }
+            else
             {
+                head.transform.DOLookAt(Vector3.forward, .5f);
+                characterTarget.GetComponent<TopDownMovement>()?.Escaped();
                 captureDelayTimer = captureDelayTimerReset;
                 CarryOn();
-                
             }
-        }
-        else
-        {
-            head.transform.DOLookAt(Vector3.forward, .5f);
-            characterTarget.GetComponent<TopDownMovement>()?.Escaped();
-            captureDelayTimer = captureDelayTimerReset;
-            CarryOn();
-        }
-            
+        }  
     }
 
     void CarryOn()
@@ -266,9 +274,10 @@ public class RepairManBehaviour : MonoBehaviour
     bool CheckLineOfSight()
     {
         RaycastHit hit;
+        Vector3 originPoint = new Vector3(transform.position.x, 1.25f, transform.position.z);
         Vector3 dir = characterTarget.transform.position - head.transform.position;
-        Debug.DrawRay(transform.position, dir, Color.red, .1f);
-        if (Physics.Raycast(transform.position, dir.normalized, out hit, detectPlayerRange))
+        Debug.DrawRay(originPoint, dir, Color.red, .1f);
+        if (Physics.Raycast(originPoint, dir.normalized, out hit, detectPlayerRange))
         {
             if (hit.transform.gameObject == characterTarget)
                 return true;
@@ -281,10 +290,12 @@ public class RepairManBehaviour : MonoBehaviour
     {
         Debug.Log("I'm hit!");
         currentState = RepairManState.Stunned;
+        Stunned();
     }
 
     void Stunned()
     {
+        currentState = RepairManState.Stunned;
         moving.Stop();
         Debug.Log("I can't move!");
         particleSystem.SetActive(true);
@@ -332,31 +343,30 @@ public class RepairManBehaviour : MonoBehaviour
                     SaveVillager();
                 }
             }
-
-
-            if (other.gameObject.GetComponent<TopDownMovement>())
-            {
-                if (currentState != RepairManState.Saving && currentState != RepairManState.Stunned)
-                {
-                    Debug.Log("You there!");
-                    characterTarget = other.gameObject;
-                    prevState = currentState;
-                    currentState = RepairManState.Saving;
-                    CapturePlayer();
-                }
-            }
         }
     }
     private void OnTriggerStay(Collider other)
     {
-        var potentialRepair = other.gameObject.GetComponentInChildren<LightPoleBehaviour>();
-        if (potentialRepair)
+        if (other.gameObject.GetComponent<TopDownMovement>())
         {
-            if (potentialRepair.lightGlobe.enabled == false && nav.remainingDistance <= 4 && currentState != RepairManState.Saving)
+            if (currentState != RepairManState.Stunned)
             {
-                currentState = RepairManState.Repairing;
+                Debug.Log("You there!");
+                characterTarget = other.gameObject;
+                CapturePlayer();
             }
-                
+        }
+        if (currentState != RepairManState.Stunned)
+        {
+            var potentialRepair = other.gameObject.GetComponentInChildren<LightPoleBehaviour>();
+            if (potentialRepair)
+            {
+                if (potentialRepair.lightGlobe.enabled == false && nav.remainingDistance <= 4 && currentState != RepairManState.Saving)
+                {
+                    currentState = RepairManState.Repairing;
+                }
+
+            }
         }
     }
 

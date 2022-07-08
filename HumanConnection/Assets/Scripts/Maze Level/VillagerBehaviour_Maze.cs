@@ -366,7 +366,7 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
     void Hiding()
     {
         if (nav.enabled)
-            nav.SetDestination(closestHidingSpot.transform.position);
+            nav.SetDestination(FindClosestHidingSpot().transform.position);
     }
 
     void Hidden()
