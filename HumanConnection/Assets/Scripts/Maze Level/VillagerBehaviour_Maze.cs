@@ -356,11 +356,14 @@ public class VillagerBehaviour_Maze : MonoBehaviour, Interactable
 
     void Hide()
     {
-        isInLight = false;
-        currentState = VillagerState.Hiding;
-        nav.stoppingDistance = 0.5f;
-        nav.autoBraking = true;
-        Hiding();
+        if (currentState != VillagerState.Captured)
+        {
+            isInLight = false;
+            currentState = VillagerState.Hiding;
+            nav.stoppingDistance = 0.5f;
+            nav.autoBraking = true;
+            Hiding();
+        }
     }
 
     void Hiding()
